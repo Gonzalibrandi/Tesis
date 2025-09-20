@@ -5,7 +5,7 @@ import { GraduationCap, Zap, Shield, Target } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Question Interface */}
@@ -68,7 +68,7 @@ const Index = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-8 mt-16">
+      <footer className="bg-primary text-primary-foreground py-8">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <GraduationCap className="h-5 w-5" />
