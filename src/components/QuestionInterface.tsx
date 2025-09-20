@@ -21,6 +21,7 @@ export const QuestionInterface = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [githubRepo, setGithubRepo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isIngesting, setIsIngesting] = useState(false);
   const [answer, setAnswer] = useState('');
   const [sources, setSources] = useState<Source[]>([]);
   const { toast } = useToast();
@@ -88,6 +89,29 @@ The choice of architecture depends on factors like scalability requirements, tea
     setAnswer(mockAnswer);
     setSources(mockSources);
     setIsLoading(false);
+  };
+
+  const handleIngestData = async () => {
+    if (!pdfFile && !githubRepo.trim()) {
+      toast({
+        title: "Data source required",
+        description: "Please upload a PDF or provide a GitHub repository URL",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsIngesting(true);
+    
+    // Simulate ingestion process
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    
+    toast({
+      title: "Data ingested successfully",
+      description: "Your documents are now ready for querying",
+    });
+    
+    setIsIngesting(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -170,23 +194,45 @@ The choice of architecture depends on factors like scalability requirements, tea
               </TabsContent>
             </Tabs>
             
-            <Button 
-              type="submit" 
-              className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  <Search className="h-4 w-4 mr-2" />
-                  Search & Analyze
-                </>
-              )}
-            </Button>
+            <div className="flex gap-3">
+              <Button 
+                type="button"
+                variant="outline"
+                onClick={handleIngestData}
+                className="flex-1"
+                disabled={isIngesting || isLoading}
+              >
+                {isIngesting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Ingesting Data...
+                  </>
+                ) : (
+                  <>
+                    <Database className="h-4 w-4 mr-2" />
+                    Ingest Data
+                  </>
+                )}
+              </Button>
+              
+              <Button 
+                type="submit" 
+                className="flex-1 bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                disabled={isLoading || isIngesting}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <Search className="h-4 w-4 mr-2" />
+                    Ask Question
+                  </>
+                )}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

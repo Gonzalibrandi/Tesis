@@ -60,11 +60,11 @@ const Index = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12 space-y-12">
-        {/* System Architecture Overview */}
-        <SystemArchitecture />
-        
         {/* Question Interface */}
         <QuestionInterface />
+        
+        {/* System Architecture Overview */}
+        <SystemArchitecture />
       </div>
 
       {/* Footer */}
