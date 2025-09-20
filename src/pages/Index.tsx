@@ -6,6 +6,15 @@ import { GraduationCap, Zap, Shield, Target } from "lucide-react";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-subtle">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-12 space-y-12">
+        {/* Question Interface */}
+        <QuestionInterface />
+        
+        {/* System Architecture Overview */}
+        <SystemArchitecture />
+      </div>
+
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-primary opacity-90" />
@@ -56,15 +65,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-12 space-y-12">
-        {/* Question Interface */}
-        <QuestionInterface />
-        
-        {/* System Architecture Overview */}
-        <SystemArchitecture />
       </div>
 
       {/* Footer */}
