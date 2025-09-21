@@ -20,8 +20,10 @@ export const QuestionInterface = () => {
   const [question, setQuestion] = useState('');
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [githubRepo, setGithubRepo] = useState('');
+  const [githubBranch, setGithubBranch] = useState('main');
   const [isLoading, setIsLoading] = useState(false);
-  const [isIngesting, setIsIngesting] = useState(false);
+  const [isPdfIngesting, setIsPdfIngesting] = useState(false);
+  const [isGithubIngesting, setIsGithubIngesting] = useState(false);
   const [answer, setAnswer] = useState('');
   const [sources, setSources] = useState<Source[]>([]);
   const { toast } = useToast();
@@ -96,27 +98,50 @@ The choice of architecture depends on factors like scalability requirements, tea
     setIsLoading(false);
   };
 
-  const handleIngestData = async () => {
-    if (!pdfFile && !githubRepo.trim()) {
+  const handleIngestPdf = async () => {
+    if (!pdfFile) {
       toast({
-        title: "Data source required",
-        description: "Please upload a PDF or provide a GitHub repository URL",
+        title: "No PDF selected",
+        description: "Please upload a PDF file first",
         variant: "destructive",
       });
       return;
     }
     
-    setIsIngesting(true);
+    setIsPdfIngesting(true);
     
     // Simulate ingestion process
     await new Promise(resolve => setTimeout(resolve, 2500));
     
     toast({
-      title: "Data ingested successfully",
-      description: "Your documents are now ready for querying",
+      title: "PDF ingested successfully",
+      description: `${pdfFile.name} is now ready for querying`,
     });
     
-    setIsIngesting(false);
+    setIsPdfIngesting(false);
+  };
+
+  const handleIngestGithub = async () => {
+    if (!githubRepo.trim()) {
+      toast({
+        title: "No repository URL provided",
+        description: "Please enter a GitHub repository URL",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsGithubIngesting(true);
+    
+    // Simulate ingestion process
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    
+    toast({
+      title: "Repository ingested successfully",
+      description: `Repository from branch "${githubBranch}" is now ready for querying`,
+    });
+    
+    setIsGithubIngesting(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -154,7 +179,7 @@ The choice of architecture depends on factors like scalability requirements, tea
             <Button 
               type="submit" 
               className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 h-12 text-base font-medium"
-              disabled={isLoading || isIngesting}
+              disabled={isLoading || isPdfIngesting || isGithubIngesting}
             >
               {isLoading ? (
                 <>
@@ -212,6 +237,26 @@ The choice of architecture depends on factors like scalability requirements, tea
                   </div>
                 )}
               </div>
+              
+              {pdfFile && (
+                <Button 
+                  onClick={handleIngestPdf}
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+                  disabled={isPdfIngesting || isLoading}
+                >
+                  {isPdfIngesting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Ingesting PDF...
+                    </>
+                  ) : (
+                    <>
+                      <Database className="h-4 w-4 mr-2" />
+                      Ingest PDF
+                    </>
+                  )}
+                </Button>
+              )}
             </CardContent>
           </Card>
 
@@ -231,42 +276,48 @@ The choice of architecture depends on factors like scalability requirements, tea
                   onChange={(e) => setGithubRepo(e.target.value)}
                   className="w-full bg-background/50 border-primary/20 focus:border-primary/40"
                 />
+                <Input
+                  placeholder="Branch name (e.g., main, dev, feature-branch)"
+                  value={githubBranch}
+                  onChange={(e) => setGithubBranch(e.target.value)}
+                  className="w-full bg-background/50 border-primary/20 focus:border-primary/40"
+                />
                 <p className="text-xs text-muted-foreground">
-                  Enter the URL of a public GitHub repository to analyze its codebase, documentation, and README files
+                  Enter the URL of a public GitHub repository and specify the branch to analyze its codebase, documentation, and README files
                 </p>
                 {githubRepo && (
                   <div className="p-3 bg-primary/10 rounded-md">
                     <p className="text-sm text-primary font-medium">
-                      ✓ Repository URL added
+                      ✓ Repository: {githubRepo}
+                    </p>
+                    <p className="text-xs text-primary/80">
+                      Branch: {githubBranch}
                     </p>
                   </div>
                 )}
               </div>
+              
+              {githubRepo && (
+                <Button 
+                  onClick={handleIngestGithub}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                  disabled={isGithubIngesting || isLoading}
+                >
+                  {isGithubIngesting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Ingesting Repository...
+                    </>
+                  ) : (
+                    <>
+                      <Database className="h-4 w-4 mr-2" />
+                      Ingest Repository
+                    </>
+                  )}
+                </Button>
+              )}
             </CardContent>
           </Card>
-        </div>
-
-        {/* Ingest Data Button */}
-        <div className="flex justify-center pt-4">
-          <Button 
-            type="button"
-            variant="outline"
-            onClick={handleIngestData}
-            className="px-8 py-3 h-12 text-base border-2 border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
-            disabled={isIngesting || isLoading}
-          >
-            {isIngesting ? (
-              <>
-                <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                Ingesting Data Sources...
-              </>
-            ) : (
-              <>
-                <Database className="h-5 w-5 mr-2" />
-                Ingest Data Sources
-              </>
-            )}
-          </Button>
         </div>
       </div>
 
