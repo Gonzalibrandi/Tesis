@@ -144,6 +144,34 @@ The choice of architecture depends on factors like scalability requirements, tea
     setIsGithubIngesting(false);
   };
 
+  const handleIngestAllSources = async () => {
+    if (!pdfFile && !githubRepo.trim()) {
+      toast({
+        title: "No data sources selected",
+        description: "Please upload a PDF or provide a GitHub repository URL",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    const promises = [];
+    
+    if (pdfFile) {
+      promises.push(handleIngestPdf());
+    }
+    
+    if (githubRepo.trim()) {
+      promises.push(handleIngestGithub());
+    }
+    
+    await Promise.all(promises);
+    
+    toast({
+      title: "All data sources ingested",
+      description: "Your documents are now ready for querying",
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) {
@@ -343,8 +371,32 @@ The choice of architecture depends on factors like scalability requirements, tea
                     <p>→ Searching GitHub repositories</p>
                     <p>→ Gathering web sources</p>
                     <p>→ Generating comprehensive answer</p>
-                  </div>
-                </div>
+        </div>
+        
+        {/* Central Ingest All Button */}
+        {(pdfFile || githubRepo.trim()) && (
+          <div className="flex justify-center pt-6">
+            <Button 
+              onClick={handleIngestAllSources}
+              variant="outline"
+              className="px-8 py-3 h-12 text-base border-2 border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
+              disabled={isPdfIngesting || isGithubIngesting || isLoading}
+            >
+              {(isPdfIngesting || isGithubIngesting) ? (
+                <>
+                  <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                  Ingesting Data Sources...
+                </>
+              ) : (
+                <>
+                  <Database className="h-5 w-5 mr-2" />
+                  Ingest All Data Sources
+                </>
+              )}
+            </Button>
+          </div>
+        )}
+      </div>
               </div>
             ) : (
               <div className="space-y-6">
