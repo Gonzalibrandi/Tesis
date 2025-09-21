@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,6 +25,7 @@ export const QuestionInterface = () => {
   const [answer, setAnswer] = useState('');
   const [sources, setSources] = useState<Source[]>([]);
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -41,6 +42,10 @@ export const QuestionInterface = () => {
         variant: "destructive",
       });
     }
+  };
+
+  const triggerFileUpload = () => {
+    fileInputRef.current?.click();
   };
 
   const simulateQuery = async () => {
@@ -128,112 +133,142 @@ The choice of architecture depends on factors like scalability requirements, tea
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-6xl mx-auto space-y-8">
       {/* Question Input */}
-      <Card className="shadow-elegant">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-primary">
-            <Search className="h-5 w-5" />
+      <Card className="shadow-elegant bg-gradient-subtle">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-primary text-xl">
+            <Search className="h-6 w-6" />
             Ask Your Question
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <Textarea
               placeholder="Enter your question about software architecture, computer architecture, or any technical topic..."
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              className="min-h-[120px] resize-none"
+              className="min-h-[120px] resize-none bg-background/50 border-primary/20 focus:border-primary/40"
             />
             
             <Button 
               type="submit" 
-              className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+              className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 h-12 text-base font-medium"
               disabled={isLoading || isIngesting}
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Processing...
+                  <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                  Processing Your Question...
                 </>
               ) : (
                 <>
-                  <Search className="h-4 w-4 mr-2" />
+                  <Search className="h-5 w-5 mr-2" />
                   Ask Question
-                </>
-              )}
-            </Button>
-            
-            <Tabs defaultValue="pdf" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="pdf" className="flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
-                  PDF Document
-                </TabsTrigger>
-                <TabsTrigger value="github" className="flex items-center gap-2">
-                  <Github className="h-4 w-4" />
-                  GitHub Repository
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="pdf" className="space-y-4">
-                <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
-                  <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Upload a PDF document for analysis
-                  </p>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    id="pdf-upload"
-                  />
-                  <label htmlFor="pdf-upload">
-                    <Button variant="outline" type="button" className="cursor-pointer">
-                      Choose PDF File
-                    </Button>
-                  </label>
-                  {pdfFile && (
-                    <p className="text-sm text-primary mt-2">
-                      Selected: {pdfFile.name}
-                    </p>
-                  )}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="github" className="space-y-4">
-                <Input
-                  placeholder="https://github.com/username/repository"
-                  value={githubRepo}
-                  onChange={(e) => setGithubRepo(e.target.value)}
-                  className="w-full"
-                />
-              </TabsContent>
-            </Tabs>
-            
-            <Button 
-              type="button"
-              variant="outline"
-              onClick={handleIngestData}
-              className="w-full"
-              disabled={isIngesting || isLoading}
-            >
-              {isIngesting ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Ingesting Data...
-                </>
-              ) : (
-                <>
-                  <Database className="h-4 w-4 mr-2" />
-                  Ingest Data
                 </>
               )}
             </Button>
           </form>
         </CardContent>
       </Card>
+
+      {/* Data Sources */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-primary text-center">Choose Your Data Sources</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          
+          {/* PDF Upload */}
+          <Card className="shadow-elegant bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 hover:border-accent/40 transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-accent">
+                <FileText className="h-5 w-5" />
+                PDF Document
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div 
+                className="border-2 border-dashed border-accent/30 rounded-lg p-8 text-center hover:border-accent/60 transition-colors cursor-pointer bg-background/30"
+                onClick={triggerFileUpload}
+              >
+                <Upload className="h-10 w-10 mx-auto mb-3 text-accent" />
+                <p className="text-sm text-muted-foreground mb-3">
+                  Click to upload a PDF document for analysis
+                </p>
+                <p className="text-xs text-muted-foreground/80">
+                  Supports research papers, documentation, reports
+                </p>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                {pdfFile && (
+                  <div className="mt-4 p-3 bg-accent/10 rounded-md">
+                    <p className="text-sm text-accent font-medium">
+                      ✓ {pdfFile.name}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* GitHub Repository */}
+          <Card className="shadow-elegant bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 hover:border-primary/40 transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-primary">
+                <Github className="h-5 w-5" />
+                GitHub Repository
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <Input
+                  placeholder="https://github.com/username/repository"
+                  value={githubRepo}
+                  onChange={(e) => setGithubRepo(e.target.value)}
+                  className="w-full bg-background/50 border-primary/20 focus:border-primary/40"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Enter the URL of a public GitHub repository to analyze its codebase, documentation, and README files
+                </p>
+                {githubRepo && (
+                  <div className="p-3 bg-primary/10 rounded-md">
+                    <p className="text-sm text-primary font-medium">
+                      ✓ Repository URL added
+                    </p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Ingest Data Button */}
+        <div className="flex justify-center pt-4">
+          <Button 
+            type="button"
+            variant="outline"
+            onClick={handleIngestData}
+            className="px-8 py-3 h-12 text-base border-2 border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
+            disabled={isIngesting || isLoading}
+          >
+            {isIngesting ? (
+              <>
+                <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                Ingesting Data Sources...
+              </>
+            ) : (
+              <>
+                <Database className="h-5 w-5 mr-2" />
+                Ingest Data Sources
+              </>
+            )}
+          </Button>
+        </div>
+      </div>
 
       {/* Results */}
       {(answer || isLoading) && (
