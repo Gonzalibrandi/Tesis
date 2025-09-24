@@ -1,40 +1,62 @@
-# Welcome to your Lovable project
+# AI Research Assistant
+
+A full-stack application with a React frontend for AI-powered research and document analysis, and a Node.js backend for file upload handling.
+
+## Project Structure
+
+```
+├── src/                          # Frontend (React + TypeScript)
+│   ├── components/               # React components
+│   │   ├── ui/                   # Reusable UI components (shadcn)
+│   │   ├── QuestionInterface.tsx # Main research interface
+│   │   └── SystemArchitecture.tsx # System architecture display
+│   ├── pages/                    # Page components
+│   ├── hooks/                    # Custom React hooks
+│   ├── lib/                      # Utility functions
+│   └── assets/                   # Static assets
+└── backend/                      # Backend (Node.js + Express)
+    ├── server.js                 # Main server file
+    ├── package.json              # Backend dependencies
+    └── data/                     # File upload storage
+```
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/2f08b394-937c-4885-9ca1-76c428b9fd27
 
-## How can I edit this code?
+## Getting Started
 
-There are several ways of editing your application.
+### Frontend Development
 
-**Use Lovable**
-
+**Using Lovable (Recommended)**
 Simply visit the [Lovable Project](https://lovable.dev/projects/2f08b394-937c-4885-9ca1-76c428b9fd27) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+**Local Development**
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone and setup frontend
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
+
+### Backend Development
+
+The backend handles PDF file uploads and storage:
+
+```sh
+# Setup and run backend server
+cd backend
+npm install
+npm run dev  # Development mode with auto-reload
+```
+
+The backend will run on `http://localhost:3001` and includes:
+- PDF upload endpoint (`POST /upload`)
+- File retrieval endpoint (`GET /files/:filename`)
+- File listing endpoint (`GET /files`)
+
+See `backend/README.md` for detailed API documentation.
 
 **Edit a file directly in GitHub**
 
@@ -50,15 +72,22 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
+## Technology Stack
 
-This project is built with:
+### Frontend
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling framework
+- **shadcn/ui** - Component library
+- **React Router** - Client-side routing
+- **TanStack Query** - Data fetching and caching
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **Multer** - File upload handling
+- **CORS** - Cross-origin resource sharing
 
 ## How can I deploy this project?
 
