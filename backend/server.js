@@ -151,6 +151,39 @@ app.get('/files/:filename', (req, res) => {
   }
 });
 
+// Delete file endpoint
+app.delete('/files/:filename', (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const filePath = path.join(DATA_FOLDER, filename);
+
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'File not found' 
+      });
+    }
+
+    // Delete the file
+    fs.unlinkSync(filePath);
+    
+    console.log(`✅ File deleted: ${filename}`);
+
+    res.json({
+      success: true,
+      message: 'File deleted successfully',
+      filename: filename
+    });
+  } catch (error) {
+    console.error('File deletion error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error while deleting file' 
+    });
+  }
+});
+
 // List files endpoint (bonus)
 app.get('/files', (req, res) => {
   try {

@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { Database, ExternalLink, FileText, Github, Loader2, Search, Upload } from "lucide-react";
+import { Database, ExternalLink, FileText, Github, Loader2, Search, Trash2, Upload } from "lucide-react";
 import { useRef, useState } from 'react';
+
 const LANGFLOW_API_KEY = import.meta.env.VITE_LANGFLOW_API_KEY;
 const LANGFLOW_API_ENDPOINT = import.meta.env.VITE_LANGFLOW_RETRIEVAL_URL;
 
@@ -67,7 +68,6 @@ export const QuestionInterface = () => {
       const formData = new FormData();
       formData.append("file", pdfFile);
 
-      // puerto debe coincidir con backend (3001 en server.js)
       const response = await fetch("http://localhost:3001/upload", {
         method: "POST",
         body: formData,
@@ -96,6 +96,33 @@ export const QuestionInterface = () => {
     }
   };
 
+  const handleDeletePdf = async () => {
+    if (!pdfFile) return;
+
+    try {
+      const response = await fetch("http://localhost:3001/files/file.pdf", {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Delete failed");
+      }
+
+      setPdfFile(null);
+      toast({
+        title: "PDF deleted successfully",
+        description: "The PDF file has been removed from the server.",
+      });
+    } catch (error: any) {
+      console.error("Error deleting PDF:", error);
+      toast({
+        title: "Error deleting PDF",
+        description: error.message || "Could not delete the file.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleIngestGithub = async () => {
     if (!githubRepo.trim()) {
@@ -151,8 +178,6 @@ export const QuestionInterface = () => {
     }
   };
 
-
-
   const handleIngestAllSources = async () => {
     if (!pdfFile && !githubRepo.trim()) {
       toast({
@@ -199,7 +224,7 @@ export const QuestionInterface = () => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } 
-    const data = await response.json(); // ✅ Ajusta esta ruta si la estructura cambia
+    const data = await response.json();
     return data.outputs?.[0]?.outputs?.[0]?.artifacts?.message || "";
   }; 
   
@@ -227,7 +252,6 @@ export const QuestionInterface = () => {
     } 
     return { answer, sources }; 
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -298,6 +322,83 @@ export const QuestionInterface = () => {
         </CardContent>
       </Card>
 
+      {/* Results */}
+      {(answer || isLoading) && (
+        <Card className="shadow-elegant">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-primary">
+              <Database className="h-5 w-5" />
+              Analysis Results
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {isLoading ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="text-center space-y-4">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
+                  <p className="text-muted-foreground">
+                    Processing your query through the Langflow pipeline...
+                  </p>
+                  <div className="text-sm text-muted-foreground space-y-1">
+                    <p>→ Retrieving from PDF documents</p>
+                    <p>→ Searching GitHub repositories</p>
+                    <p>→ Gathering web sources</p>
+                    <p>→ Generating comprehensive answer</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <div className="prose prose-sm max-w-none">
+                  <div className="bg-gradient-subtle p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold text-primary mb-3">Answer</h3>
+                    <div className="whitespace-pre-wrap text-foreground leading-relaxed">
+                      {answer}
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-semibold text-primary mb-4">Sources</h3>
+                  <div className="grid gap-4">
+                    {sources.map((source, index) => (
+                      <Card key={index} className="border-l-4 border-l-accent">
+                        <CardContent className="pt-4">
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              {source.type === 'pdf' && <FileText className="h-4 w-4 text-primary" />}
+                              {source.type === 'github' && <Github className="h-4 w-4 text-primary" />}
+                              {source.type === 'web' && <ExternalLink className="h-4 w-4 text-primary" />}
+                              <span className="font-medium">{source.title}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Badge variant="secondary" className="text-xs">
+                                {source.type.toUpperCase()}
+                              </Badge>
+                              {source.score && (
+                                <Badge variant="outline" className="text-xs">
+                                  {Math.round(source.score * 100)}% match
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {source.reference}
+                          </p>
+                          <p className="text-sm">
+                            {source.content}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Data Sources */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-primary text-center">Choose Your Data Sources</h2>
@@ -331,10 +432,21 @@ export const QuestionInterface = () => {
                   className="hidden"
                 />
                 {pdfFile && (
-                  <div className="mt-4 p-3 bg-accent/10 rounded-md">
+                  <div className="mt-4 p-3 bg-accent/10 rounded-md flex items-center justify-between">
                     <p className="text-sm text-accent font-medium">
                       ✓ {pdfFile.name}
                     </p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePdf();
+                      }}
+                      className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </div>
                 )}
               </div>
@@ -420,31 +532,6 @@ export const QuestionInterface = () => {
             </CardContent>
           </Card>
         </div>
-      </div>
-
-      {/* Results */}
-      {(answer || isLoading) && (
-        <Card className="shadow-elegant">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <Database className="h-5 w-5" />
-              Analysis Results
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <div className="flex items-center justify-center py-12">
-                <div className="text-center space-y-4">
-                  <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-                  <p className="text-muted-foreground">
-                    Processing your query through the Langflow pipeline...
-                  </p>
-                  <div className="text-sm text-muted-foreground space-y-1">
-                    <p>→ Retrieving from PDF documents</p>
-                    <p>→ Searching GitHub repositories</p>
-                    <p>→ Gathering web sources</p>
-                    <p>→ Generating comprehensive answer</p>
-        </div>
         
         {/* Central Ingest All Button */}
         {(pdfFile || githubRepo.trim()) && (
@@ -470,58 +557,6 @@ export const QuestionInterface = () => {
           </div>
         )}
       </div>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                <div className="prose prose-sm max-w-none">
-                  <div className="bg-gradient-subtle p-6 rounded-lg">
-                    <h3 className="text-lg font-semibold text-primary mb-3">Answer</h3>
-                    <div className="whitespace-pre-wrap text-foreground leading-relaxed">
-                      {answer}
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-lg font-semibold text-primary mb-4">Sources</h3>
-                  <div className="grid gap-4">
-                    {sources.map((source, index) => (
-                      <Card key={index} className="border-l-4 border-l-accent">
-                        <CardContent className="pt-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                              {source.type === 'pdf' && <FileText className="h-4 w-4 text-primary" />}
-                              {source.type === 'github' && <Github className="h-4 w-4 text-primary" />}
-                              {source.type === 'web' && <ExternalLink className="h-4 w-4 text-primary" />}
-                              <span className="font-medium">{source.title}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary" className="text-xs">
-                                {source.type.toUpperCase()}
-                              </Badge>
-                              {source.score && (
-                                <Badge variant="outline" className="text-xs">
-                                  {Math.round(source.score * 100)}% match
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {source.reference}
-                          </p>
-                          <p className="text-sm">
-                            {source.content}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 };
