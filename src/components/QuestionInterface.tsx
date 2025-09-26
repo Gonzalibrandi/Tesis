@@ -1,12 +1,13 @@
-import { useState, useRef } from 'react';
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
-import { Search, Upload, Github, FileText, Loader2, ExternalLink, Database } from "lucide-react";
+import { Database, ExternalLink, FileText, Github, Loader2, Search, Upload } from "lucide-react";
+import { useRef, useState } from 'react';
+const LANGFLOW_API_KEY = import.meta.env.VITE_LANGFLOW_API_KEY;
+const LANGFLOW_API_ENDPOINT = import.meta.env.VITE_LANGFLOW_RETRIEVAL_URL;
 
 interface Source {
   type: 'pdf' | 'github' | 'web';
@@ -20,7 +21,7 @@ export const QuestionInterface = () => {
   const [question, setQuestion] = useState('');
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [githubRepo, setGithubRepo] = useState('');
-  const [githubBranch, setGithubBranch] = useState('main');
+  const [githubBranch, setGithubBranch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isPdfIngesting, setIsPdfIngesting] = useState(false);
   const [isGithubIngesting, setIsGithubIngesting] = useState(false);
@@ -50,54 +51,6 @@ export const QuestionInterface = () => {
     fileInputRef.current?.click();
   };
 
-  const simulateQuery = async () => {
-    setIsLoading(true);
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    // Mock response
-    const mockAnswer = `Based on the provided documents and external sources, here's a comprehensive answer to your question:
-
-Software architecture refers to the fundamental structures of a software system and the discipline of creating such structures. It encompasses the system's components, their relationships, and the principles governing their design and evolution.
-
-Key architectural patterns include:
-- Layered Architecture: Organizes code into horizontal layers
-- Microservices: Decomposes applications into small, independent services
-- Event-Driven Architecture: Uses events to trigger and communicate between services
-- Clean Architecture: Emphasizes dependency inversion and separation of concerns
-
-The choice of architecture depends on factors like scalability requirements, team structure, and system complexity.`;
-
-    const mockSources: Source[] = [
-      {
-        type: 'pdf',
-        title: 'Software Architecture in Practice',
-        reference: 'Chapter 2, Page 45',
-        score: 0.94,
-        content: 'Architecture is the set of significant decisions about the organization of software systems...'
-      },
-      {
-        type: 'github',
-        title: 'Clean Architecture Examples',
-        reference: 'src/architecture/README.md',
-        score: 0.87,
-        content: 'This repository demonstrates clean architecture principles in practice...'
-      },
-      {
-        type: 'web',
-        title: 'Martin Fowler - Software Architecture Guide',
-        reference: 'martinfowler.com',
-        score: 0.82,
-        content: 'Software architecture is about making fundamental structural choices...'
-      }
-    ];
-
-    setAnswer(mockAnswer);
-    setSources(mockSources);
-    setIsLoading(false);
-  };
-
   const handleIngestPdf = async () => {
     if (!pdfFile) {
       toast({
@@ -107,19 +60,42 @@ The choice of architecture depends on factors like scalability requirements, tea
       });
       return;
     }
-    
+
     setIsPdfIngesting(true);
-    
-    // Simulate ingestion process
-    await new Promise(resolve => setTimeout(resolve, 2500));
-    
-    toast({
-      title: "PDF ingested successfully",
-      description: `${pdfFile.name} is now ready for querying`,
-    });
-    
-    setIsPdfIngesting(false);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", pdfFile);
+
+      // puerto debe coincidir con backend (3001 en server.js)
+      const response = await fetch("http://localhost:3001/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Upload failed");
+      }
+
+      const result = await response.json();
+
+      toast({
+        title: "PDF uploaded successfully",
+        description: `${result.file.filename} saved in server.`,
+      });
+    } catch (error: any) {
+      console.error("Error uploading PDF:", error);
+      toast({
+        title: "Error uploading PDF",
+        description: error.message || "Could not upload the file.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsPdfIngesting(false);
+    }
   };
+
 
   const handleIngestGithub = async () => {
     if (!githubRepo.trim()) {
@@ -130,19 +106,52 @@ The choice of architecture depends on factors like scalability requirements, tea
       });
       return;
     }
-    
+
     setIsGithubIngesting(true);
-    
-    // Simulate ingestion process
-    await new Promise(resolve => setTimeout(resolve, 2500));
-    
-    toast({
-      title: "Repository ingested successfully",
-      description: `Repository from branch "${githubBranch}" is now ready for querying`,
-    });
-    
-    setIsGithubIngesting(false);
+
+    try {
+      const response = await fetch(import.meta.env.VITE_LANGFLOW_GITHUB_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_LANGFLOW_API_KEY}`,
+        },
+        body: JSON.stringify({
+          input_value: "",
+          input_type: "chat",
+          output_type: "chat",
+          tweaks: {
+             "GitLoaderComponent-V0bQK": {
+              repo_source: "Remote",
+              clone_url: githubRepo,
+              branch: githubBranch || "main",
+            },
+          },
+        }),
+      });
+
+      if (!response.ok) throw new Error("Langflow ingestion failed");
+
+      const data = await response.json();
+      console.log("Langflow GitHub ingestion response:", data);
+
+      toast({
+        title: "Repository ingested successfully",
+        description: `Repository from branch "${githubBranch || "main"}" is now ready for querying`,
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error ingesting repository",
+        description: String(error),
+        variant: "destructive",
+      });
+    } finally {
+      setIsGithubIngesting(false);
+    }
   };
+
+
 
   const handleIngestAllSources = async () => {
     if (!pdfFile && !githubRepo.trim()) {
@@ -172,19 +181,83 @@ The choice of architecture depends on factors like scalability requirements, tea
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!question.trim()) {
-      toast({
-        title: "Question required",
-        description: "Please enter a question to proceed",
-        variant: "destructive",
-      });
-      return;
-    }
-    simulateQuery();
+  const fetchLangflowAnswer = async (userQuestion: string) => {
+    const apiKey = LANGFLOW_API_KEY;
+    const apiEndpoint = LANGFLOW_API_ENDPOINT;
+    const payload = { 
+      output_type: "chat", 
+      input_type: "chat", 
+      input_value: userQuestion, 
+      session_id: "user_1" 
+    }; 
+    const options = { 
+      method: "POST", 
+      headers: { "Content-Type": "application/json", "x-api-key": apiKey }, 
+      body: JSON.stringify(payload) 
+    }; 
+    const response = await fetch(apiEndpoint, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } 
+    const data = await response.json(); // ✅ Ajusta esta ruta si la estructura cambia
+    return data.outputs?.[0]?.outputs?.[0]?.artifacts?.message || "";
+  }; 
+  
+  const parseLLMResponse = (raw: string) => { 
+    const [answerPart, traceabilityPart] = raw.split("**Source Traceability:**");
+    const answer = answerPart
+      .replace("**Answer:**", "")
+      .replace(/^[-\s\n]+/, "")
+      .trim(); 
+    const sources: Source[] = [];
+    if (traceabilityPart) {
+      const lines = traceabilityPart.trim().split("\n");
+      lines.forEach((line) => {
+        const match = line.match(/-\s*(PDF|GitHub|Web):\s*(\d+)%/i);
+        if (match) {
+          sources.push({
+            type: match[1].toLowerCase() as "pdf" | "github" | "web",
+            title: `${match[1]} contribution`,
+            reference: "",
+            score: parseInt(match[2], 10) / 100,
+            content: ""
+          });
+        } 
+      }); 
+    } 
+    return { answer, sources }; 
   };
 
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!question.trim()) {
+      toast({ 
+        title: "Question required", 
+        description: "Please enter a question to proceed", 
+        variant: "destructive", 
+      });
+      return; 
+    } 
+    setIsLoading(true); 
+    try {
+      const rawResponse = await fetchLangflowAnswer(question);
+      const { answer, sources } = parseLLMResponse(rawResponse);
+      setAnswer(answer);
+      setSources(sources);
+    } catch (err) {
+      console.error("Langflow error:", err);
+      toast({ 
+        title: "Error", 
+        description: "Could not retrieve a valid response from Langflow", 
+        variant: "destructive", 
+      }); 
+    } 
+    finally { 
+      setIsLoading(false); 
+    } 
+  };
+  
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Question Input */}

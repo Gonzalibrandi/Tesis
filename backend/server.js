@@ -3,10 +3,13 @@ const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 const DATA_FOLDER = process.env.DATA_FOLDER || './data';
+const LANGFLOW_API_KEY = process.env.LANGFLOW_API_KEY;
+const LANGFLOW_PDF_URL = process.env.LANGFLOW_PDF_URL;
 
 // Ensure data folder exists
 if (!fs.existsSync(DATA_FOLDER)) {
@@ -15,7 +18,7 @@ if (!fs.existsSync(DATA_FOLDER)) {
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173'], // React and Vite default ports
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8081', 'http://localhost:8080'], // React and Vite default ports
   credentials: true
 }));
 
@@ -27,9 +30,7 @@ const storage = multer.diskStorage({
     cb(null, DATA_FOLDER);
   },
   filename: (req, file, cb) => {
-    // Preserve original filename or use 'file.pdf' if overwrite query param is set
-    const overwrite = req.query.overwrite === 'true';
-    const filename = overwrite ? 'file.pdf' : file.originalname;
+    const filename = 'file.pdf';
     cb(null, filename);
   }
 });
@@ -63,7 +64,7 @@ app.get('/', (req, res) => {
 });
 
 // Upload endpoint
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ 
@@ -72,24 +73,54 @@ app.post('/upload', upload.single('file'), (req, res) => {
       });
     }
 
+    console.log("✅ PDF guardado en:", req.file.path);
+
+    // Body mínimo requerido por Langflow
+    const body = {
+      "input_value": "",
+      "output_type": "chat", 
+      "input_type": "chat"
+    };
+
+    // Llamada al Flow de Langflow
+    const response = await fetch(LANGFLOW_PDF_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${LANGFLOW_API_KEY}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Langflow API error: ${response.status} - ${errText}`);
+    }
+
+    const data = await response.json();
+    console.log("Langflow response ✅:", data);
+
     res.json({
       success: true,
-      message: 'File uploaded successfully',
+      message: 'File uploaded and Langflow flow executed successfully',
       file: {
         filename: req.file.filename,
         originalName: req.file.originalname,
         size: req.file.size,
         path: req.file.path
-      }
+      },
+      flowResult: data
     });
   } catch (error) {
     console.error('Upload error:', error);
     res.status(500).json({ 
       success: false, 
-      error: 'Internal server error while uploading file' 
+      error: 'Internal server error while uploading file',
+      details: error.message
     });
   }
 });
+
 
 // Get file endpoint
 app.get('/files/:filename', (req, res) => {
@@ -113,8 +144,8 @@ app.get('/files/:filename', (req, res) => {
     res.sendFile(path.resolve(filePath));
   } catch (error) {
     console.error('File retrieval error:', error);
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       error: 'Internal server error while retrieving file' 
     });
   }
