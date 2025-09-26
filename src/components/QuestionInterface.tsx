@@ -96,32 +96,14 @@ export const QuestionInterface = () => {
     }
   };
 
-  const handleDeletePdf = async () => {
+  const handleDeletePdf = () => {
     if (!pdfFile) return;
 
-    try {
-      const response = await fetch("http://localhost:3001/files/file.pdf", {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Delete failed");
-      }
-
-      setPdfFile(null);
-      toast({
-        title: "PDF deleted successfully",
-        description: "The PDF file has been removed from the server.",
-      });
-    } catch (error: any) {
-      console.error("Error deleting PDF:", error);
-      toast({
-        title: "Error deleting PDF",
-        description: error.message || "Could not delete the file.",
-        variant: "destructive",
-      });
-    }
+    setPdfFile(null);
+    toast({
+      title: "PDF removed",
+      description: "The PDF file has been removed from the interface.",
+    });
   };
 
   const handleIngestGithub = async () => {
