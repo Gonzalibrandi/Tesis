@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { Database, ExternalLink, FileText, Github, Loader2, Search, Trash2, Upload } from "lucide-react";
@@ -28,6 +29,8 @@ export const QuestionInterface = () => {
   const [isGithubIngesting, setIsGithubIngesting] = useState(false);
   const [answer, setAnswer] = useState('');
   const [sources, setSources] = useState<Source[]>([]);
+  const [pdfEnabled, setPdfEnabled] = useState(true);
+  const [githubEnabled, setGithubEnabled] = useState(true);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -161,10 +164,14 @@ export const QuestionInterface = () => {
   };
 
   const handleIngestAllSources = async () => {
-    if (!pdfFile && !githubRepo.trim()) {
+    const enabledSources = [];
+    if (pdfFile && pdfEnabled) enabledSources.push('PDF');
+    if (githubRepo.trim() && githubEnabled) enabledSources.push('GitHub');
+    
+    if (enabledSources.length === 0) {
       toast({
-        title: "No data sources selected",
-        description: "Please upload a PDF or provide a GitHub repository URL",
+        title: "No enabled data sources",
+        description: "Please enable at least one data source and provide the necessary files/URLs",
         variant: "destructive",
       });
       return;
@@ -172,19 +179,19 @@ export const QuestionInterface = () => {
     
     const promises = [];
     
-    if (pdfFile) {
+    if (pdfFile && pdfEnabled) {
       promises.push(handleIngestPdf());
     }
     
-    if (githubRepo.trim()) {
+    if (githubRepo.trim() && githubEnabled) {
       promises.push(handleIngestGithub());
     }
     
     await Promise.all(promises);
     
     toast({
-      title: "All data sources ingested",
-      description: "Your documents are now ready for querying",
+      title: "Enabled data sources ingested",
+      description: `${enabledSources.join(' and ')} are now ready for querying`,
     });
   };
 
@@ -387,11 +394,26 @@ export const QuestionInterface = () => {
         <div className="grid md:grid-cols-2 gap-6">
           
           {/* PDF Upload */}
-          <Card className="shadow-elegant bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 hover:border-accent/40 transition-all duration-300">
+          <Card className={`shadow-elegant bg-gradient-to-br transition-all duration-300 ${
+            pdfEnabled 
+              ? "from-accent/5 to-accent/10 border-accent/20 hover:border-accent/40" 
+              : "from-muted/5 to-muted/10 border-muted/20 opacity-60"
+          }`}>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent">
-                <FileText className="h-5 w-5" />
-                PDF Document
+              <CardTitle className="flex items-center justify-between text-accent">
+                <div className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  PDF Document
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">
+                    {pdfEnabled ? "Enabled" : "Disabled"}
+                  </span>
+                  <Switch
+                    checked={pdfEnabled}
+                    onCheckedChange={setPdfEnabled}
+                  />
+                </div>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -437,7 +459,7 @@ export const QuestionInterface = () => {
                 <Button 
                   onClick={handleIngestPdf}
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-                  disabled={isPdfIngesting || isLoading}
+                  disabled={isPdfIngesting || isLoading || !pdfEnabled}
                 >
                   {isPdfIngesting ? (
                     <>
@@ -456,11 +478,26 @@ export const QuestionInterface = () => {
           </Card>
 
           {/* GitHub Repository */}
-          <Card className="shadow-elegant bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 hover:border-primary/40 transition-all duration-300">
+          <Card className={`shadow-elegant bg-gradient-to-br transition-all duration-300 ${
+            githubEnabled 
+              ? "from-primary/5 to-primary/10 border-primary/20 hover:border-primary/40" 
+              : "from-muted/5 to-muted/10 border-muted/20 opacity-60"
+          }`}>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-primary">
-                <Github className="h-5 w-5" />
-                GitHub Repository
+              <CardTitle className="flex items-center justify-between text-primary">
+                <div className="flex items-center gap-2">
+                  <Github className="h-5 w-5" />
+                  GitHub Repository
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">
+                    {githubEnabled ? "Enabled" : "Disabled"}
+                  </span>
+                  <Switch
+                    checked={githubEnabled}
+                    onCheckedChange={setGithubEnabled}
+                  />
+                </div>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -496,7 +533,7 @@ export const QuestionInterface = () => {
                 <Button 
                   onClick={handleIngestGithub}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                  disabled={isGithubIngesting || isLoading}
+                  disabled={isGithubIngesting || isLoading || !githubEnabled}
                 >
                   {isGithubIngesting ? (
                     <>
@@ -516,7 +553,7 @@ export const QuestionInterface = () => {
         </div>
         
         {/* Central Ingest All Button */}
-        {(pdfFile || githubRepo.trim()) && (
+        {((pdfFile && pdfEnabled) || (githubRepo.trim() && githubEnabled)) && (
           <div className="flex justify-center pt-6">
             <Button 
               onClick={handleIngestAllSources}
