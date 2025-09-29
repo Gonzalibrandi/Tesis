@@ -6,10 +6,12 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { Database, ExternalLink, FileText, Github, Loader2, Search, Trash2, Upload } from "lucide-react";
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const LANGFLOW_API_KEY = import.meta.env.VITE_LANGFLOW_API_KEY;
-const LANGFLOW_API_ENDPOINT = import.meta.env.VITE_LANGFLOW_RETRIEVAL_URL;
+const LANGFLOW_RETRIEVAL_ENDPOINT = import.meta.env.VITE_LANGFLOW_RETRIEVAL_URL;
+const FLOW_ID = import.meta.env.VITE_LANGFLOW_FLOW_ID;
+const LANGFLOW_BASE_URL = import.meta.env.VITE_LANGFLOW_BASE_URL;
 
 interface Source {
   type: 'pdf' | 'github' | 'web';
@@ -31,6 +33,8 @@ export const QuestionInterface = () => {
   const [sources, setSources] = useState<Source[]>([]);
   const [pdfEnabled, setPdfEnabled] = useState(true);
   const [githubEnabled, setGithubEnabled] = useState(true);
+  const [pdfIngested, setPdfIngested] = useState(false);
+  const [githubIngested, setGithubIngested] = useState(false);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -55,11 +59,13 @@ export const QuestionInterface = () => {
     fileInputRef.current?.click();
   };
 
+  // Asegúrate de que pdfFile sea un objeto File, por ejemplo, de un input type="file"
+
   const handleIngestPdf = async () => {
     if (!pdfFile) {
       toast({
-        title: "No PDF selected",
-        description: "Please upload a PDF file first",
+        title: "No PDF seleccionado",
+        description: "Por favor cargá un archivo PDF válido",
         variant: "destructive",
       });
       return;
@@ -68,36 +74,67 @@ export const QuestionInterface = () => {
     setIsPdfIngesting(true);
 
     try {
+      //Subir archivo a Langflow
       const formData = new FormData();
-      formData.append("file", pdfFile);
+      formData.append("file", pdfFile, pdfFile.name);
 
-      const response = await fetch("http://localhost:3001/upload", {
+      const uploadRes = await fetch(`${LANGFLOW_BASE_URL}/api/v2/files/`, {
         method: "POST",
+        headers: {
+          "x-api-key": LANGFLOW_API_KEY,
+        },
         body: formData,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Upload failed");
+      if (!uploadRes.ok) {
+        throw new Error(`Upload failed: ${uploadRes.status} ${uploadRes.statusText}`);
       }
 
-      const result = await response.json();
+      const uploadData = await uploadRes.json();
+      const uploadedPath = uploadData?.path;
+      if (!uploadedPath) throw new Error("Langflow no devolvió un path de archivo");
+
+      //Ejecutar el flow pasando el path del nodo File
+      const runRes = await fetch(`${LANGFLOW_BASE_URL}/api/v1/run/${FLOW_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": LANGFLOW_API_KEY,
+        },
+        body: JSON.stringify({
+          input_value: "",
+          input_type: "chat",
+          output_type: "chat",
+          tweaks: {
+            "File-aDxd1": {
+              path: uploadedPath,
+              delete_server_file_after_processing: true,
+            },
+          },
+        }),
+      });
+
+      if (!runRes.ok) {
+        throw new Error(`Flow failed: ${runRes.status} ${runRes.statusText}`);
+      }
 
       toast({
-        title: "PDF uploaded successfully",
-        description: `${result.file.filename} saved in server.`,
+        title: "PDF ingestado correctamente",
+        description: `${pdfFile.name} fue enviado a Langflow.`,
       });
-    } catch (error: any) {
-      console.error("Error uploading PDF:", error);
+      setPdfIngested(true);
+    } catch (err: any) {
+      console.error("Error:", err);
       toast({
-        title: "Error uploading PDF",
-        description: error.message || "Could not upload the file.",
+        title: "Error",
+        description: err.message || "No se pudo ingestar el PDF",
         variant: "destructive",
       });
     } finally {
       setIsPdfIngesting(false);
     }
   };
+
 
   const handleDeletePdf = () => {
     if (!pdfFile) return;
@@ -107,7 +144,12 @@ export const QuestionInterface = () => {
       title: "PDF removed",
       description: "The PDF file has been removed from the interface.",
     });
+    setPdfIngested(false);
   };
+
+  useEffect(() => {
+    setPdfIngested(false);
+  }, [pdfFile]);
 
   const handleIngestGithub = async () => {
     if (!githubRepo.trim()) {
@@ -151,6 +193,7 @@ export const QuestionInterface = () => {
         title: "Repository ingested successfully",
         description: `Repository from branch "${githubBranch || "main"}" is now ready for querying`,
       });
+      setGithubIngested(true);
     } catch (error) {
       console.error(error);
       toast({
@@ -162,6 +205,10 @@ export const QuestionInterface = () => {
       setIsGithubIngesting(false);
     }
   };
+
+  useEffect(() => {
+    setGithubIngested(false);
+  }, [githubRepo, githubBranch]);
 
   const handleIngestAllSources = async () => {
     const enabledSources = [];
@@ -196,26 +243,42 @@ export const QuestionInterface = () => {
   };
 
   const fetchLangflowAnswer = async (userQuestion: string) => {
-    const apiKey = LANGFLOW_API_KEY;
-    const apiEndpoint = LANGFLOW_API_ENDPOINT;
+    // armo tweaks dinámicamente según los flags
+    const tweaks: Record<string, any> = {};
+
+    if (pdfIngested) {
+      tweaks["ConditionalRouter-N2QZ8"] = { input_value: "PDF_INGESTED" };
+    }
+
+    if (githubIngested) {
+      tweaks["ConditionalRouter-XWU85"] = { input_value: "GITHUB_INGESTED" };
+    }
+
     const payload = { 
       output_type: "chat", 
       input_type: "chat", 
       input_value: userQuestion, 
-      session_id: "user_1" 
+      session_id: "user_1",
+      tweaks
     }; 
+
     const options = { 
       method: "POST", 
-      headers: { "Content-Type": "application/json", "x-api-key": apiKey }, 
+      headers: { 
+        "Content-Type": "application/json", 
+        "x-api-key": LANGFLOW_API_KEY 
+      }, 
       body: JSON.stringify(payload) 
     }; 
-    const response = await fetch(apiEndpoint, options);
+
+    const response = await fetch(LANGFLOW_RETRIEVAL_ENDPOINT, options);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } 
+
     const data = await response.json();
     return data.outputs?.[0]?.outputs?.[0]?.artifacts?.message || "";
-  }; 
+  };
   
   const parseLLMResponse = (raw: string) => { 
     const [answerPart, traceabilityPart] = raw.split("**Source Traceability:**");
