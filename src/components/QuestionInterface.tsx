@@ -25,7 +25,6 @@ export const QuestionInterface = () => {
   const [question, setQuestion] = useState('');
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [githubRepo, setGithubRepo] = useState('');
-  const [githubBranch, setGithubBranch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isPdfIngesting, setIsPdfIngesting] = useState(false);
   const [isGithubIngesting, setIsGithubIngesting] = useState(false);
@@ -144,11 +143,11 @@ export const QuestionInterface = () => {
       title: "PDF removed",
       description: "The PDF file has been removed from the interface.",
     });
-    setPdfIngested(false);
   };
 
   useEffect(() => {
     setPdfIngested(false);
+    console.log("PDF ingestion reset due to file change");
   }, [pdfFile]);
 
   const handleIngestGithub = async () => {
@@ -175,10 +174,11 @@ export const QuestionInterface = () => {
           input_type: "chat",
           output_type: "chat",
           tweaks: {
-             "GitLoaderComponent-V0bQK": {
-              repo_source: "Remote",
-              clone_url: githubRepo,
-              branch: githubBranch || "main",
+             "GitExtractorComponent-MVX7J": {
+              repository_url: githubRepo,
+              //repo_source: "Remote",
+              //clone_url: githubRepo,
+              //branch: githubBranch || "main",
             },
           },
         }),
@@ -191,7 +191,7 @@ export const QuestionInterface = () => {
 
       toast({
         title: "Repository ingested successfully",
-        description: `Repository from branch "${githubBranch || "main"}" is now ready for querying`,
+        //description: `Repository from branch "${githubBranch || "main"}" is now ready for querying`,
       });
       setGithubIngested(true);
     } catch (error) {
@@ -208,7 +208,8 @@ export const QuestionInterface = () => {
 
   useEffect(() => {
     setGithubIngested(false);
-  }, [githubRepo, githubBranch]);
+    console.log("GitHub ingestion reset due to repo change");
+  }, [githubRepo]);
 
   const handleIngestAllSources = async () => {
     const enabledSources = [];
@@ -246,12 +247,14 @@ export const QuestionInterface = () => {
     // armo tweaks dinámicamente según los flags
     const tweaks: Record<string, any> = {};
 
-    if (pdfIngested) {
-      tweaks["ConditionalRouter-N2QZ8"] = { input_value: "PDF_INGESTED" };
+    if (pdfIngested && pdfEnabled) {
+      tweaks["ConditionalRouter-RZ4gB"] = { input_text: "PDF_INGESTED" };
+      console.log("PDF tweak added");
     }
 
-    if (githubIngested) {
-      tweaks["ConditionalRouter-XWU85"] = { input_value: "GITHUB_INGESTED" };
+    if (githubIngested && githubEnabled) {
+      tweaks["ConditionalRouter-92JKj"] = { input_text: "GITHUB_INGESTED" };
+      console.log("GitHub tweak added");
     }
 
     const payload = { 
@@ -392,8 +395,9 @@ export const QuestionInterface = () => {
                     Processing your query through the Langflow pipeline...
                   </p>
                   <div className="text-sm text-muted-foreground space-y-1">
-                    <p>→ Retrieving from PDF documents</p>
-                    <p>→ Searching GitHub repositories</p>
+                    <p>This may take a moment depending on the data sources.</p>
+                    {(pdfEnabled && pdfIngested) && <p>→ Analyzing PDF document</p>}
+                    {(githubEnabled && githubIngested) && <p>→ Searching GitHub repositories</p>}
                     <p>→ Gathering web sources</p>
                     <p>→ Generating comprehensive answer</p>
                   </div>
@@ -571,22 +575,13 @@ export const QuestionInterface = () => {
                   onChange={(e) => setGithubRepo(e.target.value)}
                   className="w-full bg-background/50 border-primary/20 focus:border-primary/40"
                 />
-                <Input
-                  placeholder="Branch name (e.g., main, dev, feature-branch)"
-                  value={githubBranch}
-                  onChange={(e) => setGithubBranch(e.target.value)}
-                  className="w-full bg-background/50 border-primary/20 focus:border-primary/40"
-                />
                 <p className="text-xs text-muted-foreground">
-                  Enter the URL of a public GitHub repository and specify the branch to analyze its codebase, documentation, and README files
+                  Enter the URL of a public GitHub repository to analyze its codebase, documentation, and README files
                 </p>
                 {githubRepo && (
                   <div className="p-3 bg-primary/10 rounded-md">
                     <p className="text-sm text-primary font-medium">
                       ✓ Repository: {githubRepo}
-                    </p>
-                    <p className="text-xs text-primary/80">
-                      Branch: {githubBranch}
                     </p>
                   </div>
                 )}
@@ -616,7 +611,7 @@ export const QuestionInterface = () => {
         </div>
         
         {/* Central Ingest All Button */}
-        {((pdfFile && pdfEnabled) || (githubRepo.trim() && githubEnabled)) && (
+        {((pdfFile && pdfEnabled) && (githubRepo.trim() && githubEnabled)) && (
           <div className="flex justify-center pt-6">
             <Button 
               onClick={handleIngestAllSources}

@@ -5,19 +5,15 @@ A full-stack application with a React frontend for AI-powered research and docum
 ## Project Structure
 
 ```
-├── src/                          # Frontend (React + TypeScript)
-│   ├── components/               # React components
-│   │   ├── ui/                   # Reusable UI components (shadcn)
-│   │   ├── QuestionInterface.tsx # Main research interface
-│   │   └── SystemArchitecture.tsx # System architecture display
-│   ├── pages/                    # Page components
-│   ├── hooks/                    # Custom React hooks
-│   ├── lib/                      # Utility functions
-│   └── assets/                   # Static assets
-└── backend/                      # Backend (Node.js + Express)
-    ├── server.js                 # Main server file
-    ├── package.json              # Backend dependencies
-    └── data/                     # File upload storage
+└── src/                          # Frontend (React + TypeScript)
+    ├── components/               # React components
+    │   ├── ui/                   # Reusable UI components (shadcn)
+    │   ├── QuestionInterface.tsx # Main research interface
+    │   └── SystemArchitecture.tsx # System architecture display
+    ├── pages/                    # Page components
+    ├── hooks/                    # Custom React hooks
+    ├── lib/                      # Utility functions
+    └── assets/                   # Static assets
 ```
 
 ## Project info
@@ -50,11 +46,6 @@ cd backend
 npm install
 npm run dev  # Development mode with auto-reload
 ```
-
-The backend will run on `http://localhost:3001` and includes:
-- PDF upload endpoint (`POST /upload`)
-- File retrieval endpoint (`GET /files/:filename`)
-- File listing endpoint (`GET /files`)
 
 See `backend/README.md` for detailed API documentation.
 
