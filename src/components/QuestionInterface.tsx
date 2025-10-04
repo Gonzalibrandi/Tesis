@@ -331,7 +331,7 @@ export const QuestionInterface = () => {
     e.preventDefault();
     if (!question.trim()) {
       toast({ 
-        title: "Question required", 
+        title: "Question required",
         description: "Please enter a question to proceed", 
         variant: "destructive", 
       });
