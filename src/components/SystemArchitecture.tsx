@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Database, Search, FileText, Github, Brain, Merge } from "lucide-react";
+import { ArrowDown, Brain, Database, FileText, Github, Merge, Search } from "lucide-react";
 
 export const SystemArchitecture = () => {
   return (
@@ -20,7 +20,7 @@ export const SystemArchitecture = () => {
                 <FileText className="h-4 w-4 text-primary" />
                 <span className="text-sm">PDF Loader</span>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground mx-auto" />
+              <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
                 <Database className="h-4 w-4 text-accent" />
                 <span className="text-sm">FAISS-PDF Index</span>
@@ -32,7 +32,7 @@ export const SystemArchitecture = () => {
                 <Github className="h-4 w-4 text-primary" />
                 <span className="text-sm">GitHub Loader</span>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground mx-auto" />
+              <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
                 <Database className="h-4 w-4 text-accent" />
                 <span className="text-sm">FAISS-GitHub Index</span>
@@ -61,7 +61,7 @@ export const SystemArchitecture = () => {
                   Web Search
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground mx-auto" />
+              <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
                 <Merge className="h-4 w-4 text-accent" />
                 <span className="text-sm">Merge & Parse</span>
@@ -76,14 +76,14 @@ export const SystemArchitecture = () => {
               <div className="p-3 bg-secondary rounded-lg">
                 <span className="text-sm">Context Building</span>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground mx-auto" />
+              <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="p-3 bg-gradient-accent rounded-lg text-accent-foreground">
                 <div className="flex items-center gap-2">
                   <Brain className="h-4 w-4" />
                   <span className="text-sm font-medium">OpenAI LLM</span>
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground mx-auto" />
+              <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="p-3 bg-primary text-primary-foreground rounded-lg text-center">
                 <span className="text-sm font-medium">Final Answer</span>
               </div>

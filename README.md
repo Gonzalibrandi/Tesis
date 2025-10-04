@@ -36,19 +36,6 @@ npm install
 npm run dev
 ```
 
-### Backend Development
-
-The backend handles PDF file uploads and storage:
-
-```sh
-# Setup and run backend server
-cd backend
-npm install
-npm run dev  # Development mode with auto-reload
-```
-
-See `backend/README.md` for detailed API documentation.
-
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).
@@ -73,12 +60,6 @@ See `backend/README.md` for detailed API documentation.
 - **shadcn/ui** - Component library
 - **React Router** - Client-side routing
 - **TanStack Query** - Data fetching and caching
-
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **Multer** - File upload handling
-- **CORS** - Cross-origin resource sharing
 
 ## How can I deploy this project?
 
