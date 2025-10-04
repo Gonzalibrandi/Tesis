@@ -30,6 +30,7 @@ export const QuestionInterface = () => {
   const [isGithubIngesting, setIsGithubIngesting] = useState(false);
   const [answer, setAnswer] = useState('');
   const [sources, setSources] = useState<Source[]>([]);
+  const [suggestedQuestions, setSuggestedQuestions] = useState<string[]>([]);
   const [pdfEnabled, setPdfEnabled] = useState(true);
   const [githubEnabled, setGithubEnabled] = useState(true);
   const [pdfIngested, setPdfIngested] = useState(false);
@@ -280,15 +281,21 @@ export const QuestionInterface = () => {
     } 
 
     const data = await response.json();
+    console.log("Langflow response data:", data.outputs?.[0]?.outputs?.[0]?.artifacts?.message);
     return data.outputs?.[0]?.outputs?.[0]?.artifacts?.message || "";
   };
   
   const parseLLMResponse = (raw: string) => { 
-    const [answerPart, traceabilityPart] = raw.split("**Source Traceability:**");
+    // Split by Suggested Questions first
+    const [beforeSuggested, afterSuggested] = raw.split("**Suggested Questions:**");
+    
+    // Split the before part by Source Traceability
+    const [answerPart, traceabilityPart] = beforeSuggested.split("**Source Traceability:**");
     const answer = answerPart
       .replace("**Answer:**", "")
       .replace(/^[-\s\n]+/, "")
-      .trim(); 
+      .trim();
+    
     const sources: Source[] = [];
     if (traceabilityPart) {
       const lines = traceabilityPart.trim().split("\n");
@@ -302,10 +309,22 @@ export const QuestionInterface = () => {
             score: parseInt(match[2], 10) / 100,
             content: ""
           });
-        } 
-      }); 
-    } 
-    return { answer, sources }; 
+        }
+      });
+    }
+    
+    const suggestedQuestions: string[] = [];
+    if (afterSuggested) {
+      const lines = afterSuggested.trim().split("\n");
+      lines.forEach((line) => {
+        const questionMatch = line.match(/^-\s*(.+)$/);
+        if (questionMatch) {
+          suggestedQuestions.push(questionMatch[1].trim());
+        }
+      });
+    }
+    
+    return { answer, sources, suggestedQuestions };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -321,9 +340,14 @@ export const QuestionInterface = () => {
     setIsLoading(true); 
     try {
       const rawResponse = await fetchLangflowAnswer(question);
-      const { answer, sources } = parseLLMResponse(rawResponse);
+      console.log("Raw LLM response:", rawResponse);
+      const { answer, sources, suggestedQuestions } = parseLLMResponse(rawResponse);
+      console.log("Parsed answer:", answer);
+      console.log("Parsed sources:", sources);
+      console.log("Parsed suggested questions:", suggestedQuestions);
       setAnswer(answer);
       setSources(sources);
+      setSuggestedQuestions(suggestedQuestions);
     } catch (err) {
       console.error("Langflow error:", err);
       toast({ 
@@ -414,41 +438,57 @@ export const QuestionInterface = () => {
                   </div>
                 </div>
                 
-                <div>
-                  <h3 className="text-lg font-semibold text-primary mb-4">Sources</h3>
-                  <div className="grid gap-4">
-                    {sources.map((source, index) => (
-                      <Card key={index} className="border-l-4 border-l-accent">
-                        <CardContent className="pt-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                              {source.type === 'pdf' && <FileText className="h-4 w-4 text-primary" />}
-                              {source.type === 'github' && <Github className="h-4 w-4 text-primary" />}
-                              {source.type === 'web' && <ExternalLink className="h-4 w-4 text-primary" />}
-                              <span className="font-medium">{source.title}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary" className="text-xs">
-                                {source.type.toUpperCase()}
-                              </Badge>
-                              {source.score && (
-                                <Badge variant="outline" className="text-xs">
-                                  {Math.round(source.score * 100)}% match
+                {sources.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-primary mb-4">Source Traceability</h3>
+                    <div className="grid gap-4">
+                      {sources.map((source, index) => (
+                        <Card key={index} className="border-l-4 border-l-accent">
+                          <CardContent className="pt-4">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                {source.type === 'pdf' && <FileText className="h-4 w-4 text-primary" />}
+                                {source.type === 'github' && <Github className="h-4 w-4 text-primary" />}
+                                {source.type === 'web' && <ExternalLink className="h-4 w-4 text-primary" />}
+                                <span className="font-medium">{source.title}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Badge variant="secondary" className="text-xs">
+                                  {source.type.toUpperCase()}
                                 </Badge>
-                              )}
+                                {source.score && (
+                                  <Badge variant="outline" className="text-xs">
+                                    {Math.round(source.score * 100)}% match
+                                  </Badge>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {source.reference}
-                          </p>
-                          <p className="text-sm">
-                            {source.content}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    ))}
+                            <p className="text-sm text-muted-foreground mb-2">
+                              {source.reference}
+                            </p>
+                            <p className="text-sm">
+                              {source.content}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {suggestedQuestions.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-primary mb-4">Suggested Questions</h3>
+                    <div className="bg-gradient-subtle p-6 rounded-lg space-y-3">
+                      {suggestedQuestions.map((q, index) => (
+                        <div key={index} className="flex items-start gap-3 p-3 bg-background/50 rounded-md hover:bg-background/80 transition-colors">
+                          <span className="text-primary font-medium">{index + 1}.</span>
+                          <span className="text-foreground flex-1">{q}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
