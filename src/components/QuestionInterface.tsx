@@ -14,7 +14,7 @@ const FLOW_ID = import.meta.env.VITE_LANGFLOW_FLOW_ID;
 const LANGFLOW_BASE_URL = import.meta.env.VITE_LANGFLOW_BASE_URL;
 
 interface Source {
-  type: 'pdf' | 'github' | 'web';
+  type: 'pdf' | 'github' | 'web' | 'llm';
   title: string;
   reference: string;
   score?: number;
@@ -300,10 +300,12 @@ export const QuestionInterface = () => {
     if (traceabilityPart) {
       const lines = traceabilityPart.trim().split("\n");
       lines.forEach((line) => {
-        const match = line.match(/-\s*(PDF|GitHub|Web):\s*(\d+)%/i);
+        const match = line.match(/-\s*(PDF|GitHub|Web|LLM prior knowledge):\s*(\d+)%/i);
         if (match) {
+          const sourceType = match[1].toLowerCase();
+          const normalizedType = sourceType.includes('llm') ? 'llm' : sourceType as "pdf" | "github" | "web" | "llm";
           sources.push({
-            type: match[1].toLowerCase() as "pdf" | "github" | "web",
+            type: normalizedType,
             title: `${match[1]} contribution`,
             reference: "",
             score: parseInt(match[2], 10) / 100,
@@ -450,6 +452,7 @@ export const QuestionInterface = () => {
                                 {source.type === 'pdf' && <FileText className="h-4 w-4 text-primary" />}
                                 {source.type === 'github' && <Github className="h-4 w-4 text-primary" />}
                                 {source.type === 'web' && <ExternalLink className="h-4 w-4 text-primary" />}
+                                {source.type === 'llm' && <Database className="h-4 w-4 text-primary" />}
                                 <span className="font-medium">{source.title}</span>
                               </div>
                               <div className="flex items-center gap-2">
