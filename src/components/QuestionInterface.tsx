@@ -250,12 +250,12 @@ export const QuestionInterface = () => {
 
     if (pdfIngested && pdfEnabled) {
       tweaks["ConditionalRouter-RZ4gB"] = { input_text: "PDF_INGESTED" };
-      console.log("PDF tweak added");
+      console.log("PDF information used in the query");
     }
 
     if (githubIngested && githubEnabled) {
       tweaks["ConditionalRouter-92JKj"] = { input_text: "GITHUB_INGESTED" };
-      console.log("GitHub tweak added");
+      console.log("GitHub information used in the query");
     }
 
     const payload = { 
