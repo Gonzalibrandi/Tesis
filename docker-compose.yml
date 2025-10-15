@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  langflow:
+    build:
+      context: ./langflow_custom
+    container_name: langflow-container
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./langflow_data:/app/langflow/.langflow
+      - ./indices:/app/indices
+    environment:
+      - LANGFLOW_LOAD_FLOWS_PATH=/app/langflow/.langflow
+       # --- LÍNEA AÑADIDA ---
+      - PYTHONPATH=/app/data/.local/lib/python3.12/site-packages
+    restart: unless-stopped
+
+  frontend:
+    build: ./Tesis
+    container_name: frontend-container
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Tesis:/app:delegated
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_LANGFLOW_API=http://langflow:7860
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - POLLING_INTERVAL=1000
+    depends_on:
+      - langflow
+    restart: unless-stopped
+
+volumes:
+  langflow_data:

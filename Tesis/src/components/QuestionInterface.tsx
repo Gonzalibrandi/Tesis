@@ -9,9 +9,8 @@ import { Database, ExternalLink, FileText, Github, Loader2, Search, Trash2, Uplo
 import { useEffect, useRef, useState } from 'react';
 
 const LANGFLOW_API_KEY = import.meta.env.VITE_LANGFLOW_API_KEY;
-const LANGFLOW_RETRIEVAL_ENDPOINT = import.meta.env.VITE_LANGFLOW_RETRIEVAL_URL;
-const FLOW_ID = import.meta.env.VITE_LANGFLOW_FLOW_ID;
-const LANGFLOW_BASE_URL = import.meta.env.VITE_LANGFLOW_BASE_URL;
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const JIGSAW_API_KEY = import.meta.env.VITE_JIGSAW_API_KEY;
 
 interface Source {
   type: 'pdf' | 'github' | 'web' | 'llm';
@@ -78,7 +77,7 @@ export const QuestionInterface = () => {
       const formData = new FormData();
       formData.append("file", pdfFile, pdfFile.name);
 
-      const uploadRes = await fetch(`${LANGFLOW_BASE_URL}/api/v2/files/`, {
+      const uploadRes = await fetch(`http://localhost:7860/api/v2/files/`, {
         method: "POST",
         headers: {
           "x-api-key": LANGFLOW_API_KEY,
@@ -92,10 +91,10 @@ export const QuestionInterface = () => {
 
       const uploadData = await uploadRes.json();
       const uploadedPath = uploadData?.path;
-      if (!uploadedPath) throw new Error("Langflow no devolvió un path de archivo");
+      if (!uploadedPath) throw new Error("Langflow did not return a file path");
 
       //Ejecutar el flow pasando el path del nodo File
-      const runRes = await fetch(`${LANGFLOW_BASE_URL}/api/v1/run/${FLOW_ID}`, {
+      const runRes = await fetch("http://localhost:7860/api/v1/run/ingest_pdf_flow", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,15 +118,15 @@ export const QuestionInterface = () => {
       }
 
       toast({
-        title: "PDF ingestado correctamente",
-        description: `${pdfFile.name} fue enviado a Langflow.`,
+        title: "PDF ingested successfully",
+        description: `${pdfFile.name} has been sent to Langflow.`,
       });
       setPdfIngested(true);
     } catch (err: any) {
       console.error("Error:", err);
       toast({
         title: "Error",
-        description: err.message || "No se pudo ingestar el PDF",
+        description: err.message || "Failed to ingest PDF",
         variant: "destructive",
       });
     } finally {
@@ -164,18 +163,18 @@ export const QuestionInterface = () => {
     setIsGithubIngesting(true);
 
     try {
-      const response = await fetch(import.meta.env.VITE_LANGFLOW_GITHUB_URL, {
+      const response = await fetch("http://localhost:7860/api/v1/run/ingest_github_flow", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_LANGFLOW_API_KEY}`,
+          Authorization: `Bearer ${LANGFLOW_API_KEY}`,
         },
         body: JSON.stringify({
           input_value: "",
           input_type: "chat",
           output_type: "chat",
           tweaks: {
-             "GitExtractorComponent-MVX7J": {
+             "GitExtractorComponent-PmJhm": {
               repository_url: githubRepo,
               //repo_source: "Remote",
               //clone_url: githubRepo,
@@ -261,10 +260,18 @@ export const QuestionInterface = () => {
     const payload = { 
       output_type: "chat", 
       input_type: "chat", 
-      input_value: userQuestion, 
-      session_id: "user_1",
-      tweaks
-    }; 
+      tweaks: {
+        "ChatInput-yVntr":{
+          "input_value": userQuestion
+        },
+        "OpenAIModel-4TVDv":{
+          "api_key": OPENAI_API_KEY,
+        },
+        "JigsawStackAISearch-OqFI6":{
+          "api_key": JIGSAW_API_KEY,
+        }
+      }
+    };
 
     const options = { 
       method: "POST", 
@@ -275,7 +282,7 @@ export const QuestionInterface = () => {
       body: JSON.stringify(payload) 
     }; 
 
-    const response = await fetch(LANGFLOW_RETRIEVAL_ENDPOINT, options);
+    const response = await fetch("http://localhost:7860/api/v1/run/retriever_flow", options);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } 

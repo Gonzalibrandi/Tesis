@@ -1,0 +1,12 @@
+FROM langflowai/langflow:1.5.1
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+# Instalará todo directamente desde el archivo "resuelto"
+# Será rápido porque no hay nada que resolver.
+RUN pip install -v --no-cache-dir -r requirements.txt
+
+# Comando para ejecutar Langflow
+CMD ["langflow", "run", "--host", "0.0.0.0", "--port", "7860"]
