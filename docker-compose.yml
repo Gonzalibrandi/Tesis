@@ -17,12 +17,12 @@ services:
     restart: unless-stopped
 
   frontend:
-    build: ./Tesis
+    build: ./frontend
     container_name: frontend-container
     ports:
       - "8080:8080"
     volumes:
-      - ./Tesis:/app:delegated
+      - ./frontend:/app:delegated
       - /app/node_modules
     environment:
       - NEXT_PUBLIC_LANGFLOW_API=http://langflow:7860
