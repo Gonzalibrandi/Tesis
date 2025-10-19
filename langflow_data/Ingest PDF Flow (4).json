@@ -6,35 +6,6 @@
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "SplitText",
-            "id": "SplitText-SlJql",
-            "name": "dataframe",
-            "output_types": [
-              "DataFrame"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "ingest_data",
-            "id": "FAISS-kqqkq",
-            "inputTypes": [
-              "Data",
-              "DataFrame"
-            ],
-            "type": "other"
-          }
-        },
-        "id": "xy-edge__SplitText-SlJql{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-SlJqlœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}-FAISS-kqqkq{œfieldNameœ:œingest_dataœ,œidœ:œFAISS-kqqkqœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}",
-        "selected": false,
-        "source": "SplitText-SlJql",
-        "sourceHandle": "{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-SlJqlœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}",
-        "target": "FAISS-kqqkq",
-        "targetHandle": "{œfieldNameœ:œingest_dataœ,œidœ:œFAISS-kqqkqœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
             "dataType": "LocalHuggingFaceEmbeddings",
             "id": "CustomComponent-8Vn0a",
             "name": "embeddings",
@@ -71,6 +42,35 @@
             ]
           },
           "targetHandle": {
+            "fieldName": "input_documents",
+            "id": "MetadataTagger-Lyz8A",
+            "inputTypes": [
+              "Data",
+              "Message"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__File-aDxd1{œdataTypeœ:œFileœ,œidœ:œFile-aDxd1œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-MetadataTagger-Lyz8A{œfieldNameœ:œinput_documentsœ,œidœ:œMetadataTagger-Lyz8Aœ,œinputTypesœ:[œDataœ,œMessageœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "File-aDxd1",
+        "sourceHandle": "{œdataTypeœ:œFileœ,œidœ:œFile-aDxd1œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "MetadataTagger-Lyz8A",
+        "targetHandle": "{œfieldNameœ:œinput_documentsœ,œidœ:œMetadataTagger-Lyz8Aœ,œinputTypesœ:[œDataœ,œMessageœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "MetadataTagger",
+            "id": "MetadataTagger-Lyz8A",
+            "name": "tagged_documents",
+            "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
             "fieldName": "data_inputs",
             "id": "SplitText-SlJql",
             "inputTypes": [
@@ -81,12 +81,41 @@
             "type": "other"
           }
         },
-        "id": "xy-edge__File-aDxd1{œdataTypeœ:œFileœ,œidœ:œFile-aDxd1œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-SplitText-SlJql{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-SlJqlœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
+        "id": "xy-edge__MetadataTagger-Lyz8A{œdataTypeœ:œMetadataTaggerœ,œidœ:œMetadataTagger-Lyz8Aœ,œnameœ:œtagged_documentsœ,œoutput_typesœ:[œDataœ]}-SplitText-SlJql{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-SlJqlœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
         "selected": false,
-        "source": "File-aDxd1",
-        "sourceHandle": "{œdataTypeœ:œFileœ,œidœ:œFile-aDxd1œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}",
+        "source": "MetadataTagger-Lyz8A",
+        "sourceHandle": "{œdataTypeœ:œMetadataTaggerœ,œidœ:œMetadataTagger-Lyz8Aœ,œnameœ:œtagged_documentsœ,œoutput_typesœ:[œDataœ]}",
         "target": "SplitText-SlJql",
         "targetHandle": "{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-SlJqlœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "SplitText",
+            "id": "SplitText-SlJql",
+            "name": "dataframe",
+            "output_types": [
+              "DataFrame"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "ingest_data",
+            "id": "FAISS-kqqkq",
+            "inputTypes": [
+              "Data",
+              "DataFrame"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__SplitText-SlJql{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-SlJqlœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}-FAISS-kqqkq{œfieldNameœ:œingest_dataœ,œidœ:œFAISS-kqqkqœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "SplitText-SlJql",
+        "sourceHandle": "{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-SlJqlœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}",
+        "target": "FAISS-kqqkq",
+        "targetHandle": "{œfieldNameœ:œingest_dataœ,œidœ:œFAISS-kqqkqœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}"
       }
     ],
     "nodes": [
@@ -120,7 +149,7 @@
             "icon": "FAISS",
             "key": "FAISS",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -341,7 +370,7 @@
         "dragging": false,
         "id": "FAISS-kqqkq",
         "measured": {
-          "height": 453,
+          "height": 455,
           "width": 320
         },
         "position": {
@@ -378,7 +407,7 @@
             "icon": "scissors-line-dashed",
             "key": "SplitText",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -559,12 +588,12 @@
         "dragging": false,
         "id": "SplitText-SlJql",
         "measured": {
-          "height": 327,
+          "height": 329,
           "width": 320
         },
         "position": {
-          "x": 694.7792350657617,
-          "y": 260.40703002178384
+          "x": 699.4684604992541,
+          "y": 263.64483661179054
         },
         "selected": false,
         "type": "genericNode"
@@ -589,7 +618,7 @@
             "frozen": false,
             "icon": "brain-circuit",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -665,7 +694,7 @@
         "dragging": false,
         "id": "CustomComponent-8Vn0a",
         "measured": {
-          "height": 218,
+          "height": 219,
           "width": 320
         },
         "position": {
@@ -709,9 +738,9 @@
             ],
             "frozen": false,
             "icon": "file-text",
-            "last_updated": "2025-10-14T21:00:38.661Z",
+            "last_updated": "2025-10-17T03:47:03.208Z",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -1126,21 +1155,196 @@
         "dragging": false,
         "id": "File-aDxd1",
         "measured": {
-          "height": 212,
+          "height": 213,
           "width": 320
         },
         "position": {
-          "x": 276.96997565447066,
-          "y": 242.32357701660044
+          "x": -115.29639134643287,
+          "y": 235.06707743285725
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "MetadataTagger-Lyz8A",
+          "node": {
+            "base_classes": [
+              "Data"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Adds custom key-value pairs to the metadata of each document in a list.",
+            "display_name": "Metadata Tagger",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_documents",
+              "tag_name",
+              "tag_value",
+              "source_file_path"
+            ],
+            "frozen": false,
+            "icon": "tag",
+            "legacy": false,
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Tagged Documents",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "tag_documents",
+                "name": "tagged_documents",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from typing import List\r\nfrom langflow.custom import Component\r\nfrom langflow.io import HandleInput, MessageTextInput, Output\r\nfrom langflow.schema import Data\r\n\r\nclass MetadataTagger(Component):\r\n    display_name = \"Metadata Tagger\"\r\n    description = \"Adds custom key-value pairs to the metadata of each document in a list.\"\r\n    icon = \"tag\"\r\n    name = \"MetadataTagger\"\r\n\r\n    inputs = [\r\n        HandleInput(\r\n            name=\"input_documents\",\r\n            display_name=\"Input Documents\",\r\n            info=\"The list of documents to tag.\",\r\n            is_list=True,\r\n            input_types=[\"Data\", \"Message\"],\r\n            required=True,\r\n        ),\r\n        MessageTextInput(\r\n            name=\"tag_name\",\r\n            display_name=\"Tag Name\",\r\n            info=\"The name of the metadata field to add (e.g., 'origin').\",\r\n            value=\"origin\",\r\n        ),\r\n        MessageTextInput(\r\n            name=\"tag_value\",\r\n            display_name=\"Tag Value\",\r\n            info=\"The value to assign to the tag (e.g., 'PDF Document').\",\r\n            value=\"Unknown\",\r\n        ),\r\n        # --- NUEVA ENTRADA ---\r\n        # Entrada opcional para pasar el nombre del archivo explícitamente.\r\n        MessageTextInput(\r\n            name=\"source_file_path\",\r\n            display_name=\"Source File Path\",\r\n            info=\"[Optional] Explicitly sets the 'source' metadata field. Useful for PDF files.\",\r\n            required=False, # Es opcional\r\n        ),\r\n    ]\r\n\r\n    outputs = [\r\n        Output(\r\n            display_name=\"Tagged Documents\",\r\n            name=\"tagged_documents\",\r\n            method=\"tag_documents\"\r\n        ),\r\n    ]\r\n\r\n    def tag_documents(self) -> List[Data]:\r\n        \"\"\"\r\n        Iterates through documents and adds the specified tag and optional source to their metadata.\r\n        \"\"\"\r\n        raw_input = self.input_documents or []\r\n        documents: List[Data] = []\r\n        \r\n        # Lógica para \"desenvolver\" la entrada\r\n        if isinstance(raw_input, Message):\r\n            content = raw_input.content\r\n            if isinstance(content, list): documents = content\r\n            elif isinstance(content, Data): documents = [content]\r\n        elif isinstance(raw_input, list): documents = raw_input\r\n        elif isinstance(raw_input, Data): documents = [raw_input]\r\n\r\n        tag_name = self.tag_name\r\n        tag_value = self.tag_value\r\n        source_path = self.source_file_path # Obtenemos el path del nuevo input\r\n        \r\n        if not documents:\r\n            self.status = \"No valid documents found in the input to tag.\"\r\n            return []\r\n\r\n        tagged_docs = []\r\n        for doc in documents:\r\n            if isinstance(doc, Data):\r\n                if not hasattr(doc, 'metadata') or not isinstance(doc.metadata, dict):\r\n                    doc.metadata = {}\r\n                \r\n                # Añadir la etiqueta de origen\r\n                doc.metadata[tag_name] = tag_value\r\n                \r\n                # --- LÓGICA MEJORADA ---\r\n                # Si se pasó un path de archivo, lo agregamos como 'source'.\r\n                if source_path:\r\n                    doc.metadata[\"source\"] = source_path\r\n                \r\n                tagged_docs.append(doc)\r\n\r\n        self.status = f\"Successfully tagged {len(tagged_docs)} documents.\"\r\n        return tagged_docs"
+              },
+              "input_documents": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Input Documents",
+                "dynamic": false,
+                "info": "The list of documents to tag.",
+                "input_types": [
+                  "Data",
+                  "Message"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "input_documents",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "source_file_path": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Source File Path",
+                "dynamic": false,
+                "info": "[Optional] Explicitly sets the 'source' metadata field. Useful for PDF files.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "source_file_path",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "tag_name": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Tag Name",
+                "dynamic": false,
+                "info": "The name of the metadata field to add (e.g., 'origin').",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "tag_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "origin"
+              },
+              "tag_value": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Tag Value",
+                "dynamic": false,
+                "info": "The value to assign to the tag (e.g., 'PDF Document').",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "tag_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "PDF Document"
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "MetadataTagger"
+        },
+        "dragging": false,
+        "id": "MetadataTagger-Lyz8A",
+        "measured": {
+          "height": 427,
+          "width": 320
+        },
+        "position": {
+          "x": 295.8735601208083,
+          "y": 235.77531906587132
         },
         "selected": false,
         "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": -219.44173276024594,
-      "y": -166.35548876415749,
-      "zoom": 0.7507249491358274
+      "x": 168.10488021289552,
+      "y": -105.99087025373717,
+      "zoom": 0.9809923701171841
     }
   },
   "description": "Navigate the Linguistic Landscape, Discover Opportunities.",

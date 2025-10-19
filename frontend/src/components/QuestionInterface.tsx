@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 const LANGFLOW_API_KEY = import.meta.env.VITE_LANGFLOW_API_KEY;
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const JIGSAW_API_KEY = import.meta.env.VITE_JIGSAW_API_KEY;
+const NVIDIA_API_KEY = import.meta.env.VITE_NVIDIA_API_KEY;
 
 interface Source {
   type: 'pdf' | 'github' | 'web' | 'llm';
@@ -109,6 +110,9 @@ export const QuestionInterface = () => {
               path: uploadedPath,
               delete_server_file_after_processing: true,
             },
+            "MetadataTagger-Lyz8A": {
+              "source_file_path": pdfFile.name
+            }
           },
         }),
       });
@@ -269,6 +273,9 @@ export const QuestionInterface = () => {
         },
         "JigsawStackAISearch-OqFI6":{
           "api_key": JIGSAW_API_KEY,
+        },
+        "NvidiaRerankComponent-fRkUX":{
+          "api_key": NVIDIA_API_KEY,
         }
       }
     };

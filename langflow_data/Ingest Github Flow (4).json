@@ -65,9 +65,66 @@
           "sourceHandle": {
             "dataType": "GitExtractorComponent",
             "id": "GitExtractorComponent-PmJhm",
-            "name": "text_based_file_contents",
+            "name": "files_content",
             "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_documents",
+            "id": "MetadataTagger-XqRJY",
+            "inputTypes": [
+              "Data",
               "Message"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__GitExtractorComponent-PmJhm{œdataTypeœ:œGitExtractorComponentœ,œidœ:œGitExtractorComponent-PmJhmœ,œnameœ:œfiles_contentœ,œoutput_typesœ:[œDataœ]}-MetadataTagger-XqRJY{œfieldNameœ:œinput_documentsœ,œidœ:œMetadataTagger-XqRJYœ,œinputTypesœ:[œDataœ,œMessageœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "GitExtractorComponent-PmJhm",
+        "sourceHandle": "{œdataTypeœ:œGitExtractorComponentœ,œidœ:œGitExtractorComponent-PmJhmœ,œnameœ:œfiles_contentœ,œoutput_typesœ:[œDataœ]}",
+        "target": "MetadataTagger-XqRJY",
+        "targetHandle": "{œfieldNameœ:œinput_documentsœ,œidœ:œMetadataTagger-XqRJYœ,œinputTypesœ:[œDataœ,œMessageœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "MetadataTagger",
+            "id": "MetadataTagger-XqRJY",
+            "name": "tagged_documents",
+            "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_documents",
+            "id": "CustomComponent-F1TVs",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__MetadataTagger-XqRJY{œdataTypeœ:œMetadataTaggerœ,œidœ:œMetadataTagger-XqRJYœ,œnameœ:œtagged_documentsœ,œoutput_typesœ:[œDataœ]}-CustomComponent-F1TVs{œfieldNameœ:œinput_documentsœ,œidœ:œCustomComponent-F1TVsœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "MetadataTagger-XqRJY",
+        "sourceHandle": "{œdataTypeœ:œMetadataTaggerœ,œidœ:œMetadataTagger-XqRJYœ,œnameœ:œtagged_documentsœ,œoutput_typesœ:[œDataœ]}",
+        "target": "CustomComponent-F1TVs",
+        "targetHandle": "{œfieldNameœ:œinput_documentsœ,œidœ:œCustomComponent-F1TVsœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "DocumentNormalizer",
+            "id": "CustomComponent-F1TVs",
+            "name": "normalized_documents",
+            "output_types": [
+              "Data"
             ]
           },
           "targetHandle": {
@@ -81,10 +138,10 @@
             "type": "other"
           }
         },
-        "id": "xy-edge__GitExtractorComponent-PmJhm{œdataTypeœ:œGitExtractorComponentœ,œidœ:œGitExtractorComponent-PmJhmœ,œnameœ:œtext_based_file_contentsœ,œoutput_typesœ:[œMessageœ]}-SplitText-TzwXF{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-TzwXFœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
+        "id": "xy-edge__CustomComponent-F1TVs{œdataTypeœ:œDocumentNormalizerœ,œidœ:œCustomComponent-F1TVsœ,œnameœ:œnormalized_documentsœ,œoutput_typesœ:[œDataœ]}-SplitText-TzwXF{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-TzwXFœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
         "selected": false,
-        "source": "GitExtractorComponent-PmJhm",
-        "sourceHandle": "{œdataTypeœ:œGitExtractorComponentœ,œidœ:œGitExtractorComponent-PmJhmœ,œnameœ:œtext_based_file_contentsœ,œoutput_typesœ:[œMessageœ]}",
+        "source": "CustomComponent-F1TVs",
+        "sourceHandle": "{œdataTypeœ:œDocumentNormalizerœ,œidœ:œCustomComponent-F1TVsœ,œnameœ:œnormalized_documentsœ,œoutput_typesœ:[œDataœ]}",
         "target": "SplitText-TzwXF",
         "targetHandle": "{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-TzwXFœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}"
       }
@@ -110,7 +167,7 @@
             "frozen": false,
             "icon": "brain-circuit",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -190,8 +247,8 @@
           "width": 320
         },
         "position": {
-          "x": 761.482198676493,
-          "y": 428.13558290732726
+          "x": 773.7279474376274,
+          "y": 426.91100803121384
         },
         "selected": false,
         "type": "genericNode"
@@ -226,7 +283,7 @@
             "icon": "FAISS",
             "key": "FAISS",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -484,7 +541,7 @@
             "icon": "scissors-line-dashed",
             "key": "SplitText",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -670,8 +727,8 @@
           "width": 320
         },
         "position": {
-          "x": 748.5283941591812,
-          "y": -162.75334215733005
+          "x": 781.0842582377572,
+          "y": -73.46391286815134
         },
         "selected": false,
         "type": "genericNode"
@@ -699,7 +756,7 @@
             "icon": "GitLoader",
             "key": "GitExtractorComponent",
             "legacy": false,
-            "lf_version": "1.6.4",
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -711,7 +768,6 @@
                 "group_outputs": false,
                 "method": "get_text_based_file_contents",
                 "name": "text_based_file_contents",
-                "selected": "Message",
                 "tool_mode": true,
                 "types": [
                   "Message"
@@ -764,6 +820,7 @@
                 "group_outputs": false,
                 "method": "get_files_content",
                 "name": "files_content",
+                "selected": "Data",
                 "tool_mode": true,
                 "types": [
                   "Data"
@@ -819,7 +876,7 @@
             },
             "tool_mode": false
           },
-          "selected_output": "text_based_file_contents",
+          "selected_output": "files_content",
           "showNode": true,
           "type": "GitExtractorComponent"
         },
@@ -830,17 +887,272 @@
           "width": 320
         },
         "position": {
-          "x": 297.115195469926,
-          "y": 22.51278985862946
+          "x": -322.3868788512631,
+          "y": -127.93685628511645
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "MetadataTagger-XqRJY",
+          "node": {
+            "base_classes": [
+              "Data"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Adds a custom key-value pair to the metadata of each document in a list.",
+            "display_name": "Metadata Tagger",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_documents",
+              "tag_name",
+              "tag_value"
+            ],
+            "frozen": false,
+            "icon": "tag",
+            "legacy": false,
+            "lf_version": "1.5.1",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Tagged Documents",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "tag_documents",
+                "name": "tagged_documents",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from typing import List\r\nfrom langflow.custom import Component\r\nfrom langflow.io import HandleInput, MessageTextInput, Output\r\nfrom langflow.schema import Data, Message\r\n\r\nclass MetadataTagger(Component):\r\n    display_name = \"Metadata Tagger\"\r\n    description = \"Adds a custom key-value pair to the metadata of each document in a list.\"\r\n    icon = \"tag\"\r\n    name = \"MetadataTagger\"\r\n\r\n    inputs = [\r\n        HandleInput(\r\n            name=\"input_documents\",\r\n            display_name=\"Input Data\",\r\n            info=\"The documents to tag. Can be a list of Data or a Message containing a list of Data.\",\r\n            is_list=True,\r\n            # --- CAMBIO IMPORTANTE: Aceptamos también objetos Message ---\r\n            input_types=[\"Data\", \"Message\"],\r\n            required=True,\r\n        ),\r\n        MessageTextInput(\r\n            name=\"tag_name\",\r\n            display_name=\"Tag Name\",\r\n            info=\"The name of the metadata field to add (e.g., 'origin').\",\r\n            value=\"origin\",\r\n        ),\r\n        MessageTextInput(\r\n            name=\"tag_value\",\r\n            display_name=\"Tag Value\",\r\n            info=\"The value to assign to the tag (e.g., 'PDF Document').\",\r\n            value=\"Unknown\",\r\n        ),\r\n    ]\r\n\r\n    outputs = [\r\n        Output(\r\n            display_name=\"Tagged Documents\",\r\n            name=\"tagged_documents\",\r\n            method=\"tag_documents\"\r\n        ),\r\n    ]\r\n\r\n    def tag_documents(self) -> List[Data]:\r\n        \"\"\"\r\n        Extracts documents from the input and adds the specified tag to their metadata.\r\n        \"\"\"\r\n        raw_input = self.input_documents or []\r\n        documents: List[Data] = []\r\n        \r\n        # --- CAMBIO IMPORTANTE: Lógica para \"desenvolver\" la entrada ---\r\n        # Si la entrada es un Message, extraemos su contenido.\r\n        if isinstance(raw_input, Message):\r\n            content = raw_input.content\r\n            if isinstance(content, list):\r\n                documents = content\r\n            elif isinstance(content, Data):\r\n                documents = [content]\r\n        # Si ya es una lista (de Data), la usamos directamente.\r\n        elif isinstance(raw_input, list):\r\n            documents = raw_input\r\n        # Si es un solo objeto Data, lo metemos en una lista.\r\n        elif isinstance(raw_input, Data):\r\n            documents = [raw_input]\r\n\r\n        tag_name = self.tag_name\r\n        tag_value = self.tag_value\r\n        \r\n        if not documents:\r\n            self.status = \"No valid documents found in the input to tag.\"\r\n            return []\r\n\r\n        tagged_docs = []\r\n        for doc in documents:\r\n            if isinstance(doc, Data):\r\n                if not hasattr(doc, 'metadata') or not isinstance(doc.metadata, dict):\r\n                    doc.metadata = {}\r\n                \r\n                doc.metadata[tag_name] = tag_value\r\n                tagged_docs.append(doc)\r\n\r\n        self.status = f\"Successfully tagged {len(tagged_docs)} documents with '{tag_name}: {tag_value}'.\"\r\n        return tagged_docs"
+              },
+              "input_documents": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Input Data",
+                "dynamic": false,
+                "info": "The documents to tag. Can be a list of Data or a Message containing a list of Data.",
+                "input_types": [
+                  "Data",
+                  "Message"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "input_documents",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "tag_name": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Tag Name",
+                "dynamic": false,
+                "info": "The name of the metadata field to add (e.g., 'origin').",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "tag_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "origin"
+              },
+              "tag_value": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Tag Value",
+                "dynamic": false,
+                "info": "The value to assign to the tag (e.g., 'PDF Document').",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "tag_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "GitHub Repository"
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "MetadataTagger"
+        },
+        "dragging": false,
+        "id": "MetadataTagger-XqRJY",
+        "measured": {
+          "height": 345,
+          "width": 320
+        },
+        "position": {
+          "x": 66.72295824131362,
+          "y": -106.69739925207556
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "CustomComponent-F1TVs",
+          "node": {
+            "base_classes": [
+              "Data"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Restructures nested Data objects from loaders into a flat format for splitters.",
+            "display_name": "Document Normalizer",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_documents"
+            ],
+            "frozen": false,
+            "icon": "transform",
+            "legacy": false,
+            "lf_version": "1.5.1",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Normalized Documents",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "normalize_documents",
+                "name": "normalized_documents",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from typing import List\nfrom langflow.custom import Component\nfrom langflow.io import HandleInput, Output\nfrom langflow.schema import Data\n\nclass DocumentNormalizer(Component):\n    display_name = \"Document Normalizer\"\n    description = \"Restructures nested Data objects from loaders into a flat format for splitters.\"\n    icon = \"transform\"\n    name = \"DocumentNormalizer\"\n\n    inputs = [\n        HandleInput(\n            name=\"input_documents\",\n            display_name=\"Input Documents\",\n            info=\"The list of nested documents from a loader (e.g., GitExtractor).\",\n            is_list=True,\n            input_types=[\"Data\"],\n            required=True,\n        )\n    ]\n\n    outputs = [\n        Output(\n            display_name=\"Normalized Documents\",\n            name=\"normalized_documents\",\n            method=\"normalize_documents\"\n        ),\n    ]\n\n    def normalize_documents(self) -> List[Data]:\n        \"\"\"\n        Takes nested Data objects and flattens them into the standard format\n        that splitters and other components expect.\n        \"\"\"\n        nested_docs = self.input_documents or []\n        normalized_docs = []\n\n        if not nested_docs:\n            self.status = \"No documents to normalize.\"\n            return []\n\n        for doc in nested_docs:\n            # Nos aseguramos de que el objeto tenga la estructura anidada que esperamos\n            if not isinstance(doc, Data) or not hasattr(doc, 'data') or not doc.data:\n                continue\n\n            # Extraemos la información de la sub-caja '.data'\n            inner_data = doc.data\n            content = inner_data.get(\"content\", \"\")\n            path = inner_data.get(\"path\", \"Unknown Path\")\n            \n            # Extraemos los metadatos de la sub-sub-caja '.data['metadata']'\n            inner_metadata = inner_data.get(\"metadata\", {})\n            origin = inner_metadata.get(\"origin\", \"Unknown Origin\")\n            \n            # Creamos un nuevo objeto Data con la estructura \"plana\" y correcta\n            new_doc = Data(\n                text=content,\n                metadata={\n                    \"source\": path,  # Usamos 'path' como la 'source'\n                    \"origin\": origin   # Propagamos el 'origin' que agregamos antes\n                }\n            )\n            normalized_docs.append(new_doc)\n            \n        self.status = f\"Successfully normalized {len(normalized_docs)} documents.\"\n        return normalized_docs\n"
+              },
+              "input_documents": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Input Documents",
+                "dynamic": false,
+                "info": "The list of nested documents from a loader (e.g., GitExtractor).",
+                "input_types": [
+                  "Data"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "input_documents",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "DocumentNormalizer"
+        },
+        "dragging": false,
+        "id": "CustomComponent-F1TVs",
+        "measured": {
+          "height": 181,
+          "width": 320
+        },
+        "position": {
+          "x": 427.0579630245183,
+          "y": 39.42433807176252
         },
         "selected": false,
         "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": -31.811699334227455,
-      "y": 121.38975642863795,
-      "zoom": 0.6045329399965669
+      "x": 340.0165506640433,
+      "y": 213.5842336295242,
+      "zoom": 0.8375544055210092
     }
   },
   "description": "Navigate the Linguistic Landscape, Discover Opportunities.",
