@@ -120,6 +120,9 @@ export const QuestionInterface = () => {
       if (!runRes.ok) {
         throw new Error(`Flow failed: ${runRes.status} ${runRes.statusText}`);
       }
+      const data = await runRes.json();
+      console.log("Langflow PDF ingestion response:", data);
+      console.log("PDF ingested successfully");
 
       toast({
         title: "PDF ingested successfully",
@@ -192,6 +195,7 @@ export const QuestionInterface = () => {
 
       const data = await response.json();
       console.log("Langflow GitHub ingestion response:", data);
+      console.log("Repository ingested successfully");
 
       toast({
         title: "Repository ingested successfully",
@@ -249,15 +253,15 @@ export const QuestionInterface = () => {
 
   const fetchLangflowAnswer = async (userQuestion: string) => {
     // armo tweaks dinámicamente según los flags
-    const tweaks: Record<string, any> = {};
+    const dynamicTweaks: Record<string, any> = {};
 
     if (pdfIngested && pdfEnabled) {
-      tweaks["ConditionalRouter-RZ4gB"] = { input_text: "PDF_INGESTED" };
+      dynamicTweaks["ConditionalRouter-RZ4gB"] = { input_text: "PDF_INGESTED" };
       console.log("PDF information used in the query");
     }
 
     if (githubIngested && githubEnabled) {
-      tweaks["ConditionalRouter-92JKj"] = { input_text: "GITHUB_INGESTED" };
+      dynamicTweaks["ConditionalRouter-92JKj"] = { input_text: "GITHUB_INGESTED" };
       console.log("GitHub information used in the query");
     }
 
@@ -265,6 +269,7 @@ export const QuestionInterface = () => {
       output_type: "chat", 
       input_type: "chat", 
       tweaks: {
+        ...dynamicTweaks,
         "ChatInput-yVntr":{
           "input_value": userQuestion
         },
@@ -274,7 +279,7 @@ export const QuestionInterface = () => {
         "JigsawStackAISearch-OqFI6":{
           "api_key": JIGSAW_API_KEY,
         },
-        "NvidiaRerankComponent-fRkUX":{
+        "NvidiaRerankComponent-DqD1n":{
           "api_key": NVIDIA_API_KEY,
         }
       }
@@ -289,6 +294,7 @@ export const QuestionInterface = () => {
       body: JSON.stringify(payload) 
     }; 
 
+    console.log("Enviando este payload a Langflow:", JSON.stringify(payload, null, 2));
     const response = await fetch("http://localhost:7860/api/v1/run/retriever_flow", options);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

@@ -10,6 +10,7 @@ services:
     volumes:
       - ./langflow_data:/app/langflow/.langflow
       - ./indices:/app/indices
+    user: "root"
     environment:
       - LANGFLOW_LOAD_FLOWS_PATH=/app/langflow/.langflow
        # --- LÍNEA AÑADIDA ---

@@ -176,90 +176,6 @@
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-RZ4gB",
-            "name": "passthrough_result",
-            "output_types": [
-              "Message"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "search_query",
-            "id": "FAISS-xDStI",
-            "inputTypes": [
-              "Message"
-            ],
-            "type": "query"
-          }
-        },
-        "id": "xy-edge__ConditionalRouter-RZ4gB{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-RZ4gBœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}-FAISS-xDStI{œfieldNameœ:œsearch_queryœ,œidœ:œFAISS-xDStIœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}",
-        "selected": false,
-        "source": "ConditionalRouter-RZ4gB",
-        "sourceHandle": "{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-RZ4gBœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}",
-        "target": "FAISS-xDStI",
-        "targetHandle": "{œfieldNameœ:œsearch_queryœ,œidœ:œFAISS-xDStIœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
-            "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-92JKj",
-            "name": "passthrough_result",
-            "output_types": [
-              "Message"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "search_query",
-            "id": "FAISS-McYvf",
-            "inputTypes": [
-              "Message"
-            ],
-            "type": "query"
-          }
-        },
-        "id": "xy-edge__ConditionalRouter-92JKj{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-92JKjœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}-FAISS-McYvf{œfieldNameœ:œsearch_queryœ,œidœ:œFAISS-McYvfœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}",
-        "selected": false,
-        "source": "ConditionalRouter-92JKj",
-        "sourceHandle": "{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-92JKjœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}",
-        "target": "FAISS-McYvf",
-        "targetHandle": "{œfieldNameœ:œsearch_queryœ,œidœ:œFAISS-McYvfœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
-            "dataType": "LocalHuggingFaceEmbeddings",
-            "id": "LocalHuggingFaceEmbeddings-O3z78",
-            "name": "embeddings",
-            "output_types": [
-              "Embeddings"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "embedding",
-            "id": "FAISS-McYvf",
-            "inputTypes": [
-              "Embeddings"
-            ],
-            "type": "other"
-          }
-        },
-        "id": "xy-edge__LocalHuggingFaceEmbeddings-O3z78{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}-FAISS-McYvf{œfieldNameœ:œembeddingœ,œidœ:œFAISS-McYvfœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}",
-        "selected": false,
-        "source": "LocalHuggingFaceEmbeddings-O3z78",
-        "sourceHandle": "{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}",
-        "target": "FAISS-McYvf",
-        "targetHandle": "{œfieldNameœ:œembeddingœ,œidœ:œFAISS-McYvfœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
             "dataType": "AdvancedTextExtractor",
             "id": "CustomComponent-N1Dmp",
             "name": "formatted_context",
@@ -344,34 +260,6 @@
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "FAISS",
-            "id": "FAISS-McYvf",
-            "name": "search_results",
-            "output_types": [
-              "Data"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "search_results",
-            "id": "NvidiaRerankComponent-DqD1n",
-            "inputTypes": [
-              "Data"
-            ],
-            "type": "other"
-          }
-        },
-        "id": "xy-edge__FAISS-McYvf{œdataTypeœ:œFAISSœ,œidœ:œFAISS-McYvfœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}-NvidiaRerankComponent-DqD1n{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
-        "selected": false,
-        "source": "FAISS-McYvf",
-        "sourceHandle": "{œdataTypeœ:œFAISSœ,œidœ:œFAISS-McYvfœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}",
-        "target": "NvidiaRerankComponent-DqD1n",
-        "targetHandle": "{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
             "dataType": "ChatInput",
             "id": "ChatInput-yVntr",
             "name": "message",
@@ -400,6 +288,62 @@
         "className": "",
         "data": {
           "sourceHandle": {
+            "dataType": "ConditionalRouter",
+            "id": "ConditionalRouter-92JKj",
+            "name": "passthrough_result",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "search_query",
+            "id": "Chroma-n7Ava",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "query"
+          }
+        },
+        "id": "xy-edge__ConditionalRouter-92JKj{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-92JKjœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}-Chroma-n7Ava{œfieldNameœ:œsearch_queryœ,œidœ:œChroma-n7Avaœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}",
+        "selected": false,
+        "source": "ConditionalRouter-92JKj",
+        "sourceHandle": "{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-92JKjœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "Chroma-n7Ava",
+        "targetHandle": "{œfieldNameœ:œsearch_queryœ,œidœ:œChroma-n7Avaœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ConditionalRouter",
+            "id": "ConditionalRouter-RZ4gB",
+            "name": "passthrough_result",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "search_query",
+            "id": "Chroma-TRdau",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "query"
+          }
+        },
+        "id": "xy-edge__ConditionalRouter-RZ4gB{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-RZ4gBœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}-Chroma-TRdau{œfieldNameœ:œsearch_queryœ,œidœ:œChroma-TRdauœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}",
+        "selected": false,
+        "source": "ConditionalRouter-RZ4gB",
+        "sourceHandle": "{œdataTypeœ:œConditionalRouterœ,œidœ:œConditionalRouter-RZ4gBœ,œnameœ:œpassthrough_resultœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "Chroma-TRdau",
+        "targetHandle": "{œfieldNameœ:œsearch_queryœ,œidœ:œChroma-TRdauœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
             "dataType": "LocalHuggingFaceEmbeddings",
             "id": "LocalHuggingFaceEmbeddings-O3z78",
             "name": "embeddings",
@@ -409,27 +353,55 @@
           },
           "targetHandle": {
             "fieldName": "embedding",
-            "id": "FAISS-xDStI",
+            "id": "Chroma-TRdau",
             "inputTypes": [
               "Embeddings"
             ],
             "type": "other"
           }
         },
-        "id": "xy-edge__LocalHuggingFaceEmbeddings-O3z78{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}-FAISS-xDStI{œfieldNameœ:œembeddingœ,œidœ:œFAISS-xDStIœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}",
+        "id": "xy-edge__LocalHuggingFaceEmbeddings-O3z78{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}-Chroma-TRdau{œfieldNameœ:œembeddingœ,œidœ:œChroma-TRdauœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}",
         "selected": false,
         "source": "LocalHuggingFaceEmbeddings-O3z78",
         "sourceHandle": "{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}",
-        "target": "FAISS-xDStI",
-        "targetHandle": "{œfieldNameœ:œembeddingœ,œidœ:œFAISS-xDStIœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}"
+        "target": "Chroma-TRdau",
+        "targetHandle": "{œfieldNameœ:œembeddingœ,œidœ:œChroma-TRdauœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}"
       },
       {
         "animated": false,
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "FAISS",
-            "id": "FAISS-xDStI",
+            "dataType": "LocalHuggingFaceEmbeddings",
+            "id": "LocalHuggingFaceEmbeddings-O3z78",
+            "name": "embeddings",
+            "output_types": [
+              "Embeddings"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "embedding",
+            "id": "Chroma-n7Ava",
+            "inputTypes": [
+              "Embeddings"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__LocalHuggingFaceEmbeddings-O3z78{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}-Chroma-n7Ava{œfieldNameœ:œembeddingœ,œidœ:œChroma-n7Avaœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "LocalHuggingFaceEmbeddings-O3z78",
+        "sourceHandle": "{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-O3z78œ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}",
+        "target": "Chroma-n7Ava",
+        "targetHandle": "{œfieldNameœ:œembeddingœ,œidœ:œChroma-n7Avaœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "Chroma",
+            "id": "Chroma-n7Ava",
             "name": "search_results",
             "output_types": [
               "Data"
@@ -444,15 +416,44 @@
             "type": "other"
           }
         },
-        "id": "xy-edge__FAISS-xDStI{œdataTypeœ:œFAISSœ,œidœ:œFAISS-xDStIœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}-NvidiaRerankComponent-DqD1n{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+        "id": "xy-edge__Chroma-n7Ava{œdataTypeœ:œChromaœ,œidœ:œChroma-n7Avaœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}-NvidiaRerankComponent-DqD1n{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
         "selected": false,
-        "source": "FAISS-xDStI",
-        "sourceHandle": "{œdataTypeœ:œFAISSœ,œidœ:œFAISS-xDStIœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}",
+        "source": "Chroma-n7Ava",
+        "sourceHandle": "{œdataTypeœ:œChromaœ,œidœ:œChroma-n7Avaœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}",
         "target": "NvidiaRerankComponent-DqD1n",
         "targetHandle": "{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}"
       },
       {
         "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "Chroma",
+            "id": "Chroma-TRdau",
+            "name": "search_results",
+            "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "search_results",
+            "id": "NvidiaRerankComponent-DqD1n",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__Chroma-TRdau{œdataTypeœ:œChromaœ,œidœ:œChroma-TRdauœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}-NvidiaRerankComponent-DqD1n{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "Chroma-TRdau",
+        "sourceHandle": "{œdataTypeœ:œChromaœ,œidœ:œChroma-TRdauœ,œnameœ:œsearch_resultsœ,œoutput_typesœ:[œDataœ]}",
+        "target": "NvidiaRerankComponent-DqD1n",
+        "targetHandle": "{œfieldNameœ:œsearch_resultsœ,œidœ:œNvidiaRerankComponent-DqD1nœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
         "data": {
           "sourceHandle": {
             "dataType": "ChatInput",
@@ -480,6 +481,7 @@
       },
       {
         "animated": false,
+        "className": "",
         "data": {
           "sourceHandle": {
             "dataType": "JigsawStackAIParser",
@@ -740,7 +742,7 @@
         "dragging": false,
         "id": "ChatInput-yVntr",
         "measured": {
-          "height": 201,
+          "height": 202,
           "width": 320
         },
         "position": {
@@ -813,7 +815,7 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "from typing import List\r\nfrom langflow.custom import Component\r\nfrom langflow.io import HandleInput, MessageTextInput, Output\r\nfrom langflow.schema import Data, Message\r\n\r\nclass AdvancedTextExtractor(Component):\r\n    name = \"AdvancedTextExtractor\"\r\n    display_name = \"Advanced Text Extractor\"\r\n    description = \"Extracts text and metadata from documents, compatible with both retrievers and rerankers.\"\r\n    icon = \"file-search\"\r\n\r\n    inputs = [\r\n        HandleInput(\r\n            name=\"input_data\",\r\n            display_name=\"Input Data List\",\r\n            info=\"A list of Data objects from a retriever or reranker.\",\r\n            is_list=True,\r\n            input_types=[\"Data\"],\r\n            required=True,\r\n        ),\r\n        MessageTextInput(\r\n            name=\"sep\",\r\n            display_name=\"Separator\",\r\n            advanced=True,\r\n            value=\"\\n\\n---\\n\\n\",\r\n            info=\"String used to separate each formatted text chunk.\",\r\n        ),\r\n    ]\r\n\r\n    outputs = [\r\n        Output(\r\n            display_name=\"Formatted Context\",\r\n            name=\"formatted_context\",\r\n            info=\"A single block of text with all extracted and formatted content.\",\r\n            method=\"extract_and_format\"\r\n        ),\r\n    ]\r\n\r\n    def extract_and_format(self) -> Message:\r\n        \"\"\"\r\n        Iterates through Data objects, intelligently extracts metadata from either\r\n        the top-level .metadata or the nested .data attribute, and formats the output.\r\n        \"\"\"\r\n        documents = self.input_data or []\r\n        \r\n        if not documents:\r\n            self.status = \"No documents received.\"\r\n            return Message(text=\"\")\r\n\r\n        formatted_chunks = []\r\n        for i, doc in enumerate(documents):\r\n            if isinstance(doc, Data):\r\n                text_content = doc.text or \"\"\r\n                \r\n                # --- LÓGICA INTELIGENTE DE EXTRACCIÓN ---\r\n                # 1. Empezamos con el metadata de nivel superior (salida de FAISS).\r\n                combined_info = doc.metadata or {}\r\n                \r\n                # 2. Si existe el atributo .data (salida del Reranker),\r\n                #    actualizamos nuestro diccionario, priorizando esta información.\r\n                if hasattr(doc, 'data') and doc.data:\r\n                    combined_info.update(doc.data)\r\n\r\n                # 3. Ahora extraemos la información del diccionario combinado.\r\n                origin = combined_info.get(\"origin\", \"Unknown Origin\")\r\n                source = combined_info.get(\"source\", \"Unknown Source\")\r\n                score = combined_info.get(\"relevance_score\")\r\n\r\n                # Construimos el encabezado para cada chunk\r\n                header = f\"--- Context Chunk {i + 1} (From: {origin}) ---\\n\"\r\n                header += f\"Source File: {source}\\n\"\r\n                if score is not None:\r\n                    header += f\"Relevance Score: {score:.4f}\\n\"\r\n                \r\n                chunk_block = f\"{header}\\n{text_content}\"\r\n                formatted_chunks.append(chunk_block)\r\n        \r\n        combined_text = self.sep.join(formatted_chunks)\r\n        \r\n        self.status = f\"Successfully formatted {len(formatted_chunks)} text chunks.\"\r\n        return Message(text=combined_text)"
+                "value": "from typing import List\r\nfrom langflow.custom import Component\r\nfrom langflow.io import HandleInput, MessageTextInput, Output\r\nfrom langflow.schema import Data, Message\r\n\r\nclass AdvancedTextExtractor(Component):\r\n    name = \"AdvancedTextExtractor\"\r\n    display_name = \"Advanced Text Extractor\"\r\n    description = \"Extracts text and metadata from documents, compatible with both retrievers and rerankers.\"\r\n    icon = \"file-search\"\r\n\r\n    inputs = [\r\n        HandleInput(\r\n            name=\"input_data\",\r\n            display_name=\"Input Data List\",\r\n            info=\"A list of Data objects from a retriever or reranker.\",\r\n            is_list=True,\r\n            input_types=[\"Data\"],\r\n            required=True,\r\n        ),\r\n        MessageTextInput(\r\n            name=\"sep\",\r\n            display_name=\"Separator\",\r\n            advanced=True,\r\n            value=\"\\n\\n---\\n\\n\",\r\n            info=\"String used to separate each formatted text chunk.\",\r\n        ),\r\n    ]\r\n\r\n    outputs = [\r\n        Output(\r\n            display_name=\"Formatted Context\",\r\n            name=\"formatted_context\",\r\n            info=\"A single block of text with all extracted and formatted content.\",\r\n            method=\"extract_and_format\"\r\n        ),\r\n    ]\r\n\r\n    def extract_and_format(self) -> Message:\r\n        \"\"\"\r\n        Iterates through Data objects, intelligently extracts metadata from either\r\n        the top-level .metadata or the nested .data attribute, and formats the output.\r\n        \"\"\"\r\n        documents = self.input_data or []\r\n        \r\n        if not documents:\r\n            self.status = \"No documents received.\"\r\n            return Message(text=\"\")\r\n\r\n        formatted_chunks = []\r\n        for i, doc in enumerate(documents):\r\n            if isinstance(doc, Data):\r\n                text_content = doc.text or \"\"\r\n                \r\n                # --- LÓGICA INTELIGENTE DE EXTRACCIÓN ---\r\n                # 1. Empezamos con el metadata de nivel superior (salida de FAISS).\r\n                combined_info = getattr(doc, 'metadata', None) or {}\r\n                \r\n                # 2. Si existe el atributo .data (salida del Reranker),\r\n                #    actualizamos nuestro diccionario, priorizando esta información.\r\n                if hasattr(doc, 'data') and doc.data:\r\n                    combined_info.update(doc.data)\r\n\r\n                # 3. Ahora extraemos la información del diccionario combinado.\r\n                origin = combined_info.get(\"origin\", \"Unknown Origin\")\r\n                source = combined_info.get(\"source\", \"Unknown Source\")\r\n                score = combined_info.get(\"relevance_score\")\r\n\r\n                # Construimos el encabezado para cada chunk\r\n                header = f\"--- Context Chunk {i + 1} (From: {origin}) ---\\n\"\r\n                header += f\"Source File: {source}\\n\"\r\n                if score is not None:\r\n                    header += f\"Relevance Score: {score:.4f}\\n\"\r\n                \r\n                chunk_block = f\"{header}\\n{text_content}\"\r\n                formatted_chunks.append(chunk_block)\r\n        \r\n        combined_text = self.sep.join(formatted_chunks)\r\n        \r\n        self.status = f\"Successfully formatted {len(formatted_chunks)} text chunks.\"\r\n        return Message(text=combined_text)"
               },
               "input_data": {
                 "_input_type": "HandleInput",
@@ -871,8 +873,8 @@
           "width": 320
         },
         "position": {
-          "x": 2218.8762092361826,
-          "y": 63.510199030863404
+          "x": 2251.878130068232,
+          "y": 61.04625803318363
         },
         "selected": false,
         "type": "genericNode"
@@ -1273,8 +1275,8 @@
           "width": 320
         },
         "position": {
-          "x": 3095.916315823227,
-          "y": 39.82478591633439
+          "x": 3098.273873968896,
+          "y": 42.182344062003516
         },
         "selected": false,
         "type": "genericNode"
@@ -1311,7 +1313,6 @@
             "is_input": null,
             "is_output": null,
             "legacy": false,
-            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "name": "",
@@ -1396,7 +1397,7 @@
                 "tool_mode": false,
                 "trace_as_input": true,
                 "type": "prompt",
-                "value": "You are a high-performance assistant specialized in context analysis. \nYour sole task is to **answer the question** based strictly on the provided context (Structured Context and Web Context).\n\n**PRIORITIZATION RULE (CRITICAL):**\n1.  **Prioritize Sources:** When synthesizing the answer, you **must prioritize** information found in **PDF** and **GitHub** content.\n2.  **Web as Supplemental:** Use the **Web** context only to fill gaps, provide supporting details, or complete the answer if the **PDF** and **GitHub** sources are insufficient or absent.\n3.  **LLM as Fallback:** Only use **LLM prior knowledge** if the information is entirely missing or insufficient across all provided contexts (PDF, GitHub, and Web).\n\nYou must **strictly adhere** to the following output format. **DO NOT** include any other explanation or text outside of this format.\n\n1. Always begin with the literal header **Answer:**. \n2. Provide the answer to the question immediately after the **Answer:** header. The response must be concise, complete, and high-quality. \n3. After the answer, skip one line and add the literal header **Source Traceability:**. \n4. Under **Source Traceability:**, list the sources you used. You may only use the source types: **PDF**, **GitHub**, **Web**, or **LLM prior knowledge**. \n5. You must assign a percentage contribution, summing to a total of 100% across all used sources. The percentage assigned must reflect the **prioritization rule** (PDF/GitHub should receive higher percentages when used). \n6. Format each source as a Markdown list item (-) followed by the type and the percentage: - [Type]: [Percentage]%. \n\n7. **Suggested Questions Policy:** \n    7.1. Only include a **Suggested Questions** section if BOTH of the following conditions are met: \n        - The original question was appropriate for a RAG system (i.e., it seeks factual, contextual, or document-based information). \n        - The question is directly related to information from **PDFs or GitHub repositories**. \n    7.2. In this section, list 1–3 related or alternative questions that could yield better or more specific results. \n    7.3. If the question does not meet these criteria, **omit this section entirely**.\n\n8. **Critical Rule for Missing Information:** \n    8.1. If no relevant information is found in the provided context, or you cannot confidently answer, you MUST still fill the **Answer** section using your prior knowledge. \n    8.2. Leaving the **Answer** section empty is strictly forbidden. \n\n**STRICT REQUIRED OUTPUT FORMAT:**\n\n**Answer:** [Your concise answer based on the context. If none, respond using your prior knowledge.]\n\n**Source Traceability:** \n- PDF: [Percentage]% \n- GitHub: [Percentage]% \n- Web: [Percentage]% \n- LLM prior knowledge: [Percentage]%\n\n**Suggested Questions:** \n- [Question 1] \n- [Question 2] \n- [Question 3] \n\n(Only include this section if the question was appropriate for RAG and related to PDFs or GitHub repositories.)\n\nGiven the context, answer the question as best as possible.\n\nQuestion: {question} \nAnswer:"
+                "value": "You are a high-performance assistant specialized in context analysis. \nYour sole task is to **answer the question** based strictly on the provided context (Structured Context and Web Context).\n\n**PRIORITIZATION RULE (CRITICAL):**\n1.  **Prioritize Sources:** When synthesizing the answer, you **must prioritize** information found in **PDF** and **GitHub** content.\n2.  **Web as Supplemental:** Use the **Web** context only to fill gaps, provide supporting details, or complete the answer if the **PDF** and **GitHub** sources are insufficient or absent. If the primary sources are comprehensive, the Web's contribution should be minimal and reflect a supporting role.\n3.  **LLM as Fallback:** Only use **LLM prior knowledge** if the information is entirely missing or insufficient across all provided contexts (PDF, GitHub, and Web).\n\n**STEP-BY-STEP INSTRUCTIONS:**\n1. Identify the core information and formulate the main part of the answer using only the **PDF and GitHub** context.\n2. Review the **Web context** to find any details that **clarify, support, or enrich** the core answer you formulated.\n3. Construct the final, complete answer by integrating the supplemental details from the web into the core answer from your primary sources.\n4. Calculate the Source Traceability percentages based on the contribution of each source to the final answer, strictly adhering to the hierarchy.\n\nYou must **strictly adhere** to the following output format. **DO NOT** include any other explanation or text outside of this format.\n\n1. Always begin with the literal header **Answer:**. \n2. Provide the answer to the question immediately after the **Answer:** header. The response must be concise, complete, and high-quality. \n3. After the answer, skip one line and add the literal header **Source Traceability:**. \n4. Under **Source Traceability:**, list the sources you used. You may only use the source types: **PDF**, **GitHub**, **Web**, or **LLM prior knowledge**. \n5. You must assign a percentage contribution, summing to a total of 100% across all used sources. The percentage assigned must reflect the **prioritization rule** (PDF/GitHub should receive higher percentages when used). \n6. Format each source as a Markdown list item (-) followed by the type and the percentage: - [Type]: [Percentage]%. \n7. **Suggested Questions Policy:** \n    7.1. Only include a **Suggested Questions** section if BOTH of the following conditions are met: \n        - The original question was appropriate for a RAG system (i.e., it seeks factual, contextual, or document-based information). \n        - The question is directly related to information from **PDFs or GitHub repositories**. \n    7.2. In this section, list 1–3 related or alternative questions that could yield better or more specific results. \n    7.3. If the question does not meet these criteria, **omit this section entirely**.\n8. **Critical Rule for Missing Information:** \n    8.1. If no relevant information is found in the provided context, or you cannot confidently answer, you MUST still fill the **Answer** section using your prior knowledge. \n    8.2. Leaving the **Answer** section empty is strictly forbidden. \n\n**STRICT REQUIRED OUTPUT FORMAT:**\n**Answer:** [Your concise answer based on the context. If none, respond using your prior knowledge.]\n**Source Traceability:** \n- PDF: [Percentage]% \n- GitHub: [Percentage]% \n- Web: [Percentage]% \n- LLM prior knowledge: [Percentage]%\n**Suggested Questions:** \n- [Question 1] \n- [Question 2] \n- [Question 3] \n\n(Only include this section if the question was appropriate for RAG and related to PDFs or GitHub repositories.)\n\nGiven the context, answer the question as best as possible.\n\nQuestion: {question} \n\nAnswer:"
               },
               "tool_placeholder": {
                 "_input_type": "MessageTextInput",
@@ -1669,8 +1670,8 @@
           "width": 320
         },
         "position": {
-          "x": 1775.197127817259,
-          "y": -486.45264691146656
+          "x": 1152.7283539333644,
+          "y": -383.3815187683541
         },
         "selected": false,
         "type": "genericNode"
@@ -1696,7 +1697,6 @@
             "frozen": false,
             "icon": "code-pull-request-draft",
             "legacy": false,
-            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -1799,8 +1799,8 @@
           "width": 320
         },
         "position": {
-          "x": 2668.116851761401,
-          "y": -80.97922596562597
+          "x": 2676.2925591946964,
+          "y": -251.64535435264182
         },
         "selected": false,
         "type": "genericNode"
@@ -2094,7 +2094,7 @@
         "dragging": false,
         "id": "ConditionalRouter-RZ4gB",
         "measured": {
-          "height": 463,
+          "height": 464,
           "width": 320
         },
         "position": {
@@ -2393,7 +2393,7 @@
         "dragging": false,
         "id": "ConditionalRouter-92JKj",
         "measured": {
-          "height": 463,
+          "height": 464,
           "width": 320
         },
         "position": {
@@ -2844,540 +2844,8 @@
           "width": 320
         },
         "position": {
-          "x": 686.6779807615022,
-          "y": -822.4905866394447
-        },
-        "selected": false,
-        "type": "genericNode"
-      },
-      {
-        "data": {
-          "id": "FAISS-xDStI",
-          "node": {
-            "base_classes": [
-              "Data",
-              "DataFrame"
-            ],
-            "beta": false,
-            "conditional_paths": [],
-            "custom_fields": {},
-            "description": "FAISS Vector Store with search capabilities",
-            "display_name": "FAISS",
-            "documentation": "",
-            "edited": true,
-            "field_order": [
-              "index_name",
-              "persist_directory",
-              "ingest_data",
-              "search_query",
-              "should_cache_vector_store",
-              "allow_dangerous_deserialization",
-              "embedding",
-              "number_of_results"
-            ],
-            "frozen": false,
-            "icon": "FAISS",
-            "legacy": false,
-            "lf_version": "1.5.1",
-            "metadata": {},
-            "minimized": false,
-            "output_types": [],
-            "outputs": [
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "Search Results",
-                "group_outputs": false,
-                "hidden": null,
-                "method": "search_documents",
-                "name": "search_results",
-                "options": null,
-                "required_inputs": null,
-                "selected": "Data",
-                "tool_mode": true,
-                "types": [
-                  "Data"
-                ],
-                "value": "__UNDEFINED__"
-              },
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "DataFrame",
-                "group_outputs": false,
-                "hidden": null,
-                "method": "as_dataframe",
-                "name": "dataframe",
-                "options": null,
-                "required_inputs": null,
-                "selected": "DataFrame",
-                "tool_mode": true,
-                "types": [
-                  "DataFrame"
-                ],
-                "value": "__UNDEFINED__"
-              }
-            ],
-            "pinned": false,
-            "template": {
-              "_type": "Component",
-              "allow_dangerous_deserialization": {
-                "_input_type": "BoolInput",
-                "advanced": true,
-                "display_name": "Allow Dangerous Deserialization",
-                "dynamic": false,
-                "info": "Set to True to allow loading pickle files from untrusted sources. Only enable this if you trust the source of the data.",
-                "list": false,
-                "list_add_label": "Add More",
-                "name": "allow_dangerous_deserialization",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "bool",
-                "value": true
-              },
-              "code": {
-                "advanced": true,
-                "dynamic": true,
-                "fileTypes": [],
-                "file_path": "",
-                "info": "",
-                "list": false,
-                "load_from_db": false,
-                "multiline": true,
-                "name": "code",
-                "password": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "type": "code",
-                "value": "from pathlib import Path\n\nfrom langchain_community.vectorstores import FAISS\n\nfrom langflow.base.vectorstores.model import LCVectorStoreComponent, check_cached_vector_store\nfrom langflow.helpers.data import docs_to_data\nfrom langflow.io import BoolInput, HandleInput, IntInput, StrInput\nfrom langflow.schema.data import Data\n\n\nclass FaissVectorStoreComponent(LCVectorStoreComponent):\n    \"\"\"FAISS Vector Store with search capabilities.\"\"\"\n\n    display_name: str = \"FAISS\"\n    description: str = \"FAISS Vector Store with search capabilities\"\n    name = \"FAISS\"\n    icon = \"FAISS\"\n\n    inputs = [\n        StrInput(\n            name=\"index_name\",\n            display_name=\"Index Name\",\n            value=\"langflow_index\",\n        ),\n        StrInput(\n            name=\"persist_directory\",\n            display_name=\"Persist Directory\",\n            info=\"Path to save the FAISS index. It will be relative to where Langflow is running.\",\n        ),\n        *LCVectorStoreComponent.inputs,\n        BoolInput(\n            name=\"allow_dangerous_deserialization\",\n            display_name=\"Allow Dangerous Deserialization\",\n            info=\"Set to True to allow loading pickle files from untrusted sources. \"\n            \"Only enable this if you trust the source of the data.\",\n            advanced=True,\n            value=True,\n        ),\n        HandleInput(name=\"embedding\", display_name=\"Embedding\", input_types=[\"Embeddings\"]),\n        IntInput(\n            name=\"number_of_results\",\n            display_name=\"Number of Results\",\n            info=\"Number of results to return.\",\n            advanced=True,\n            value=4,\n        ),\n    ]\n\n    @staticmethod\n    def resolve_path(path: str) -> str:\n        \"\"\"Resolve the path relative to the Langflow root.\n\n        Args:\n            path: The path to resolve\n        Returns:\n            str: The resolved path as a string\n        \"\"\"\n        return str(Path(path).resolve())\n\n    def get_persist_directory(self) -> Path:\n        \"\"\"Returns the resolved persist directory path or the current directory if not set.\"\"\"\n        if self.persist_directory:\n            return Path(self.resolve_path(self.persist_directory))\n        return Path()\n\n    @check_cached_vector_store\n    def build_vector_store(self) -> FAISS:\n        \"\"\"Builds the FAISS object.\"\"\"\n        path = self.get_persist_directory()\n        path.mkdir(parents=True, exist_ok=True)\n\n        # Convert DataFrame to Data if needed using parent's method\n        self.ingest_data = self._prepare_ingest_data()\n\n        documents = []\n        for _input in self.ingest_data or []:\n            if isinstance(_input, Data):\n                documents.append(_input.to_lc_document())\n            else:\n                documents.append(_input)\n\n        faiss = FAISS.from_documents(documents=documents, embedding=self.embedding)\n        faiss.save_local(str(path), self.index_name)\n        return faiss\n\n    def search_documents(self) -> list[Data]:\n        \"\"\"Search for documents in the FAISS vector store.\"\"\"\n        if not self.search_query or not isinstance(self.search_query, str) or not self.search_query.strip():\n            self.status = \"No search query provided. Component will not run.\"\n            return []\n        \n        path = self.get_persist_directory()\n        index_path = path / f\"{self.index_name}.faiss\"\n\n        if not index_path.exists():\n            vector_store = self.build_vector_store()\n        else:\n            vector_store = FAISS.load_local(\n                folder_path=str(path),\n                embeddings=self.embedding,\n                index_name=self.index_name,\n                allow_dangerous_deserialization=self.allow_dangerous_deserialization,\n            )\n\n        if not vector_store:\n            msg = \"Failed to load the FAISS index.\"\n            raise ValueError(msg)\n\n        if self.search_query and isinstance(self.search_query, str) and self.search_query.strip():\n            docs = vector_store.similarity_search(\n                query=self.search_query,\n                k=self.number_of_results,\n            )\n            return docs_to_data(docs)\n        return []\n"
-              },
-              "embedding": {
-                "_input_type": "HandleInput",
-                "advanced": false,
-                "display_name": "Embedding",
-                "dynamic": false,
-                "info": "",
-                "input_types": [
-                  "Embeddings"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "name": "embedding",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "trace_as_metadata": true,
-                "type": "other",
-                "value": ""
-              },
-              "index_name": {
-                "_input_type": "StrInput",
-                "advanced": false,
-                "display_name": "Index Name",
-                "dynamic": false,
-                "info": "",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "index_name",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "str",
-                "value": "index_pdf"
-              },
-              "ingest_data": {
-                "_input_type": "HandleInput",
-                "advanced": false,
-                "display_name": "Ingest Data",
-                "dynamic": false,
-                "info": "",
-                "input_types": [
-                  "Data",
-                  "DataFrame"
-                ],
-                "list": true,
-                "list_add_label": "Add More",
-                "name": "ingest_data",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "trace_as_metadata": true,
-                "type": "other",
-                "value": ""
-              },
-              "number_of_results": {
-                "_input_type": "IntInput",
-                "advanced": true,
-                "display_name": "Number of Results",
-                "dynamic": false,
-                "info": "Number of results to return.",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "number_of_results",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "int",
-                "value": 10
-              },
-              "persist_directory": {
-                "_input_type": "StrInput",
-                "advanced": false,
-                "display_name": "Persist Directory",
-                "dynamic": false,
-                "info": "Path to save the FAISS index. It will be relative to where Langflow is running.",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "persist_directory",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "str",
-                "value": "./indices/pdf"
-              },
-              "search_query": {
-                "_input_type": "QueryInput",
-                "advanced": false,
-                "display_name": "Search Query",
-                "dynamic": false,
-                "info": "Enter a query to run a similarity search.",
-                "input_types": [
-                  "Message"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "search_query",
-                "placeholder": "Enter a query...",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": true,
-                "trace_as_input": true,
-                "trace_as_metadata": true,
-                "type": "query",
-                "value": ""
-              },
-              "should_cache_vector_store": {
-                "_input_type": "BoolInput",
-                "advanced": true,
-                "display_name": "Cache Vector Store",
-                "dynamic": false,
-                "info": "If True, the vector store will be cached for the current build of the component. This is useful for components that have multiple output methods and want to share the same vector store.",
-                "list": false,
-                "list_add_label": "Add More",
-                "name": "should_cache_vector_store",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "bool",
-                "value": true
-              }
-            },
-            "tool_mode": false
-          },
-          "selected_output": "search_results",
-          "showNode": true,
-          "type": "FAISS"
-        },
-        "dragging": false,
-        "id": "FAISS-xDStI",
-        "measured": {
-          "height": 453,
-          "width": 320
-        },
-        "position": {
-          "x": 1083.4037882475873,
-          "y": 972.4707245336781
-        },
-        "selected": true,
-        "type": "genericNode"
-      },
-      {
-        "data": {
-          "id": "FAISS-McYvf",
-          "node": {
-            "base_classes": [
-              "Data",
-              "DataFrame"
-            ],
-            "beta": false,
-            "conditional_paths": [],
-            "custom_fields": {},
-            "description": "FAISS Vector Store with search capabilities",
-            "display_name": "FAISS",
-            "documentation": "",
-            "edited": true,
-            "field_order": [
-              "index_name",
-              "persist_directory",
-              "ingest_data",
-              "search_query",
-              "should_cache_vector_store",
-              "allow_dangerous_deserialization",
-              "embedding",
-              "number_of_results"
-            ],
-            "frozen": false,
-            "icon": "FAISS",
-            "legacy": false,
-            "lf_version": "1.5.1",
-            "metadata": {},
-            "minimized": false,
-            "output_types": [],
-            "outputs": [
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "Search Results",
-                "group_outputs": false,
-                "hidden": null,
-                "method": "search_documents",
-                "name": "search_results",
-                "options": null,
-                "required_inputs": null,
-                "selected": "Data",
-                "tool_mode": true,
-                "types": [
-                  "Data"
-                ],
-                "value": "__UNDEFINED__"
-              },
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "DataFrame",
-                "group_outputs": false,
-                "hidden": null,
-                "method": "as_dataframe",
-                "name": "dataframe",
-                "options": null,
-                "required_inputs": null,
-                "selected": "DataFrame",
-                "tool_mode": true,
-                "types": [
-                  "DataFrame"
-                ],
-                "value": "__UNDEFINED__"
-              }
-            ],
-            "pinned": false,
-            "template": {
-              "_type": "Component",
-              "allow_dangerous_deserialization": {
-                "_input_type": "BoolInput",
-                "advanced": true,
-                "display_name": "Allow Dangerous Deserialization",
-                "dynamic": false,
-                "info": "Set to True to allow loading pickle files from untrusted sources. Only enable this if you trust the source of the data.",
-                "list": false,
-                "list_add_label": "Add More",
-                "name": "allow_dangerous_deserialization",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "bool",
-                "value": true
-              },
-              "code": {
-                "advanced": true,
-                "dynamic": true,
-                "fileTypes": [],
-                "file_path": "",
-                "info": "",
-                "list": false,
-                "load_from_db": false,
-                "multiline": true,
-                "name": "code",
-                "password": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "type": "code",
-                "value": "from pathlib import Path\n\nfrom langchain_community.vectorstores import FAISS\n\nfrom langflow.base.vectorstores.model import LCVectorStoreComponent, check_cached_vector_store\nfrom langflow.helpers.data import docs_to_data\nfrom langflow.io import BoolInput, HandleInput, IntInput, StrInput\nfrom langflow.schema.data import Data\n\n\nclass FaissVectorStoreComponent(LCVectorStoreComponent):\n    \"\"\"FAISS Vector Store with search capabilities.\"\"\"\n\n    display_name: str = \"FAISS\"\n    description: str = \"FAISS Vector Store with search capabilities\"\n    name = \"FAISS\"\n    icon = \"FAISS\"\n\n    inputs = [\n        StrInput(\n            name=\"index_name\",\n            display_name=\"Index Name\",\n            value=\"langflow_index\",\n        ),\n        StrInput(\n            name=\"persist_directory\",\n            display_name=\"Persist Directory\",\n            info=\"Path to save the FAISS index. It will be relative to where Langflow is running.\",\n        ),\n        *LCVectorStoreComponent.inputs,\n        BoolInput(\n            name=\"allow_dangerous_deserialization\",\n            display_name=\"Allow Dangerous Deserialization\",\n            info=\"Set to True to allow loading pickle files from untrusted sources. \"\n            \"Only enable this if you trust the source of the data.\",\n            advanced=True,\n            value=True,\n        ),\n        HandleInput(name=\"embedding\", display_name=\"Embedding\", input_types=[\"Embeddings\"]),\n        IntInput(\n            name=\"number_of_results\",\n            display_name=\"Number of Results\",\n            info=\"Number of results to return.\",\n            advanced=True,\n            value=4,\n        ),\n    ]\n\n    @staticmethod\n    def resolve_path(path: str) -> str:\n        \"\"\"Resolve the path relative to the Langflow root.\n\n        Args:\n            path: The path to resolve\n        Returns:\n            str: The resolved path as a string\n        \"\"\"\n        return str(Path(path).resolve())\n\n    def get_persist_directory(self) -> Path:\n        \"\"\"Returns the resolved persist directory path or the current directory if not set.\"\"\"\n        if self.persist_directory:\n            return Path(self.resolve_path(self.persist_directory))\n        return Path()\n\n    @check_cached_vector_store\n    def build_vector_store(self) -> FAISS:\n        \"\"\"Builds the FAISS object.\"\"\"\n        path = self.get_persist_directory()\n        path.mkdir(parents=True, exist_ok=True)\n\n        # Convert DataFrame to Data if needed using parent's method\n        self.ingest_data = self._prepare_ingest_data()\n\n        documents = []\n        for _input in self.ingest_data or []:\n            if isinstance(_input, Data):\n                documents.append(_input.to_lc_document())\n            else:\n                documents.append(_input)\n\n        faiss = FAISS.from_documents(documents=documents, embedding=self.embedding)\n        faiss.save_local(str(path), self.index_name)\n        return faiss\n\n    def search_documents(self) -> list[Data]:\n        \"\"\"Search for documents in the FAISS vector store.\"\"\"\n        if not self.search_query or not isinstance(self.search_query, str) or not self.search_query.strip():\n            self.status = \"No search query provided. Component will not run.\"\n            return []\n        \n        path = self.get_persist_directory()\n        index_path = path / f\"{self.index_name}.faiss\"\n\n        if not index_path.exists():\n            vector_store = self.build_vector_store()\n        else:\n            vector_store = FAISS.load_local(\n                folder_path=str(path),\n                embeddings=self.embedding,\n                index_name=self.index_name,\n                allow_dangerous_deserialization=self.allow_dangerous_deserialization,\n            )\n\n        if not vector_store:\n            msg = \"Failed to load the FAISS index.\"\n            raise ValueError(msg)\n\n        if self.search_query and isinstance(self.search_query, str) and self.search_query.strip():\n            docs = vector_store.similarity_search(\n                query=self.search_query,\n                k=self.number_of_results,\n            )\n            return docs_to_data(docs)\n        return []\n"
-              },
-              "embedding": {
-                "_input_type": "HandleInput",
-                "advanced": false,
-                "display_name": "Embedding",
-                "dynamic": false,
-                "info": "",
-                "input_types": [
-                  "Embeddings"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "name": "embedding",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "trace_as_metadata": true,
-                "type": "other",
-                "value": ""
-              },
-              "index_name": {
-                "_input_type": "StrInput",
-                "advanced": false,
-                "display_name": "Index Name",
-                "dynamic": false,
-                "info": "",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "index_name",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "str",
-                "value": "index_github"
-              },
-              "ingest_data": {
-                "_input_type": "HandleInput",
-                "advanced": false,
-                "display_name": "Ingest Data",
-                "dynamic": false,
-                "info": "",
-                "input_types": [
-                  "Data",
-                  "DataFrame"
-                ],
-                "list": true,
-                "list_add_label": "Add More",
-                "name": "ingest_data",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "trace_as_metadata": true,
-                "type": "other",
-                "value": ""
-              },
-              "number_of_results": {
-                "_input_type": "IntInput",
-                "advanced": true,
-                "display_name": "Number of Results",
-                "dynamic": false,
-                "info": "Number of results to return.",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "number_of_results",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "int",
-                "value": 10
-              },
-              "persist_directory": {
-                "_input_type": "StrInput",
-                "advanced": false,
-                "display_name": "Persist Directory",
-                "dynamic": false,
-                "info": "Path to save the FAISS index. It will be relative to where Langflow is running.",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "persist_directory",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "str",
-                "value": "./indices/github"
-              },
-              "search_query": {
-                "_input_type": "QueryInput",
-                "advanced": false,
-                "display_name": "Search Query",
-                "dynamic": false,
-                "info": "Enter a query to run a similarity search.",
-                "input_types": [
-                  "Message"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "search_query",
-                "placeholder": "Enter a query...",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": true,
-                "trace_as_input": true,
-                "trace_as_metadata": true,
-                "type": "query",
-                "value": ""
-              },
-              "should_cache_vector_store": {
-                "_input_type": "BoolInput",
-                "advanced": true,
-                "display_name": "Cache Vector Store",
-                "dynamic": false,
-                "info": "If True, the vector store will be cached for the current build of the component. This is useful for components that have multiple output methods and want to share the same vector store.",
-                "list": false,
-                "list_add_label": "Add More",
-                "name": "should_cache_vector_store",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "type": "bool",
-                "value": true
-              }
-            },
-            "tool_mode": false
-          },
-          "selected_output": "search_results",
-          "showNode": true,
-          "type": "FAISS"
-        },
-        "dragging": false,
-        "id": "FAISS-McYvf",
-        "measured": {
-          "height": 453,
-          "width": 320
-        },
-        "position": {
-          "x": 1067.6768454241296,
-          "y": 388.8264019742521
+          "x": 666.4679556354017,
+          "y": -621.6184222133328
         },
         "selected": false,
         "type": "genericNode"
@@ -3549,7 +3017,7 @@
                 "tool_mode": false,
                 "trace_as_metadata": true,
                 "type": "int",
-                "value": 3
+                "value": 5
               }
             },
             "tool_mode": false
@@ -3560,21 +3028,514 @@
         "dragging": false,
         "id": "NvidiaRerankComponent-DqD1n",
         "measured": {
-          "height": 425,
+          "height": 426,
           "width": 320
         },
         "position": {
-          "x": 1723.8088587419359,
-          "y": -185.50273109088374
+          "x": 1732.0593389499484,
+          "y": -69.99600817870997
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "Chroma-n7Ava",
+          "node": {
+            "base_classes": [
+              "Data",
+              "DataFrame"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Chroma Vector Store with search and ingest capabilities",
+            "display_name": "Chroma DB",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "collection_name",
+              "persist_directory",
+              "ingest_data",
+              "search_query",
+              "should_cache_vector_store",
+              "embedding",
+              "number_of_results"
+            ],
+            "frozen": false,
+            "icon": "Chroma",
+            "legacy": false,
+            "lf_version": "1.5.1",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Search Results",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "search_documents",
+                "name": "search_results",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "DataFrame",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "as_dataframe",
+                "name": "dataframe",
+                "options": null,
+                "required_inputs": null,
+                "selected": "DataFrame",
+                "tool_mode": true,
+                "types": [
+                  "DataFrame"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from copy import deepcopy\r\nfrom typing import TYPE_CHECKING, List, Dict, Any\r\nfrom pathlib import Path\r\n\r\nfrom chromadb.config import Settings\r\nfrom langchain_chroma import Chroma\r\nfrom typing_extensions import override\r\nimport pandas as pd\r\n\r\nfrom langchain_core.documents import Document\r\nfrom langflow.base.vectorstores.model import LCVectorStoreComponent, check_cached_vector_store\r\nfrom langflow.base.vectorstores.utils import chroma_collection_to_data\r\nfrom langflow.inputs.inputs import BoolInput, DropdownInput, HandleInput, IntInput, StrInput\r\nfrom langflow.schema.data import Data\r\nfrom langflow.schema.dataframe import DataFrame\r\nfrom langflow.helpers.data import docs_to_data # <-- Importación añadida\r\n\r\nif TYPE_CHECKING:\r\n    from langflow.schema.dataframe import DataFrame\r\n\r\n\r\nclass ChromaVectorStoreComponent(LCVectorStoreComponent):\r\n    \"\"\"Chroma Vector Store with search and ingest capabilities.\"\"\"\r\n\r\n    display_name: str = \"Chroma DB\"\r\n    description: str = \"Chroma Vector Store with search and ingest capabilities\"\r\n    name = \"Chroma\"\r\n    icon = \"Chroma\"\r\n\r\n    # Los inputs no necesitan cambios\r\n    inputs = [\r\n        StrInput(name=\"collection_name\", display_name=\"Collection Name\", value=\"langflow\"),\r\n        StrInput(name=\"persist_directory\", display_name=\"Persist Directory\"),\r\n        *LCVectorStoreComponent.inputs,\r\n        HandleInput(name=\"embedding\", display_name=\"Embedding\", input_types=[\"Embeddings\"]),\r\n        IntInput(name=\"number_of_results\", display_name=\"Number of Results\", info=\"Number of results to return.\", advanced=True, value=4),\r\n        # ... (el resto de tus inputs)\r\n    ]\r\n\r\n    @override\r\n    @check_cached_vector_store\r\n    def build_vector_store(self) -> Chroma:\r\n        # La lógica de ingesta no cambia\r\n        persist_directory = self.resolve_path(self.persist_directory) if self.persist_directory else None\r\n        chroma = Chroma(\r\n            persist_directory=persist_directory,\r\n            embedding_function=self.embedding,\r\n            collection_name=self.collection_name,\r\n        )\r\n        self._add_documents_to_vector_store(chroma)\r\n        return chroma\r\n\r\n    def _sanitize_metadata(self, metadata: Dict[str, Any]) -> Dict[str, Any]:\r\n        # La lógica de sanitización no cambia\r\n        if not isinstance(metadata, dict):\r\n            return {}\r\n        return {key: value for key, value in metadata.items() if isinstance(value, (str, int, float, bool))}\r\n\r\n    def _add_documents_to_vector_store(self, vector_store: \"Chroma\") -> None:\r\n        # La lógica de añadir documentos no cambia\r\n        ingest_input = self.ingest_data\r\n        if not ingest_input:\r\n            return\r\n\r\n        ingest_data_list = self._prepare_ingest_data()\r\n        documents_to_add: List[Document] = []\r\n        for item in ingest_data_list or []:\r\n            if isinstance(item, Data):\r\n                sanitized_meta = self._sanitize_metadata(item.metadata)\r\n                doc = Document(page_content=item.text, metadata=sanitized_meta)\r\n                documents_to_add.append(doc)\r\n        \r\n        if documents_to_add:\r\n            vector_store.add_documents(documents_to_add)\r\n\r\n    # --- NUEVO MÉTODO DE BÚSQUEDA ---\r\n    def search_documents(self) -> List[Data]:\r\n        \"\"\"\r\n        Loads the Chroma DB index and searches for documents.\r\n        If the search query is empty, it does nothing.\r\n        \"\"\"\r\n        # 1. Cláusula de Guarda: si no hay pregunta, no se ejecuta.\r\n        if not self.search_query or not isinstance(self.search_query, str) or not self.search_query.strip():\r\n            self.status = \"No search query provided. Component will not run.\"\r\n            return []\r\n\r\n        # 2. Cargamos la base de datos desde el disco\r\n        persist_directory = self.resolve_path(self.persist_directory) if self.persist_directory else None\r\n        if not persist_directory or not Path(persist_directory).exists():\r\n             raise ValueError(f\"Persist directory '{persist_directory}' not found.\")\r\n\r\n        vector_store = Chroma(\r\n            persist_directory=persist_directory,\r\n            embedding_function=self.embedding,\r\n            collection_name=self.collection_name,\r\n        )\r\n        \r\n        # 3. Realizamos la búsqueda\r\n        docs = vector_store.similarity_search(\r\n            query=self.search_query,\r\n            k=self.number_of_results,\r\n        )\r\n        \r\n        # 4. Convertimos los resultados al formato de Langflow\r\n        return docs_to_data(docs)"
+              },
+              "collection_name": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Collection Name",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "collection_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "github_collection"
+              },
+              "embedding": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Embedding",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Embeddings"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "embedding",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "ingest_data": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Ingest Data",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Data",
+                  "DataFrame"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "ingest_data",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "number_of_results": {
+                "_input_type": "IntInput",
+                "advanced": true,
+                "display_name": "Number of Results",
+                "dynamic": false,
+                "info": "Number of results to return.",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "number_of_results",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "int",
+                "value": 7
+              },
+              "persist_directory": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Persist Directory",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "persist_directory",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "./indices/github"
+              },
+              "search_query": {
+                "_input_type": "QueryInput",
+                "advanced": false,
+                "display_name": "Search Query",
+                "dynamic": false,
+                "info": "Enter a query to run a similarity search.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "search_query",
+                "placeholder": "Enter a query...",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": true,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "query",
+                "value": ""
+              },
+              "should_cache_vector_store": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Cache Vector Store",
+                "dynamic": false,
+                "info": "If True, the vector store will be cached for the current build of the component. This is useful for components that have multiple output methods and want to share the same vector store.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "should_cache_vector_store",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": true
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "search_results",
+          "showNode": true,
+          "type": "Chroma"
+        },
+        "dragging": false,
+        "id": "Chroma-n7Ava",
+        "measured": {
+          "height": 470,
+          "width": 320
+        },
+        "position": {
+          "x": 1151.7640436387212,
+          "y": 257.23705892150457
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "Chroma-TRdau",
+          "node": {
+            "base_classes": [
+              "Data",
+              "DataFrame"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Chroma Vector Store with search and ingest capabilities",
+            "display_name": "Chroma DB",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "collection_name",
+              "persist_directory",
+              "ingest_data",
+              "search_query",
+              "should_cache_vector_store",
+              "embedding",
+              "number_of_results"
+            ],
+            "frozen": false,
+            "icon": "Chroma",
+            "legacy": false,
+            "lf_version": "1.5.1",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Search Results",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "search_documents",
+                "name": "search_results",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "DataFrame",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "as_dataframe",
+                "name": "dataframe",
+                "options": null,
+                "required_inputs": null,
+                "selected": "DataFrame",
+                "tool_mode": true,
+                "types": [
+                  "DataFrame"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from copy import deepcopy\r\nfrom typing import TYPE_CHECKING, List, Dict, Any\r\nfrom pathlib import Path\r\n\r\nfrom chromadb.config import Settings\r\nfrom langchain_chroma import Chroma\r\nfrom typing_extensions import override\r\nimport pandas as pd\r\n\r\nfrom langchain_core.documents import Document\r\nfrom langflow.base.vectorstores.model import LCVectorStoreComponent, check_cached_vector_store\r\nfrom langflow.base.vectorstores.utils import chroma_collection_to_data\r\nfrom langflow.inputs.inputs import BoolInput, DropdownInput, HandleInput, IntInput, StrInput\r\nfrom langflow.schema.data import Data\r\nfrom langflow.schema.dataframe import DataFrame\r\nfrom langflow.helpers.data import docs_to_data # <-- Importación añadida\r\n\r\nif TYPE_CHECKING:\r\n    from langflow.schema.dataframe import DataFrame\r\n\r\n\r\nclass ChromaVectorStoreComponent(LCVectorStoreComponent):\r\n    \"\"\"Chroma Vector Store with search and ingest capabilities.\"\"\"\r\n\r\n    display_name: str = \"Chroma DB\"\r\n    description: str = \"Chroma Vector Store with search and ingest capabilities\"\r\n    name = \"Chroma\"\r\n    icon = \"Chroma\"\r\n\r\n    # Los inputs no necesitan cambios\r\n    inputs = [\r\n        StrInput(name=\"collection_name\", display_name=\"Collection Name\", value=\"langflow\"),\r\n        StrInput(name=\"persist_directory\", display_name=\"Persist Directory\"),\r\n        *LCVectorStoreComponent.inputs,\r\n        HandleInput(name=\"embedding\", display_name=\"Embedding\", input_types=[\"Embeddings\"]),\r\n        IntInput(name=\"number_of_results\", display_name=\"Number of Results\", info=\"Number of results to return.\", advanced=True, value=4),\r\n        # ... (el resto de tus inputs)\r\n    ]\r\n\r\n    @override\r\n    @check_cached_vector_store\r\n    def build_vector_store(self) -> Chroma:\r\n        # La lógica de ingesta no cambia\r\n        persist_directory = self.resolve_path(self.persist_directory) if self.persist_directory else None\r\n        chroma = Chroma(\r\n            persist_directory=persist_directory,\r\n            embedding_function=self.embedding,\r\n            collection_name=self.collection_name,\r\n        )\r\n        self._add_documents_to_vector_store(chroma)\r\n        return chroma\r\n\r\n    def _sanitize_metadata(self, metadata: Dict[str, Any]) -> Dict[str, Any]:\r\n        # La lógica de sanitización no cambia\r\n        if not isinstance(metadata, dict):\r\n            return {}\r\n        return {key: value for key, value in metadata.items() if isinstance(value, (str, int, float, bool))}\r\n\r\n    def _add_documents_to_vector_store(self, vector_store: \"Chroma\") -> None:\r\n        # La lógica de añadir documentos no cambia\r\n        ingest_input = self.ingest_data\r\n        if not ingest_input:\r\n            return\r\n\r\n        ingest_data_list = self._prepare_ingest_data()\r\n        documents_to_add: List[Document] = []\r\n        for item in ingest_data_list or []:\r\n            if isinstance(item, Data):\r\n                sanitized_meta = self._sanitize_metadata(item.metadata)\r\n                doc = Document(page_content=item.text, metadata=sanitized_meta)\r\n                documents_to_add.append(doc)\r\n        \r\n        if documents_to_add:\r\n            vector_store.add_documents(documents_to_add)\r\n\r\n    # --- NUEVO MÉTODO DE BÚSQUEDA ---\r\n    def search_documents(self) -> List[Data]:\r\n        \"\"\"\r\n        Loads the Chroma DB index and searches for documents.\r\n        If the search query is empty, it does nothing.\r\n        \"\"\"\r\n        # 1. Cláusula de Guarda: si no hay pregunta, no se ejecuta.\r\n        if not self.search_query or not isinstance(self.search_query, str) or not self.search_query.strip():\r\n            self.status = \"No search query provided. Component will not run.\"\r\n            return []\r\n\r\n        # 2. Cargamos la base de datos desde el disco\r\n        persist_directory = self.resolve_path(self.persist_directory) if self.persist_directory else None\r\n        if not persist_directory or not Path(persist_directory).exists():\r\n             raise ValueError(f\"Persist directory '{persist_directory}' not found.\")\r\n\r\n        vector_store = Chroma(\r\n            persist_directory=persist_directory,\r\n            embedding_function=self.embedding,\r\n            collection_name=self.collection_name,\r\n        )\r\n        \r\n        # 3. Realizamos la búsqueda\r\n        docs = vector_store.similarity_search(\r\n            query=self.search_query,\r\n            k=self.number_of_results,\r\n        )\r\n        \r\n        # 4. Convertimos los resultados al formato de Langflow\r\n        return docs_to_data(docs)"
+              },
+              "collection_name": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Collection Name",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "collection_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "pdf_collection"
+              },
+              "embedding": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Embedding",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Embeddings"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "embedding",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "ingest_data": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Ingest Data",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Data",
+                  "DataFrame"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "ingest_data",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "number_of_results": {
+                "_input_type": "IntInput",
+                "advanced": true,
+                "display_name": "Number of Results",
+                "dynamic": false,
+                "info": "Number of results to return.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "number_of_results",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "int",
+                "value": 7
+              },
+              "persist_directory": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Persist Directory",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "persist_directory",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "./indices/pdf"
+              },
+              "search_query": {
+                "_input_type": "QueryInput",
+                "advanced": false,
+                "display_name": "Search Query",
+                "dynamic": false,
+                "info": "Enter a query to run a similarity search.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "search_query",
+                "placeholder": "Enter a query...",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": true,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "query",
+                "value": ""
+              },
+              "should_cache_vector_store": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Cache Vector Store",
+                "dynamic": false,
+                "info": "If True, the vector store will be cached for the current build of the component. This is useful for components that have multiple output methods and want to share the same vector store.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "should_cache_vector_store",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": true
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "search_results",
+          "showNode": true,
+          "type": "Chroma"
+        },
+        "dragging": false,
+        "id": "Chroma-TRdau",
+        "measured": {
+          "height": 470,
+          "width": 320
+        },
+        "position": {
+          "x": 1163.2747820716506,
+          "y": 827.212221957757
         },
         "selected": false,
         "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": -6.799674573479592,
-      "y": -106.0287471118778,
-      "zoom": 0.4000000000000005
+      "x": -209.09783719204438,
+      "y": -143.98324083154137,
+      "zoom": 0.630109888716593
     }
   },
   "description": "Load your data for chat context with Retrieval Augmented Generation.",
