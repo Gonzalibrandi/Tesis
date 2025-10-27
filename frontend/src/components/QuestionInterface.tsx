@@ -107,11 +107,14 @@ export const QuestionInterface = () => {
           output_type: "chat",
           tweaks: {
             "File-aDxd1": {
-              path: uploadedPath,
-              delete_server_file_after_processing: true,
+              "delete_server_file_after_processing": true,
+              "path": uploadedPath,
             },
             "MetadataTagger-Lyz8A": {
               "source_file_path": pdfFile.name
+            },
+            "NVIDIAEmbeddingsComponent-WGSIj": {
+              "nvidia_api_key": NVIDIA_API_KEY
             }
           },
         }),
@@ -182,11 +185,11 @@ export const QuestionInterface = () => {
           output_type: "chat",
           tweaks: {
              "GitExtractorComponent-PmJhm": {
-              repository_url: githubRepo,
-              //repo_source: "Remote",
-              //clone_url: githubRepo,
-              //branch: githubBranch || "main",
+              "repository_url": githubRepo,
             },
+            "NVIDIAEmbeddingsComponent-UXH2O": {
+              "nvidia_api_key": NVIDIA_API_KEY
+            }
           },
         }),
       });
@@ -281,6 +284,9 @@ export const QuestionInterface = () => {
         },
         "NvidiaRerankComponent-DqD1n":{
           "api_key": NVIDIA_API_KEY,
+        },
+        "NVIDIAEmbeddingsComponent-XGuHe":{
+          "nvidia_api_key": NVIDIA_API_KEY, 
         }
       }
     };

@@ -34,6 +34,35 @@
         "className": "",
         "data": {
           "sourceHandle": {
+            "dataType": "SplitText",
+            "id": "SplitText-TzwXF",
+            "name": "dataframe",
+            "output_types": [
+              "DataFrame"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "ingest_data",
+            "id": "Chroma-sNqsV",
+            "inputTypes": [
+              "Data",
+              "DataFrame"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__SplitText-TzwXF{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-TzwXFœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}-Chroma-sNqsV{œfieldNameœ:œingest_dataœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "SplitText-TzwXF",
+        "sourceHandle": "{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-TzwXFœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}",
+        "target": "Chroma-sNqsV",
+        "targetHandle": "{œfieldNameœ:œingest_dataœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
             "dataType": "DocumentNormalizer",
             "id": "CustomComponent-F1TVs",
             "name": "normalized_documents",
@@ -64,63 +93,6 @@
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "SplitText",
-            "id": "SplitText-TzwXF",
-            "name": "dataframe",
-            "output_types": [
-              "DataFrame"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "ingest_data",
-            "id": "Chroma-sNqsV",
-            "inputTypes": [
-              "Data",
-              "DataFrame"
-            ],
-            "type": "other"
-          }
-        },
-        "id": "xy-edge__SplitText-TzwXF{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-TzwXFœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}-Chroma-sNqsV{œfieldNameœ:œingest_dataœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}",
-        "selected": false,
-        "source": "SplitText-TzwXF",
-        "sourceHandle": "{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-TzwXFœ,œnameœ:œdataframeœ,œoutput_typesœ:[œDataFrameœ]}",
-        "target": "Chroma-sNqsV",
-        "targetHandle": "{œfieldNameœ:œingest_dataœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
-            "dataType": "LocalHuggingFaceEmbeddings",
-            "id": "LocalHuggingFaceEmbeddings-1ppaO",
-            "name": "embeddings",
-            "output_types": [
-              "Embeddings"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "embedding",
-            "id": "Chroma-sNqsV",
-            "inputTypes": [
-              "Embeddings"
-            ],
-            "type": "other"
-          }
-        },
-        "id": "xy-edge__LocalHuggingFaceEmbeddings-1ppaO{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-1ppaOœ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}-Chroma-sNqsV{œfieldNameœ:œembeddingœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}",
-        "selected": false,
-        "source": "LocalHuggingFaceEmbeddings-1ppaO",
-        "sourceHandle": "{œdataTypeœ:œLocalHuggingFaceEmbeddingsœ,œidœ:œLocalHuggingFaceEmbeddings-1ppaOœ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}",
-        "target": "Chroma-sNqsV",
-        "targetHandle": "{œfieldNameœ:œembeddingœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
             "dataType": "GitExtractorComponent",
             "id": "GitExtractorComponent-PmJhm",
             "name": "files_content",
@@ -144,115 +116,37 @@
         "sourceHandle": "{œdataTypeœ:œGitExtractorComponentœ,œidœ:œGitExtractorComponent-PmJhmœ,œnameœ:œfiles_contentœ,œoutput_typesœ:[œDataœ]}",
         "target": "MetadataTagger-XqRJY",
         "targetHandle": "{œfieldNameœ:œinput_documentsœ,œidœ:œMetadataTagger-XqRJYœ,œinputTypesœ:[œDataœ,œMessageœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "NVIDIAEmbeddingsComponent",
+            "id": "NVIDIAEmbeddingsComponent-UXH2O",
+            "name": "embeddings",
+            "output_types": [
+              "Embeddings"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "embedding",
+            "id": "Chroma-sNqsV",
+            "inputTypes": [
+              "Embeddings"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__NVIDIAEmbeddingsComponent-UXH2O{œdataTypeœ:œNVIDIAEmbeddingsComponentœ,œidœ:œNVIDIAEmbeddingsComponent-UXH2Oœ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}-Chroma-sNqsV{œfieldNameœ:œembeddingœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "NVIDIAEmbeddingsComponent-UXH2O",
+        "sourceHandle": "{œdataTypeœ:œNVIDIAEmbeddingsComponentœ,œidœ:œNVIDIAEmbeddingsComponent-UXH2Oœ,œnameœ:œembeddingsœ,œoutput_typesœ:[œEmbeddingsœ]}",
+        "target": "Chroma-sNqsV",
+        "targetHandle": "{œfieldNameœ:œembeddingœ,œidœ:œChroma-sNqsVœ,œinputTypesœ:[œEmbeddingsœ],œtypeœ:œotherœ}"
       }
     ],
     "nodes": [
-      {
-        "data": {
-          "id": "LocalHuggingFaceEmbeddings-1ppaO",
-          "node": {
-            "base_classes": [
-              "Embeddings"
-            ],
-            "beta": false,
-            "conditional_paths": [],
-            "custom_fields": {},
-            "description": "Usa modelos HuggingFace locales para generar embeddings.",
-            "display_name": "Local HuggingFace Embeddings",
-            "documentation": "https://docs.langflow.org/components-custom-components",
-            "edited": true,
-            "field_order": [
-              "model_name"
-            ],
-            "frozen": false,
-            "icon": "brain-circuit",
-            "legacy": false,
-            "lf_version": "1.5.1",
-            "metadata": {},
-            "minimized": false,
-            "output_types": [],
-            "outputs": [
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "Embeddings",
-                "group_outputs": false,
-                "hidden": null,
-                "method": "build_output",
-                "name": "embeddings",
-                "options": null,
-                "required_inputs": null,
-                "selected": "Embeddings",
-                "tool_mode": true,
-                "types": [
-                  "Embeddings"
-                ],
-                "value": "__UNDEFINED__"
-              }
-            ],
-            "pinned": false,
-            "template": {
-              "_type": "Component",
-              "code": {
-                "advanced": true,
-                "dynamic": true,
-                "fileTypes": [],
-                "file_path": "",
-                "info": "",
-                "list": false,
-                "load_from_db": false,
-                "multiline": true,
-                "name": "code",
-                "password": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "type": "code",
-                "value": "from langflow.custom.custom_component.component import Component\nfrom langflow.io import MessageTextInput, Output\nfrom langflow.schema.data import Data\nfrom langchain.embeddings import HuggingFaceEmbeddings\nfrom langchain.schema.embeddings import Embeddings\n\n\nclass CustomComponent(Component):\n    display_name = \"Local HuggingFace Embeddings\"\n    description = \"Usa modelos HuggingFace locales para generar embeddings.\"\n    documentation: str = \"https://docs.langflow.org/components-custom-components\"\n    icon = \"brain-circuit\"\n    name = \"LocalHuggingFaceEmbeddings\"\n\n    # -------- Inputs --------\n    inputs = [\n        MessageTextInput(\n            name=\"model_name\",\n            display_name=\"Model Name\",\n            info=\"Nombre del modelo HuggingFace a usar\",\n            value=\"BAAI/bge-small-en-v1.5\",  # Valor por defecto\n            tool_mode=True,\n        ),\n    ]\n\n    # -------- Outputs --------\n    outputs = [\n        Output(\n            display_name=\"Embeddings\",\n            name=\"embeddings\",\n            method=\"build_output\",\n        ),\n    ]\n\n    # -------- Lógica principal --------\n    def build_output(self) -> Embeddings:\n        model_name = self.model_name\n        embeddings = HuggingFaceEmbeddings(\n            model_name=model_name,\n            encode_kwargs={\"normalize_embeddings\": True},\n        )\n        self.status = f\"Modelo cargado: {model_name}\"\n        return embeddings\n"
-              },
-              "model_name": {
-                "_input_type": "MessageTextInput",
-                "advanced": false,
-                "display_name": "Model Name",
-                "dynamic": false,
-                "info": "Nombre del modelo HuggingFace a usar",
-                "input_types": [
-                  "Message"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "model_name",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": true,
-                "trace_as_input": true,
-                "trace_as_metadata": true,
-                "type": "str",
-                "value": "BAAI/bge-small-en-v1.5"
-              }
-            },
-            "tool_mode": false
-          },
-          "showNode": true,
-          "type": "LocalHuggingFaceEmbeddings"
-        },
-        "dragging": false,
-        "id": "LocalHuggingFaceEmbeddings-1ppaO",
-        "measured": {
-          "height": 218,
-          "width": 320
-        },
-        "position": {
-          "x": 773.7279474376274,
-          "y": 426.91100803121384
-        },
-        "selected": false,
-        "type": "genericNode"
-      },
       {
         "data": {
           "id": "SplitText-TzwXF",
@@ -320,7 +214,7 @@
                 "tool_mode": false,
                 "trace_as_metadata": true,
                 "type": "int",
-                "value": 200
+                "value": 50
               },
               "chunk_size": {
                 "_input_type": "IntInput",
@@ -338,7 +232,7 @@
                 "tool_mode": false,
                 "trace_as_metadata": true,
                 "type": "int",
-                "value": 1024
+                "value": 512
               },
               "code": {
                 "advanced": true,
@@ -409,7 +303,7 @@
               },
               "separator": {
                 "_input_type": "MessageTextInput",
-                "advanced": false,
+                "advanced": true,
                 "display_name": "Separator",
                 "dynamic": false,
                 "info": "The character to split on. Use \\n for newline. Examples: \\n\\n for paragraphs, \\n for lines, . for sentences",
@@ -462,12 +356,12 @@
         "dragging": false,
         "id": "SplitText-TzwXF",
         "measured": {
-          "height": 409,
+          "height": 327,
           "width": 320
         },
         "position": {
-          "x": 781.0842582377572,
-          "y": -73.46391286815134
+          "x": 768.5667452855346,
+          "y": -53.79353537180149
         },
         "selected": false,
         "type": "genericNode"
@@ -923,6 +817,7 @@
             "frozen": false,
             "icon": "Chroma",
             "legacy": false,
+            "lf_version": "1.5.1",
             "metadata": {},
             "minimized": false,
             "output_types": [],
@@ -1310,11 +1205,155 @@
         },
         "selected": false,
         "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "NVIDIAEmbeddingsComponent-UXH2O",
+          "node": {
+            "base_classes": [
+              "Embeddings"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Generate embeddings using NVIDIA models.",
+            "display_name": "NVIDIA Embeddings",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "base_url",
+              "nvidia_api_key",
+              "temperature"
+            ],
+            "frozen": false,
+            "icon": "NVIDIA",
+            "last_updated": "2025-10-27T02:13:51.276Z",
+            "legacy": false,
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Embedding Model",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "build_embeddings",
+                "name": "embeddings",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Embeddings",
+                "tool_mode": true,
+                "types": [
+                  "Embeddings"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "base_url": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "NVIDIA Base URL",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "base_url",
+                "placeholder": "",
+                "refresh_button": true,
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "https://integrate.api.nvidia.com/v1"
+              },
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from typing import Any\n\nfrom langflow.base.embeddings.model import LCEmbeddingsModel\nfrom langflow.field_typing import Embeddings\nfrom langflow.inputs.inputs import DropdownInput, SecretStrInput\nfrom langflow.io import FloatInput, MessageTextInput\nfrom langflow.schema.dotdict import dotdict\n\n\nclass NVIDIAEmbeddingsComponent(LCEmbeddingsModel):\n    display_name: str = \"NVIDIA Embeddings\"\n    description: str = \"Generate embeddings using NVIDIA models.\"\n    icon = \"NVIDIA\"\n    model_name: str = \"nvidia/nv-embed-v1\"\n\n    inputs = [\n        MessageTextInput(\n            name=\"base_url\",\n            display_name=\"NVIDIA Base URL\",\n            refresh_button=True,\n            value=\"https://integrate.api.nvidia.com/v1\",\n            required=True,\n        ),\n        SecretStrInput(\n            name=\"nvidia_api_key\",\n            display_name=\"NVIDIA API Key\",\n            info=\"The NVIDIA API Key.\",\n            advanced=False,\n            value=\"NVIDIA_API_KEY\",\n            required=True,\n        ),\n        FloatInput(\n            name=\"temperature\",\n            display_name=\"Model Temperature\",\n            value=0.1,\n            advanced=True,\n        ),\n    ]\n\n    def update_build_config(self, build_config: dotdict, field_value: Any, field_name: str | None = None):\n        if field_name == \"base_url\" and field_value:\n            try:\n                build_model = self.build_embeddings()\n                ids = [model.id for model in build_model.available_models]\n                build_config[\"model\"][\"options\"] = ids\n                build_config[\"model\"][\"value\"] = ids[0]\n            except Exception as e:\n                msg = f\"Error getting model names: {e}\"\n                raise ValueError(msg) from e\n        return build_config\n\n    def build_embeddings(self) -> Embeddings:\n        try:\n            from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings\n        except ImportError as e:\n            msg = \"Please install langchain-nvidia-ai-endpoints to use the Nvidia model.\"\n            raise ImportError(msg) from e\n        try:\n            output = NVIDIAEmbeddings(\n                model=self.model_name,\n                base_url=self.base_url,\n                temperature=self.temperature,\n                nvidia_api_key=self.nvidia_api_key,\n            )\n        except Exception as e:\n            msg = f\"Could not connect to NVIDIA API. Error: {e}\"\n            raise ValueError(msg) from e\n        return output\n"
+              },
+              "nvidia_api_key": {
+                "_input_type": "SecretStrInput",
+                "advanced": false,
+                "display_name": "NVIDIA API Key",
+                "dynamic": false,
+                "info": "The NVIDIA API Key.",
+                "input_types": [],
+                "load_from_db": false,
+                "name": "nvidia_api_key",
+                "password": true,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "temperature": {
+                "_input_type": "FloatInput",
+                "advanced": true,
+                "display_name": "Model Temperature",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "temperature",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "float",
+                "value": 0.1
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "NVIDIAEmbeddingsComponent"
+        },
+        "dragging": false,
+        "id": "NVIDIAEmbeddingsComponent-UXH2O",
+        "measured": {
+          "height": 284,
+          "width": 320
+        },
+        "position": {
+          "x": 758.5715181333416,
+          "y": 393.3835337475715
+        },
+        "selected": false,
+        "type": "genericNode"
       }
     ],
     "viewport": {
       "x": 232.28406765563892,
-      "y": 154.44975763016419,
+      "y": 147.37017125857014,
       "zoom": 0.5592165174278544
     }
   },
