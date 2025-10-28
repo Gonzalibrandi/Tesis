@@ -14,7 +14,7 @@ const JIGSAW_API_KEY = import.meta.env.VITE_JIGSAW_API_KEY;
 const NVIDIA_API_KEY = import.meta.env.VITE_NVIDIA_API_KEY;
 
 interface Source {
-  type: 'pdf' | 'github' | 'web' | 'llm';
+  type: 'pdf' | 'github' | 'web';
   title: string;
   reference: string;
   score?: number;
@@ -322,21 +322,24 @@ export const QuestionInterface = () => {
       .replace(/^[-\s\n]+/, "")
       .trim();
     
-    const sources: Source[] = [];
+    const sources: Source[] = [
+        { type: "pdf", title: "PDF contribution", score: 0, reference: "", content: "" },
+        { type: "github", title: "GitHub contribution", score: 0, reference: "", content: "" },
+        { type: "web", title: "Web contribution", score: 0, reference: "", content: "" }
+    ];
+
     if (traceabilityPart) {
       const lines = traceabilityPart.trim().split("\n");
+      const regex = /-\s*(PDF|GitHub|Web):\s*(\d+)\s*%?/i;
       lines.forEach((line) => {
-        const match = line.match(/-\s*(PDF|GitHub|Web|LLM prior knowledge):\s*(\d+)%/i);
+        const match = line.match(regex);
         if (match) {
-          const sourceType = match[1].toLowerCase();
-          const normalizedType = sourceType.includes('llm') ? 'llm' : sourceType as "pdf" | "github" | "web" | "llm";
-          sources.push({
-            type: normalizedType,
-            title: `${match[1]} contribution`,
-            reference: "",
-            score: parseInt(match[2], 10) / 100,
-            content: ""
-          });
+          const sourceType = match[1].toLowerCase() as "pdf" | "github" | "web";
+          const percentage = parseInt(match[2], 10);
+          const sourceToUpdate = sources.find(s => s.type === sourceType);
+          if (sourceToUpdate) {
+            sourceToUpdate.score = percentage / 100;
+          }
         }
       });
     }
@@ -478,14 +481,13 @@ export const QuestionInterface = () => {
                                 {source.type === 'pdf' && <FileText className="h-4 w-4 text-primary" />}
                                 {source.type === 'github' && <Github className="h-4 w-4 text-primary" />}
                                 {source.type === 'web' && <ExternalLink className="h-4 w-4 text-primary" />}
-                                {source.type === 'llm' && <Database className="h-4 w-4 text-primary" />}
                                 <span className="font-medium">{source.title}</span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <Badge variant="secondary" className="text-xs">
                                   {source.type.toUpperCase()}
                                 </Badge>
-                                {source.score && (
+                                {typeof source.score === 'number' && (
                                   <Badge variant="outline" className="text-xs">
                                     {Math.round(source.score * 100)}% match
                                   </Badge>
