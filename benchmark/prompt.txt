@@ -1,0 +1,248 @@
+You are a meticulous and impartial AI System Evaluator, acting as an expert judge. Your sole task is to assess the overall performance of a Retrieval-Augmented Generation (RAG) system across an entire batch of test cases.
+
+You will be provided with a JSON array of test cases. You must analyze **all** of them and then provide a **single, consolidated summary evaluation**.
+
+**EVALUATION METRICS (Score 1-10 for each):**
+1.  **Content Accuracy:** How factually correct and semantically equivalent are the actual answers to the expected ones, on average?
+2.  **Completeness:** On average, do the actual answers cover all key points from the expected answers?
+3.  **Source Attribution Accuracy:** On average, how well does the actual source attribution match the expected one?
+4.  **Conciseness:** On average, are the actual answers direct and to the point?
+
+**OUTPUT FORMAT (CRITICAL):**
+You **MUST** provide your evaluation as a **single, valid JSON object**. This object should represent the **average performance** across all test cases. **DO NOT** include any other text or markdown outside of the JSON object.
+
+{
+  "overall_summary_judgment": "A brief, overall summary of the system's performance across the entire benchmark (e.g., 'The system performs excellently in accuracy but struggles with source attribution').",
+  "average_scores": {
+    "content_accuracy": { "average_score": <Float between 1.0-10.0>, "reasoning": "Brief justification for the average score, noting general trends." },
+    "completeness": { "average_score": <Float between 1.0-10.0>, "reasoning": "Brief justification, noting if the system tends to be comprehensive or miss details." },
+    "source_attribution_accuracy": { "average_score": <Float between 1.0-10.0>, "reasoning": "Brief justification, commenting on the system's ability to correctly cite sources." },
+    "conciseness": { "average_score": <Float between 1.0-10.0>, "reasoning": "Brief justification on the general brevity of the answers." }
+  },
+  "final_average_score": <A single float representing the average of the four average scores>
+}
+
+**--- START OF BATCH TEST CASES ---**
+
+[
+  {
+    "case_id": 0,
+    "question": "What is the intent of the Singleton pattern?",
+    "expected_answer": "Ensure a class has only one instance and provide a global access point to it.",
+    "actual_answer": "The intent of the Singleton pattern is to ensure that a class has only one instance and to provide a global point of access to that instance. This is crucial for certain classes that should maintain a single instance, such as a printer spooler or a file system. The pattern achieves this by restricting the instantiation of the class and typically involves a static member function that controls the creation of the instance, ensuring that only one instance exists throughout the application.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 1,
+    "question": "What problems does the Factory Method pattern solve and in which scenario from the PDF is its use exemplified?",
+    "expected_answer": "Allows defining an interface for creating an object but lets subclasses decide which concrete class to instantiate; used in frameworks/toolkits where the base code delegates creation to subclasses (e.g., controller creation in MVC).",
+    "actual_answer": "The Factory Method pattern solves the problem of instantiating objects when the exact type of the object is not known until runtime. It encapsulates the knowledge of which subclass to create, allowing the framework to remain flexible and extensible. In the PDF, the scenario exemplifying its use involves an Application class that cannot predict which subclass of Document to instantiate. Instead, the Factory Method allows the Application to create Document objects without needing to know their specific types, thus promoting loose coupling and adherence to the Open/Closed Principle.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 2,
+    "question": "In the repo, the author mentions 'ChatGPT-5 LLM-powered decision engine'. What practical implication for a RAG benchmark can you derive from this?",
+    "expected_answer": "It implies trading decisions are based on an advanced LLM; for the benchmark you should evaluate how the RAG integrates LLM context with evidence (chunks) and measure how much generation depends on the LLM vs verifiable sources.",
+    "actual_answer": "The mention of 'ChatGPT-5 LLM-powered decision engine' in the repository implies that the system could leverage advanced capabilities of large language models (LLMs) to enhance decision-making processes in trading. This aligns with the practical implications for a RAG benchmark, as it suggests that the integration of LLMs like ChatGPT-5 could improve the retrieval and generation of relevant trading insights from vast datasets. By utilizing RAG frameworks, the system could potentially evaluate the effectiveness of its trading decisions based on metrics such as relevance and adherence, thus providing a structured approach to assess the performance of LLMs in real-time trading scenarios.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 70%, Web: 30%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 3,
+    "question": "According to the PDF, what is the main trade-off when deciding whether to declare child management operations (Add/Remove) in Component vs Composite in the Composite pattern?",
+    "expected_answer": "Transparency vs. safety: declaring operations in Component gives transparency (treating all uniformly) but reduces safety; declaring them only in Composite gives safety but loses transparency.",
+    "actual_answer": "The main trade-off when deciding whether to declare child management operations (Add/Remove) in Component vs Composite in the Composite pattern is between safety and transparency. Declaring these operations at the root of the class hierarchy (Component) provides transparency, allowing uniform treatment of all components. However, this can lead to safety issues, as clients might attempt to perform invalid operations on leaf nodes. Conversely, defining these operations in the Composite class enhances safety by preventing invalid operations at compile-time, but it sacrifices transparency since leaves and composites will have different interfaces.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 4,
+    "question": "In the GitHub repository, what is the main purpose of the trading_script.py file?",
+    "expected_answer": "Main trading engine: daily price evaluation, portfolio management, and automatic rules such as stop-loss.",
+    "actual_answer": "The main purpose of the `trading_script.py` file is to serve as the primary trading engine for managing a micro-cap portfolio. It includes functionalities for portfolio management, stop-loss automation, and centralized market data fetching. The script ensures that all price requests are handled consistently and includes mechanisms for handling data from different sources, such as Yahoo and Stooq. Additionally, it processes the portfolio state and calculates daily results, making it integral to the overall trading strategy.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 90%, Web: 10%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 5,
+    "question": "Which pattern from the PDF would you recommend to easily swap caching policies in a subsystem, and why?",
+    "expected_answer": "Strategy: encapsulates algorithms (caching policies) in interchangeable objects, allowing the policy to vary without changing clients.",
+    "actual_answer": "I recommend using the **Strategy pattern** from the PDF to easily swap caching policies in a subsystem. The Strategy pattern allows for encapsulating algorithms (in this case, caching policies) in separate classes, enabling you to vary the caching strategy independently of the subsystem's context. This flexibility makes it easier to switch between different caching policies without modifying the subsystem's core logic, thus enhancing maintainability and extensibility.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 6,
+    "question": "In the repo README, which main market data source does the experiment use?",
+    "expected_answer": "Yahoo Finance (with Stooq as a fallback).",
+    "actual_answer": "The main market data source used in the experiment is Yahoo Finance, with Stooq as a fallback for reliability.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 7,
+    "question": "Design an evaluation question that requires combining the Command pattern (from the PDF) with the file simple_automation.py from the repo (hypothesis: order automation). What would be the expected answer?",
+    "expected_answer": "The Command pattern encapsulates requests as objects (allowing queuing/undo); in simple_automation.py, orders/actions are expected to be represented as objects/functions that can be enqueued and executed by the engine.",
+    "actual_answer": "An evaluation question that combines the Command pattern with the `simple_automation.py` file could be: \\\"How can the Command pattern be implemented in the `simple_automation.py` script to encapsulate trading actions (like buy and sell) as command objects, allowing for flexible execution and potential undo functionality in the trading automation process?\\\" The expected answer would detail how to create command classes for each trading action, implement an invoker to execute these commands, and discuss how this design pattern enhances the maintainability and scalability of the trading automation system.",
+    "expected_source_attribution": "PDF: 60%, GitHub: 35%, Web: 5%",
+    "actual_source_attribution": "PDF: 50%, GitHub: 50%, Web: 0%"
+  },
+  {
+    "case_id": 8,
+    "question": "Which elements in the repo enable reproducibility and traceability of operations (logs, CSVs, etc.)?",
+    "expected_answer": "CSVs in 'Scripts and CSV Files/', automatic logs and performance files (performance CSVs) recording PnL, equity and trade history.",
+    "actual_answer": "The elements in the repository that enable reproducibility and traceability of operations include the logging functionality implemented in the `trading_script.py` file, which logs important events such as the configuration of data directories and the writing of CSV files. Specifically, the script saves trade logs in a CSV format (`Trade Log.csv`), which records details like date, ticker, shares bought, buy price, and reasons for trades. This structured logging and data storage facilitate tracking and reproducing the trading experiment's outcomes.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 9,
+    "question": "According to the PDF, what advantage does Abstract Factory offer regarding consistency among products?",
+    "expected_answer": "It isolates concrete classes and makes it easier to use objects from a single coherent family (promotes consistency among products of the same family).",
+    "actual_answer": "The Abstract Factory pattern offers the advantage of promoting consistency among products by ensuring that an application uses objects from only one family at a time. This enforcement helps maintain compatibility among the products created, as they are designed to work together. By encapsulating a group of individual factories that share a common theme, the Abstract Factory guarantees a uniform interface for the products, thus enhancing consistency across different product families.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 50%, GitHub: 0%, Web: 50%"
+  },
+  {
+    "case_id": 10,
+    "question": "Which pattern from the PDF is suggested to reduce storage costs when there are many fine-grained objects?",
+    "expected_answer": "Flyweight: reuses shared state to reduce storage cost for many fine-grained objects.",
+    "actual_answer": "The Flyweight pattern is suggested to reduce storage costs when there are many fine-grained objects. This pattern is particularly effective when an application uses a large number of objects, storage costs are high due to the quantity of objects, and most object state can be made extrinsic. By sharing objects and removing extrinsic state, the application can significantly decrease the number of distinct objects, thus optimizing storage.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 11,
+    "question": "In the repo, which mechanism/file is indicated to allow backtesting (e.g., run with historical date)?",
+    "expected_answer": "Support via ASOF_DATE override in scripts, enabling historical analysis/backtest.",
+    "actual_answer": "The mechanism indicated for backtesting in the repository is the `ASOF_DATE` override, which allows for historical analysis. Users can run the trading script with a specific historical date using the `--asof` argument, for example: `python trading_script.py --data-dir \\\"Start Your Own\\\" --asof 2025-10-01`.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 12,
+    "question": "In the repo, which Python libraries are listed in requirements.txt as main dependencies?",
+    "expected_answer": "pandas, yFinance, matplotlib (among other dependencies listed for scraping/visualization and analysis).",
+    "actual_answer": "The main dependencies listed in the `requirements.txt` file of the repository are:\n- numpy==2.3.2\n- pandas==2.2.2\n- yfinance==0.2.65\n- matplotlib==3.8.4",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 13,
+    "question": "Which tests would you include to evaluate source attribution of your RAG when answering questions about design patterns?",
+    "expected_answer": "Scenario: pose questions about concrete pattern examples; measure if the RAG cites PDF chunks (DesignPatterns) correctly and if, for concrete code, it cites the file/line in GitHub; evaluate coverage and accuracy of source traces (precision/recall of cited sources).",
+    "actual_answer": "To evaluate source attribution of your RAG when answering questions about design patterns, you should include the following tests:\n\n1. **Document Relevance:** Ensure that the retrieved documents consistently address the user's inquiries about design patterns.\n2. **Answer Accuracy:** Verify that the outputs accurately reflect the information in the retrieved documents, comparing them to established facts or having knowledgeable reviewers assess them.\n3. **Hallucination Checks:** Monitor for any incorrect details introduced by the RAG system that are not found in the retrieved documents, ensuring answers are grounded in the provided sources.\n4. **Contextual Recall:** Confirm that the retrieval context contains all necessary information to produce ideal outputs for specific inputs regarding design patterns.\n5. **Contextual Precision:** Ensure that relevant text chunks are prioritized over irrelevant ones, focusing on the most important information about design patterns.\n6. **Task Completion:** Test whether the AI can access the correct tools with appropriate arguments to complete tasks effectively.\n\nThese tests align with the principles outlined in the design patterns literature, emphasizing the importance of critical evaluation and accurate representation of design concepts.",
+    "expected_source_attribution": "PDF: 50%, GitHub: 40%, Web: 10%",
+    "actual_source_attribution": "PDF: 40%, GitHub: 0%, Web: 60%"
+  },
+  {
+    "case_id": 14,
+    "question": "Which section of the PDF contains the explanation of Template Method and what is the central idea it proposes?",
+    "expected_answer": "The catalog of patterns section (behavioral chapter); Template Method defines the skeleton of an algorithm in an operation and delegates steps to subclasses.",
+    "actual_answer": "The explanation of the Template Method can be found in the PDF document starting from section 301. The central idea it proposes is that the Template Method allows subclasses to redefine certain steps of an algorithm without altering the overall structure of the algorithm. This pattern promotes an inverted control structure, where the parent class calls the operations of the subclass, embodying the principle of \\\"Don't call us, we'll call you.\\\"",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 15,
+    "question": "In the repo, what files/resources exist for someone to 'start their own experiment'?",
+    "expected_answer": "'Start Your Own/' folder with templates and guides; Makefile and README.md that document initial steps.",
+    "actual_answer": "To start your own experiment using the ChatGPT Micro-Cap Experiment repository, you can utilize the following resources:\n\n1. **`Start Your Own/`** - This folder contains template files and a guide for running the trading experiment on your own computer. It includes two small scripts and the CSV files they produce.\n2. **Installation Instructions** - You need to install dependencies by creating a virtual environment and running the command `pip install -r requirements.txt`.\n3. **Scripts** - The main trading engine is located in **`trading_script.py`**, which manages the portfolio and automates stop-loss.\n4. **Automation Guide** - For automating prompts, refer to the [Automation Guide](https://github.com/LuckyOne7777/ChatGPT-Micro-Cap-Experiment/blob/main/Other/AUTOMATION_README.md).\n\nThese resources will help you set up and run your own trading experiment effectively.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 16,
+    "question": "Propose a question to evaluate whether the RAG distinguishes source origin (PDF vs GitHub) in the final answer, and the expected answer.",
+    "expected_answer": "Question: 'Where does the statement about Factory Method that you cite come from?' Expected answer: indicate the definition comes from the PDF (Design Patterns) and that a practical code example may come from the GitHub repository if applicable.",
+    "actual_answer": "To evaluate whether the RAG distinguishes source origin (PDF vs GitHub) in the final answer, you could ask: \\\"Compare and contrast the approaches to data retrieval as described in the 'Weekly Deep Research (PDF)' documents and the 'Deep Research Index.md' in the GitHub repository. Highlight any differences in implementation or perspective and cite the specific sources.\\\" The expected answer should identify and explain the approaches to data retrieval as presented in both the PDF documents and the GitHub repository, clearly articulating any differences or similarities in implementation, and explicitly citing the sources.",
+    "expected_source_attribution": "PDF: 70%, GitHub: 20%, Web: 10%",
+    "actual_source_attribution": "PDF: 50%, GitHub: 50%, Web: 0%"
+  },
+  {
+    "case_id": 17,
+    "question": "Which pattern is suitable to represent states with objects and why?",
+    "expected_answer": "State: represents each state as an object, allowing the context's behavior to change when the object representing the state changes.",
+    "actual_answer": "The State pattern is suitable for representing states with objects because it allows an object to alter its behavior when its internal state changes, effectively making it appear as if the object has changed its class. This pattern encapsulates the various states of an object, enabling it to respond differently based on its current state. For example, a `TCPConnection` object can be in states like Established, Listening, or Closed, and its response to requests varies depending on its state. This encapsulation enhances flexibility and reusability in design, as state objects can be shared and managed efficiently.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 18,
+    "question": "In the repo, what indication is there about the required Python version?",
+    "expected_answer": "Python 3.11+ (requirement declared in README).",
+    "actual_answer": "The required Python version for the repository is Python 3.11 or higher.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 98%, Web: 2%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 19,
+    "question": "Which pattern from the PDF would you recommend to expose a simple interface over a complex subsystem (e.g., analytics wrapper in the repo) and why?",
+    "expected_answer": "Facade: provides a unified, simplified interface to a set of interfaces in a subsystem, hiding complexity.",
+    "actual_answer": "I recommend using the **Facade pattern** to expose a simple interface over a complex subsystem, such as an analytics wrapper. The Facade pattern is specifically designed to provide a simplified interface to a complex subsystem, making it easier for clients to interact with the system without needing to understand its intricacies. This is particularly useful as subsystems can become more complex over time, and the Facade can offer a default view that simplifies usage for clients who do not require customization.",
+    "expected_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  },
+  {
+    "case_id": 20,
+    "question": "Design a question that validates if the RAG can identify lines of code in GitHub that implement behavior described by a pattern from the PDF (e.g., Singleton usage in a module). Expected answer?",
+    "expected_answer": "The RAG should return the file/function reference that implements the single instance, with the corresponding repo chunk; if no implementation exists in the repo, indicate 'not found'.",
+    "actual_answer": "To validate if the RAG can identify lines of code in GitHub that implement behavior described by a pattern from the PDF, you could ask: \\\"Can you find instances in the GitHub repository where the Singleton pattern is implemented, as described in the DesignPatterns.pdf?\"",
+    "expected_source_attribution": "PDF: 30%, GitHub: 60%, Web: 10%",
+    "actual_source_attribution": "PDF: 70%, GitHub: 30%, Web: 0%"
+  },
+  {
+    "case_id": 21,
+    "question": "Which companies are currently leading in open-source LLM development?",
+    "expected_answer": "As of 2025, major contributors include Meta (LLaMA 3), Mistral, Hugging Face, and Stability AI, all releasing open-weight models.",
+    "actual_answer": "As of October 2025, the leading companies in open-source LLM development include Meta, known for its Llama model; Alibaba Cloud, which developed the Qwen series; DeepSeek, recognized for its DeepSeek V3.1 and DeepSeek-R1 series; Mistral AI, offering a range of models for both open-source and enterprise use; and OpenAI, which has released open-weight models like the gpt-oss series.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 0%, Web: 100%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 0%, Web: 100%"
+  },
+  {
+    "case_id": 22,
+    "question": "In the repo, which files contain examples of reports/performance you could use to evaluate reproducible results of the system?",
+    "expected_answer": "'Weekly Deep Research (PDF|MD)/', 'Scripts and CSV Files/' and 'Results.png' contain summaries and data for evaluation.",
+    "actual_answer": "The files that contain examples of reports and performance metrics for evaluating reproducible results of the system are located in the following directories of the GitHub repository:\n\n1. **`Scripts and CSV Files/`** - This directory includes CSV files with detailed daily tracking of performance data, including daily PnL, total equity, and trade history.\n2. **`Weekly Deep Research (PDF)/`** - This folder contains full deep research reports in PDF format, which can provide insights into the performance evaluations.\n3. **`Weekly Deep Research (MD)/`** - Similar to the PDF reports, this directory includes research summaries that may also contain performance evaluations.\n\nThese resources collectively allow for a comprehensive evaluation of the system's performance.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 50%, GitHub: 50%, Web: 0%"
+  },
+  {
+    "case_id": 23,
+    "question": "Propose a question that evaluates the RAG's ability to prioritize chunks from PDFs over code when the question is about software design (requires both sources). Expected answer?",
+    "expected_answer": "The RAG should prioritize conceptual explanation (PDF) for definitions/intent of patterns and use code (GitHub) as evidence/examples; the answer should clearly state which part comes from each source.",
+    "actual_answer": "A suitable question to evaluate the RAG's ability to prioritize chunks from PDFs over code in the context of software design could be: \\\"How can the insights from the PDF reports on weekly deep research enhance the software design for a trading algorithm compared to the implementation details found in the code repository?\"",
+    "expected_source_attribution": "PDF: 60%, GitHub: 30%, Web: 10%",
+    "actual_source_attribution": "PDF: 50%, GitHub: 50%, Web: 0%"
+  },
+  {
+    "case_id": 24,
+    "question": "What is the latest stable version of Python as of October 2025?",
+    "expected_answer": "As of October 2025, the latest stable Python version is Python 3.13.",
+    "actual_answer": "The latest stable version of Python as of October 2025 is **3.14.0**, which was released on October 7, 2025.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 0%, Web: 100%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 0%, Web: 100%"
+  },
+  {
+    "case_id": 25,
+    "question": "In the repo, what evidence exists that the author publishes periodic updates (e.g., weekly performance)?",
+    "expected_answer": "'Weekly Deep Research' folders and references to weekly blog posts; CSVs updated daily and results published weekly.",
+    "actual_answer": "The author publishes periodic updates on their performance weekly on their blog, as indicated in the README.md file of the GitHub repository. They mention that updates are posted weekly and that the portfolio CSV file is updated every trading day.",
+    "expected_source_attribution": "PDF: 0%, GitHub: 95%, Web: 5%",
+    "actual_source_attribution": "PDF: 0%, GitHub: 100%, Web: 0%"
+  },
+  {
+    "case_id": 26,
+    "question": "Combine GitHub + PDF: 'How would you apply Decorator (PDF) to add logging metrics to the ingestion pipeline (repo) without modifying base classes?' Expected answer.",
+    "expected_answer": "Use Decorator to wrap pipeline components (e.g., extractor or vectorizer) with objects that add logging/metrics behavior before and after calling the underlying component; this extends functionality without changing base classes in the repo's pipeline.",
+    "actual_answer": "To apply the Decorator pattern for adding logging metrics to the ingestion pipeline without modifying base classes, you would create a logging decorator that wraps the existing ingestion components. This decorator would implement the same interface as the base ingestion class, allowing it to be used interchangeably. Inside the decorator, you would add the logging functionality before and after calling the methods of the wrapped ingestion component. This approach allows you to enhance the functionality dynamically without altering the original classes, adhering to the principles of the Decorator pattern as described in the PDF.",
+    "expected_source_attribution": "PDF: 65%, GitHub: 30%, Web: 5%",
+    "actual_source_attribution": "PDF: 100%, GitHub: 0%, Web: 0%"
+  }
+]
+
+**--- END OF BATCH TEST CASES ---**
+
+**JSON Summary Evaluation:**
