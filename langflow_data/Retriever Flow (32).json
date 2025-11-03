@@ -3498,7 +3498,7 @@
             ],
             "frozen": false,
             "icon": "NVIDIA",
-            "last_updated": "2025-10-27T23:01:00.559Z",
+            "last_updated": "2025-10-29T02:57:27.918Z",
             "legacy": false,
             "lf_version": "1.5.1",
             "metadata": {},
@@ -3624,9 +3624,9 @@
       }
     ],
     "viewport": {
-      "x": 94.50257728437538,
-      "y": 179.289127744893,
-      "zoom": 0.24498811859959482
+      "x": 37.86916547272395,
+      "y": 176.7005488511235,
+      "zoom": 0.3333773892069968
     }
   },
   "description": "Load your data for chat context with Retrieval Augmented Generation.",
