@@ -23,7 +23,7 @@ export const SystemArchitecture = () => {
               <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
                 <Database className="h-4 w-4 text-accent" />
-                <span className="text-sm">FAISS-PDF Index</span>
+                <span className="text-sm">Chroma-PDF Index</span>
               </div>
             </div>
             
@@ -35,7 +35,7 @@ export const SystemArchitecture = () => {
               <ArrowDown className="h-4 w-4 text-muted-foreground mx-auto" />
               <div className="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
                 <Database className="h-4 w-4 text-accent" />
-                <span className="text-sm">FAISS-GitHub Index</span>
+                <span className="text-sm">Chroma-GitHub Index</span>
               </div>
             </div>
           </div>

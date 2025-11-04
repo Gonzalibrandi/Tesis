@@ -1,7 +1,7 @@
+import heroImage from "@/assets/hero-research.jpg";
 import { QuestionInterface } from "@/components/QuestionInterface";
 import { SystemArchitecture } from "@/components/SystemArchitecture";
-import heroImage from "@/assets/hero-research.jpg";
-import { GraduationCap, Zap, Shield, Target } from "lucide-react";
+import { GraduationCap, Shield, Target, Zap } from "lucide-react";
 
 const Index = () => {
   return (
@@ -52,7 +52,7 @@ const Index = () => {
                 <Shield className="h-8 w-8 mx-auto mb-3 text-accent-glow" />
                 <h3 className="font-semibold mb-2">Advanced Processing</h3>
                 <p className="text-sm text-primary-foreground/80">
-                  FAISS vector indexing with HuggingFace embeddings
+                  Chroma vector indexing with NVIDIA embeddings
                 </p>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center">
