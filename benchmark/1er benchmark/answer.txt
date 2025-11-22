@@ -1,0 +1,36 @@
+🧩 RAG System Evaluation Summary
+📘 Overall Summary Judgment
+
+The RAG system demonstrates strong factual accuracy and completeness when handling both PDF- and GitHub-based queries. However, it shows moderate issues with source attribution, particularly in questions requiring mixed-source reasoning.
+Responses are typically detailed and technically correct, though occasionally more verbose than necessary.
+
+📊 Evaluation Metrics
+1. Content Accuracy – 9.0 / 10
+
+Reasoning:
+Across most test cases, the answers were semantically correct and frequently expanded with useful context.
+Minor deviations appeared in multi-source or web-based questions, but overall factual precision remained high.
+
+2. Completeness – 8.8 / 10
+
+Reasoning:
+The system generally covered all key points expected in the answers.
+Occasionally, it went beyond scope or introduced small misalignments when dealing with multiple sources, but the coverage depth was consistently strong.
+
+3. Source Attribution Accuracy – 7.0 / 10
+
+Reasoning:
+Attribution was accurate for single-source answers (PDF-only or GitHub-only).
+However, when multiple sources were involved, the model tended to overweight one source and ignore minor contributions, leading to partial mismatches in expected ratios.
+
+4. Conciseness – 8.0 / 10
+
+Reasoning:
+Most answers were clear and logically structured, though slightly verbose.
+The responses favored explanation over brevity, maintaining readability but sometimes reducing succinctness.
+
+🧮 Final Average Score
+
+Overall Performance: 8.2 / 10
+
+✅ Excellent in content accuracy and completeness, fair in conciseness, but needs improvement in fine-grained source attribution across multi-origin questions.

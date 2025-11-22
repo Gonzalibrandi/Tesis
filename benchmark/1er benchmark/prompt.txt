@@ -220,7 +220,7 @@ You **MUST** provide your evaluation as a **single, valid JSON object**. This ob
   {
     "case_id": 24,
     "question": "What is the latest stable version of Python as of October 2025?",
-    "expected_answer": "As of October 2025, the latest stable Python version is Python 3.13.",
+    "expected_answer": "As of October 2025, the latest stable Python version is Python 3.14.",
     "actual_answer": "The latest stable version of Python as of October 2025 is **3.14.0**, which was released on October 7, 2025.",
     "expected_source_attribution": "PDF: 0%, GitHub: 0%, Web: 100%",
     "actual_source_attribution": "PDF: 0%, GitHub: 0%, Web: 100%"
