@@ -77,6 +77,8 @@ Una vez que el proyecto ya está instalado, para el uso diario, solo se necesita
 2. Levantar ambos contenedores (Langflow y frontend)
 3. Acceder a la aplicación web en http://localhost:8080
 
+---
+
 ## Estructura del Repositorio
 ├── langflow_custom/    # Componentes y flujos personalizados  
 │   ├── requirements.txt    # Dependencias de Python congeladas  
@@ -94,6 +96,8 @@ Una vez que el proyecto ya está instalado, para el uso diario, solo se necesita
 │   ├── 1er benchmark       # Archivos importantes del benchmark de las PPS  
 │   └── 2do benchmark       # Archivos importantes del benchmark del PI  
 └── docker-compose.yml      # Orquestación de todos los servicios  
+
+---
 
 Autor: Gonzalo Librandi  
 Contacto: librandigonzalo@gmail.com  
