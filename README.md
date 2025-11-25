@@ -52,9 +52,9 @@ git clone https://github.com/Gonzalibrandi/Tesis.git
 2. Navegar a la carpeta del frontend del proyecto:
 cd Tesis/frontend
 3. Configurar las variables de entorno: el proyecto necesita claves de API para funcionar. Se usará el archivo de ejemplo .env.example como plantilla. Estando en la carpeta raíz (Tesis), se debe ejecutar:
-# En Windows (PowerShell)
+En Windows (PowerShell)
 copy .env.example .env
-# En macOS / Linux
+En macOS / Linux
 cp .env.example .env
 4. Levantar los contenedores por primera vez: este comando construirá las imágenes de Docker. La primera vez puede tardar varios minutos debido a la descarga de dependencias.
 docker-compose up --build
