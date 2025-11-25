@@ -78,24 +78,23 @@ Una vez que el proyecto ya está instalado, para el uso diario, solo se necesita
 3. Acceder a la aplicación web en http://localhost:8080
 
 ## Estructura del Repositorio
-.
-├── langflow_custom/    # Componentes y flujos personalizados
-│   ├── requirements.txt    # Dependencias de Python congeladas
-│   └── Dockerfile          # Definición de la imagen del backend
-├── langflow_data/      # Flujos de Langflow
-│   ├── Ingest Github Flow.json     # Flujo de ingesta github
-│   ├── Ingest PDF Flow.json        # Flujo de ingesta PDF
-│   └── Retriever Flow.json         # Flujo de recuperacion y generacion
-├── frontend/               # Código fuente del frontend
-│   ├── Dockerfile          # Definición de la imagen del frontend
-│   ├── src/                # Componentes React y lógica de cliente
-│   ├── .env.example        # Plantilla para variables de entorno
-│   └── package.json        # Dependencias
-├── benchmark/              # Herramientas y datos para la evaluación
-│   ├── 1er benchmark       # Archivos importantes del benchmark de las PPS
-│   └── 2do benchmark       # Archivos importantes del benchmark del PI
-└── docker-compose.yml      # Orquestación de todos los servicios
+├── langflow_custom/    # Componentes y flujos personalizados  
+│   ├── requirements.txt    # Dependencias de Python congeladas  
+│   └── Dockerfile          # Definición de la imagen del backend  
+├── langflow_data/      # Flujos de Langflow  
+│   ├── Ingest Github Flow.json     # Flujo de ingesta github  
+│   ├── Ingest PDF Flow.json        # Flujo de ingesta PDF  
+│   └── Retriever Flow.json         # Flujo de recuperacion y generacion  
+├── frontend/               # Código fuente del frontend  
+│   ├── Dockerfile          # Definición de la imagen del frontend  
+│   ├── src/                # Componentes React y lógica de cliente  
+│   ├── .env.example        # Plantilla para variables de entorno  
+│   └── package.json        # Dependencias  
+├── benchmark/              # Herramientas y datos para la evaluación  
+│   ├── 1er benchmark       # Archivos importantes del benchmark de las PPS  
+│   └── 2do benchmark       # Archivos importantes del benchmark del PI  
+└── docker-compose.yml      # Orquestación de todos los servicios  
 
-Autor: Gonzalo Librandi 
-Contacto: librandigonzalo@gmail.com
-Institución: UNICEN - Facultad de Ciencias Exactas
+Autor: Gonzalo Librandi  
+Contacto: librandigonzalo@gmail.com  
+Institución: UNICEN - Facultad de Ciencias Exactas  
