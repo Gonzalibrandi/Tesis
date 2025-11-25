@@ -60,16 +60,16 @@ cp .env.example .env
 docker-compose up --build
 Esperar a que el servicio langflow-container se estabilice.
 5. Obtener la API Key de Langflow: una vez que el contenedor esté corriendo, abrí tu navegador y andá a: http://localhost:7860/settings/api-keys Crear una nueva clave de API y copiarla.
-6. Completar el archivo .env: abrir el archivo .env que creaste dentro de la carpeta frontend en el paso 3 y rellenar todos los valores:
-LANGFLOW_API_KEY="sk-..." # Pegar aquí la clave creada en el paso anterior
-OPENAI_API_KEY="sk-..."
-JIGSAWSTACK_API_KEY="sk_..."
+6. Completar el archivo .env: abrir el archivo .env que creaste dentro de la carpeta frontend en el paso 3 y rellenar todos los valores:  
+LANGFLOW_API_KEY="sk-..." # Pegar aquí la clave creada en el paso anterior  
+OPENAI_API_KEY="sk-..."  
+JIGSAWSTACK_API_KEY="sk_..."  
 NVIDIA_API_KEY="nvapi-..."
 7. Reiniciar los contenedores: para que todos los servicios tomen las nuevas claves de API, detener los servicios desde Docker Desktop o con Ctrl + C y volvé a levantarlos.
 docker-compose up
 
-Ahora para acceder a los dos servicios desde un navegador se deben usar las siguientes URLs:
-Aplicación Web: http://localhost:8080
+Ahora para acceder a los dos servicios desde un navegador se deben usar las siguientes URLs:  
+Aplicación Web: http://localhost:8080  
 Langflow (Entorno de desarrollo): http://localhost:7860
 
 Una vez que el proyecto ya está instalado, para el uso diario, solo se necesita seguir estos pasos para ejecutarlo:
